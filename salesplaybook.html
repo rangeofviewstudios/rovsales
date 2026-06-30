@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ROV Sales Playbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Inter:wght@400;500&family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root,[data-theme="light"]{--bg:#F0E6E0;--surface:rgba(255,251,245,.74);--surface-2:#EADFD2;--border:rgba(22,12,40,.14);--text:#160C28;--text-muted:rgba(22,12,40,.60);--text-faint:rgba(22,12,40,.40);--primary:#A56A67;--primary-hover:#8a514e;--primary-hl:rgba(165,106,103,.16);--gold:#9a6b12;--radius:.7rem;--shadow:0 1px 3px rgba(22,12,40,.06),0 6px 18px rgba(22,12,40,.07)}
+[data-theme="dark"]{--bg:#0F0820;--surface:rgba(33,18,52,.62);--surface-2:rgba(78,61,115,.30);--border:rgba(240,230,224,.15);--text:#F0E6E0;--text-muted:rgba(240,230,224,.70);--text-faint:rgba(240,230,224,.42);--primary:#A56A67;--primary-hover:#c4847f;--primary-hl:rgba(165,106,103,.20);--gold:#E3C24A;--shadow:0 1px 3px rgba(0,0,0,.4),0 8px 24px rgba(7,3,16,.5)}
+html{-webkit-font-smoothing:antialiased}
+body{font-family:"Space Grotesk",sans-serif;background:var(--bg);color:var(--text);min-height:100dvh;position:relative}
+button,select,input,textarea{font:inherit;color:inherit}button{cursor:pointer;background:none;border:none}a{color:inherit;text-decoration:none}
+/* ── twilight backdrop ── */
+.sky{position:fixed;inset:0;z-index:-2;pointer-events:none;overflow:hidden;background-color:#0F0820;background-image:radial-gradient(150% 40% at 50% 84%,rgba(227,194,74,.15) 0%,rgba(165,106,103,.22) 24%,rgba(78,61,115,.17) 50%,transparent 78%),radial-gradient(130% 52% at 50% -10%,rgba(36,18,58,.72) 0%,transparent 60%),linear-gradient(180deg,#0F0820 0%,#0F0820 32%,#1B0E2E 62%,#24123A 74%,#0F0820 100%);box-shadow:inset 0 0 clamp(140px,20vw,340px) rgba(7,3,16,.6)}
+.sky::after{content:"";position:absolute;inset:0;background:radial-gradient(130% 34% at 50% 86%,rgba(227,194,74,.08),rgba(165,106,103,.06) 40%,transparent 72%);animation:breathe 22s ease-in-out infinite alternate}
+@keyframes breathe{0%{opacity:.55;transform:translateY(0) scale(1)}100%{opacity:1;transform:translateY(-1.5%) scale(1.06)}}
+[data-theme="light"] .sky{background-color:#F0E6E0;background-image:radial-gradient(45% 35% at 14% 8%,rgba(227,194,74,.20),transparent 64%),radial-gradient(48% 40% at 86% 14%,rgba(78,61,115,.13),transparent 70%),radial-gradient(50% 42% at 16% 60%,rgba(165,106,103,.13),transparent 68%),radial-gradient(46% 38% at 88% 82%,rgba(78,61,115,.10),transparent 70%)}
+[data-theme="light"] .sky::after{display:none}
+.grain{position:fixed;inset:0;z-index:90;pointer-events:none;opacity:.06;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:170px 170px}
+@media(prefers-reduced-motion:reduce){.sky::after{animation:none}}
+/* ── header ── */
+header{position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border);padding:.75rem 1.4rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;backdrop-filter:blur(12px);background:color-mix(in oklch,var(--bg) 88%,transparent)}
+.brand{display:flex;align-items:center;gap:.7rem}
+.brand .mark{width:40px;height:40px;border-radius:10px;background:#1B0E2E;border:1px solid rgba(240,230,224,.12);display:flex;align-items:center;justify-content:center;padding:6px;flex-shrink:0}
+.brand .mark img{width:100%;height:100%;object-fit:contain;display:block}
+.brand h1{font-size:1.1rem;font-weight:700;letter-spacing:-.01em;line-height:1.1}
+.brand .tag{font-size:.74rem;font-weight:500;color:var(--text-faint);letter-spacing:.005em;line-height:1.2;margin-top:.12rem}
+.hdr-r{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.search{position:relative}
+.search input{padding:.45rem .7rem .45rem 2rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:.82rem;outline:none;min-width:200px}
+.search input:focus{border-color:var(--primary)}
+.search svg{position:absolute;left:.6rem;top:50%;transform:translateY(-50%);color:var(--text-faint)}
+.btn{display:inline-flex;align-items:center;gap:.35rem;font-size:.8rem;font-weight:600;padding:.45rem .8rem;border-radius:8px;border:1px solid var(--border);color:var(--text-muted)}
+.btn:hover{background:var(--surface-2);color:var(--text)}
+.btn.primary{background:var(--primary);border-color:var(--primary);color:#fff}.btn.primary:hover{background:var(--primary-hover)}
+.icbtn{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--text-muted);border:1px solid var(--border)}.icbtn:hover{background:var(--surface-2);color:var(--text)}
+/* ── layout ── */
+.wrap{max-width:1180px;margin:0 auto;padding:1.4rem;display:grid;grid-template-columns:212px 1fr;gap:1.4rem;align-items:start}
+@media(max-width:760px){.wrap{grid-template-columns:1fr;gap:1rem}}
+.nav{position:sticky;top:5rem;display:flex;flex-direction:column;gap:.3rem}
+@media(max-width:760px){.nav{position:static;flex-direction:row;overflow-x:auto;gap:.4rem;padding-bottom:.2rem}}
+.navitem{display:flex;align-items:center;gap:.6rem;padding:.6rem .8rem;border-radius:var(--radius);border:1px solid transparent;color:var(--text-muted);font-size:.88rem;font-weight:500;white-space:nowrap;transition:.15s}
+.navitem:hover{background:var(--surface-2)}
+.navitem.on{background:var(--surface);border-color:var(--border);color:var(--text);box-shadow:var(--shadow)}
+.navitem .ico{font-size:1rem;opacity:.85}
+.navitem .ct{margin-left:auto;font-family:"DM Mono",monospace;font-size:.72rem;color:var(--text-faint)}
+@media(max-width:760px){.navitem .ct{margin-left:.3rem}}
+/* ── content ── */
+.sechead{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1rem}
+.sechead h2{font-size:clamp(1.5rem,3.4vw,2.2rem);font-weight:700;letter-spacing:-.02em;line-height:1}
+.sechead .dek{font-family:'Instrument Serif',serif;font-style:italic;font-size:1rem;color:var(--text-faint);margin-top:.25rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:.9rem}
+.item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.1rem;display:flex;flex-direction:column;gap:.5rem;box-shadow:var(--shadow);transition:.15s}
+.item:hover{transform:translateY(-2px);border-color:var(--primary)}
+.item h3{font-size:1rem;font-weight:700;letter-spacing:-.01em;line-height:1.25;cursor:pointer}
+.item .sub{font-family:"DM Mono",monospace;font-size:.7rem;letter-spacing:.04em;color:var(--gold);text-transform:uppercase}
+.item .body{font-family:'Inter',sans-serif;font-weight:400;font-size:.875rem;line-height:1.55;color:var(--text);white-space:pre-wrap;display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}
+.item .tags{display:flex;gap:.3rem;flex-wrap:wrap}
+.tag{font-size:.66rem;font-weight:600;padding:.12rem .45rem;border-radius:5px;background:var(--surface-2);color:var(--text-faint);text-transform:uppercase;letter-spacing:.03em}
+.item .foot{display:flex;gap:.4rem;margin-top:.1rem;border-top:1px solid var(--border);padding-top:.6rem}
+.minibtn{font-size:.74rem;font-weight:600;padding:.3rem .6rem;border-radius:6px;border:1px solid var(--border);color:var(--text-muted)}
+.minibtn:hover{background:var(--surface-2);color:var(--text)}
+.minibtn.copy{border-color:var(--primary);color:var(--primary)}.minibtn.copy:hover{background:var(--primary);color:#fff}
+.minibtn.copy.done{background:var(--primary);color:#fff;border-color:var(--primary)}
+.minibtn.del{margin-left:auto;color:var(--text-faint)}.minibtn.del:hover{color:#fff;background:#9a1b1b;border-color:#9a1b1b}
+.empty{grid-column:1/-1;text-align:center;padding:3.5rem 1rem;color:var(--text-muted);font-family:'Instrument Serif',serif;font-style:italic;font-size:1.1rem}
+/* ── editor modal ── */
+.modal-bg{position:fixed;inset:0;background:rgba(7,3,16,.66);display:none;align-items:center;justify-content:center;z-index:200;padding:1rem}
+.modal-bg.show{display:flex}
+.modal{background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:1.5rem;width:min(560px,96vw);max-height:92vh;overflow:auto;display:flex;flex-direction:column;gap:.75rem;box-shadow:var(--shadow)}
+.modal h3{font-size:1.1rem;font-weight:700}
+.fld{display:flex;flex-direction:column;gap:.3rem;font-size:.66rem;letter-spacing:.05em;text-transform:uppercase;color:var(--text-faint)}
+.fld input,.fld select,.fld textarea{padding:.6rem .7rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:.9rem;color:var(--text);outline:none;font-family:inherit;text-transform:none;letter-spacing:0}
+.fld textarea{min-height:170px;resize:vertical;line-height:1.5}
+.fld input:focus,.fld select:focus,.fld textarea:focus{border-color:var(--primary)}
+.modal .foot{display:flex;gap:.5rem;align-items:center;margin-top:.3rem}
+.footer{max-width:1180px;margin:0 auto;padding:1rem 1.4rem 3rem;font-family:'Instrument Serif',serif;font-style:italic;font-size:.9rem;color:var(--text-faint);text-align:center}
+.toast{position:fixed;bottom:1.2rem;left:50%;transform:translateX(-50%) translateY(1rem);background:var(--primary);color:#fff;padding:.55rem 1.1rem;border-radius:999px;font-size:.82rem;font-weight:600;opacity:0;pointer-events:none;transition:.25s;z-index:300}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style></head><body>
+<div class="sky"></div><div class="grain"></div>
+<header>
+ <div class="brand"><div class="mark"><img src="logos/WHITEnoBG.png" alt="Range of View"></div><div><h1>Sales Playbook</h1><div class="tag">How we sell, one source of truth</div></div></div>
+ <div class="hdr-r">
+  <div class="search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input id="search" placeholder="Search this section..."></div>
+  <button class="btn primary" id="newBtn">+ New</button>
+  <button class="btn" id="expBtn">⬇ Export</button>
+  <button class="btn" id="impBtn">⬆ Import</button>
+  <input type="file" id="impFile" accept="application/json" style="display:none">
+  <button class="icbtn" id="themeBtn" title="Theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+ </div>
+</header>
+<div class="wrap">
+ <nav class="nav" id="nav"></nav>
+ <main>
+  <div class="sechead"><div><h2 id="secTitle"></h2><div class="dek" id="secDek"></div></div></div>
+  <div class="grid" id="grid"></div>
+ </main>
+</div>
+<div class="footer">Stored in this browser. Use <b>Export</b> to back up or share the playbook with the team · <span id="ver"></span></div>
+
+<div class="modal-bg" id="editBg"><div class="modal">
+ <h3 id="editTitle">New entry</h3>
+ <label class="fld">Section<select id="eSection"></select></label>
+ <label class="fld">Title<input id="eName" placeholder="Short, clear name"></label>
+ <label class="fld" id="eSubWrap">Subject<input id="eSub" placeholder=""></label>
+ <label class="fld" id="eBodyWrap">Body<textarea id="eBody" placeholder=""></textarea></label>
+ <label class="fld">Tags (comma-separated)<input id="eTags" placeholder="cold, restaurant, follow-up"></label>
+ <div class="foot"><button class="minibtn del" id="eDelete" style="margin-left:0">Delete</button><span style="flex:1"></span><button class="btn" id="eCancel">Cancel</button><button class="btn primary" id="eSave">Save</button></div>
+</div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ════════════════════════════════════════════════════════════════
+   ROV SALES PLAYBOOK
+   DATA LAYER: localStorage for now. Everything goes through PB + save().
+   Swapping to a shared backend later is a contained change.
+   ════════════════════════════════════════════════════════════════ */
+var SECTIONS=[
+ {k:"email",label:"Email templates",ico:"✉",dek:"reusable outreach: copy, tweak the name, send.",sub:"Subject line",bodyLabel:"Email body",bodyPh:"Hi {First name},\n\n..."},
+ {k:"call",label:"Call scripts",ico:"☎",dek:"what to say on the phone: opener, voicemail, gatekeeper.",sub:"Use it for (opener / voicemail / gatekeeper)",bodyLabel:"Script",bodyPh:"Hi, is this {First name}?..."},
+ {k:"linkedin",label:"LinkedIn",ico:"in",dek:"connection notes and messages that get replies.",sub:"Step (connect / first message / follow-up)",bodyLabel:"Message",bodyPh:"Hi {First name},..."},
+ {k:"inperson",label:"In-person",ico:"🤝",dek:"walk-in openers and the leave-behind.",sub:"Step (opener / leave-behind / follow-up)",bodyLabel:"What to say",bodyPh:"Hi, are you the owner?..."},
+ {k:"offers",label:"Offers",ico:"◆",dek:"what we sell, and how we frame it.",sub:"Price / terms (optional)",bodyLabel:"What it is",bodyPh:"The offer, who it's for, what they get."},
+ {k:"copy",label:"Copywriting",ico:"✎",dek:"lines, hooks and value props the team pulls from.",sub:"Where it's used (optional)",bodyLabel:"The copy",bodyPh:"The line(s)."},
+ {k:"ideas",label:"Ideas",ico:"✦",dek:"angles and experiments worth trying.",sub:"Status (optional)",bodyLabel:"The idea",bodyPh:"What's the idea, and why it might work."}
+];
+function sec(k){for(var i=0;i<SECTIONS.length;i++)if(SECTIONS[i].k===k)return SECTIONS[i];return SECTIONS[0];}
+
+function uid(){return "p"+Date.now().toString(36)+Math.floor(Math.random()*1e4).toString(36);}
+
+var SEED=[
+ {section:"email",title:"Cold intro: local business",sub:"A sharper look for {Business}",body:"Hi {First name},\n\nI came across {Business} and the work looks genuinely good, but the brand around it isn't doing it justice yet. We're Range of View, a studio that helps local businesses look as considered as the work they put out.\n\nWorth a short call this week? No pitch deck, just a few specific ideas for {Business}.\n\n{Your name}, Range of View",tags:["cold","intro"]},
+ {section:"email",title:"Follow-up: no reply",sub:"Circling back, {First name}",body:"Hi {First name},\n\nFloating this back up in case it got buried. Still happy to share a couple of quick ideas for {Business}. Takes ten minutes and you keep whatever's useful.\n\nGood to grab time this week?\n\n{Your name}",tags:["follow-up"]},
+ {section:"offers",title:"Brand identity & design systems",sub:"",body:"A complete visual identity: logo, type, color, and a system to keep it consistent everywhere. For businesses that have outgrown their first look.",tags:["brand"]},
+ {section:"offers",title:"Web / interactive / product",sub:"",body:"Sites and product interfaces designed to convert and feel premium. Built, not templated.",tags:["web"]},
+ {section:"offers",title:"Video / motion / content",sub:"",body:"Editorial, warm-toned video and motion content that matches the brand, never cold stock.",tags:["video"]},
+ {section:"offers",title:"Creative tech / AI experiences",sub:"",body:"AI-powered tools and interactive experiences for brands that want to feel ahead.",tags:["ai"]},
+ {section:"copy",title:"Detail line",sub:"email sign-off / site",body:"Crafted for those who value the details.",tags:["one-liner"]},
+ {section:"copy",title:"Process value prop",sub:"pitch",body:"Our process is methodical. Every step considered, every outcome earned. We don't rush quality.",tags:["value-prop"]},
+ {section:"ideas",title:"Walk-in Fridays",sub:"to try",body:"Block Friday mornings to visit 5 local businesses in person with a one-page leave-behind. Warm, low-pressure, memorable.",tags:["outreach"]},
+ {section:"call",title:"Cold call: opener",sub:"opener",body:"Hi, is this {First name}? Great, I'll be quick. I'm {Your name} with Range of View, a design studio here in the metro. I came across {Business} and the work looks good, but the brand and site around it aren't pulling their weight yet. I'm not going to sell you anything on this call. I just want to send over two or three specific ideas for {Business}. What's the best email for that?",tags:["cold","opener"]},
+ {section:"call",title:"Cold call: voicemail",sub:"voicemail",body:"Hi {First name}, it's {Your name} with Range of View. Quick one. I had a couple of specific ideas for {Business}'s brand and website and wanted to run them by you. No pitch. I'll send a short email as well. You can reach me at {phone}. Thanks {First name}.",tags:["voicemail"]},
+ {section:"call",title:"Gatekeeper",sub:"gatekeeper",body:"Hi, maybe you can help me out. I'm trying to get a couple of design ideas in front of whoever owns the look of {Business}, the brand and the website. Who's the best person for that, and what's the best way to reach them?",tags:["gatekeeper"]},
+ {section:"linkedin",title:"Connection note",sub:"connect",body:"Hi {First name}, I run a design studio (Range of View) and keep an eye on local businesses doing good work. {Business} stood out. Would like to connect.",tags:["connect"]},
+ {section:"linkedin",title:"First message",sub:"after they connect",body:"Thanks for connecting, {First name}. Straight to it: I had a couple of specific ideas for {Business}'s brand and site. Happy to send them over, no pitch attached. Want me to?",tags:["first-message"]},
+ {section:"linkedin",title:"Follow-up (no reply)",sub:"follow-up",body:"No problem if now isn't the time, {First name}. I'll leave the offer open: a couple of free, specific ideas for {Business} whenever you want them. Just say the word.",tags:["follow-up"]},
+ {section:"inperson",title:"Walk-in opener",sub:"opener (10 seconds)",body:"Hi, are you the owner or manager? I'm {Your name} from Range of View, a design studio just nearby. I'll be honest, I came in because I liked {Business} but felt the brand could go further. I'm not here to sell you anything today. Can I leave you one page and a card?",tags:["walk-in"]},
+ {section:"inperson",title:"Leave-behind one-pager",sub:"what the page says",body:"Range of View. We make local businesses look as good as the work they do. Brand identity, websites, video, and creative tech. A few recent results: [add 2 or 3]. If the look of {Business} ever bugs you, we should talk. {Your name}, {phone}, {email}.",tags:["leave-behind"]},
+ {section:"inperson",title:"After the visit",sub:"follow-up email",body:"Hi {First name}, it's {Your name} from Range of View. Good to meet you at {Business} earlier. As promised, here are a couple of specific ideas: [1], [2]. If either one is interesting, I'm around this week.",tags:["follow-up"]}
+];
+
+var CHANNEL_SECTIONS=["call","linkedin","inperson"];
+var PB=JSON.parse(localStorage.getItem("rovPlaybook")||"null");
+function seedItems(arr){return arr.map(function(s){return Object.assign({id:uid(),updated:Date.now()},s);});}
+if(!PB){
+ PB={v:1,seeded:CHANNEL_SECTIONS.slice(),items:seedItems(SEED)};save();
+}else{
+ // existing installs: add seeds for any newly-introduced channel section, once, without touching saved entries
+ if(!PB.seeded)PB.seeded=[];
+ var added=false;
+ CHANNEL_SECTIONS.forEach(function(k){if(PB.seeded.indexOf(k)<0){PB.items=PB.items.concat(seedItems(SEED.filter(function(s){return s.section===k;})));PB.seeded.push(k);added=true;}});
+ if(added)save();
+}
+function save(){localStorage.setItem("rovPlaybook",JSON.stringify(PB));}
+
+var state={section:"email",q:""};
+
+function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function itemsIn(k){return PB.items.filter(function(it){return it.section===k;});}
+
+function renderNav(){
+ document.getElementById("nav").innerHTML=SECTIONS.map(function(s){return "<button class=\"navitem"+(state.section===s.k?" on":"")+"\" data-k=\""+s.k+"\"><span class=\"ico\">"+s.ico+"</span>"+s.label+"<span class=\"ct\">"+itemsIn(s.k).length+"</span></button>";}).join("");
+ Array.prototype.forEach.call(document.querySelectorAll(".navitem"),function(b){b.onclick=function(){state.section=b.getAttribute("data-k");state.q="";document.getElementById("search").value="";render();};});
+}
+function render(){
+ var s=sec(state.section);
+ document.getElementById("secTitle").textContent=s.label;
+ document.getElementById("secDek").textContent=s.dek;
+ document.getElementById("search").placeholder="Search "+s.label.toLowerCase()+"...";
+ var list=itemsIn(state.section);
+ if(state.q){var q=state.q.toLowerCase();list=list.filter(function(it){return (it.title+" "+it.body+" "+(it.tags||[]).join(" ")+" "+(it.sub||"")).toLowerCase().indexOf(q)>=0;});}
+ list.sort(function(a,b){return (b.updated||0)-(a.updated||0);});
+ document.getElementById("grid").innerHTML=list.length?list.map(card).join(""):"<div class=\"empty\">Nothing here yet. Hit <b>+ New</b> to add the first one.</div>";
+ renderNav();
+}
+function card(it){
+ var tags=(it.tags||[]).filter(Boolean).map(function(t){return "<span class=\"tag\">"+esc(t)+"</span>";}).join("");
+ return "<div class=\"item\">"+
+  (it.sub?"<div class=\"sub\">"+esc(it.sub)+"</div>":"")+
+  "<h3 data-edit=\""+it.id+"\">"+esc(it.title||"(untitled)")+"</h3>"+
+  "<div class=\"body\">"+esc(it.body)+"</div>"+
+  (tags?"<div class=\"tags\">"+tags+"</div>":"")+
+  "<div class=\"foot\"><button class=\"minibtn copy\" data-copy=\""+it.id+"\">Copy</button><button class=\"minibtn\" data-edit=\""+it.id+"\">Edit</button><button class=\"minibtn del\" data-del=\""+it.id+"\">Delete</button></div>"+
+ "</div>";
+}
+function find(id){for(var i=0;i<PB.items.length;i++)if(PB.items[i].id===id)return PB.items[i];return null;}
+
+/* ── grid actions ── */
+document.getElementById("grid").addEventListener("click",function(e){
+ var t=e.target.closest("[data-copy],[data-edit],[data-del]");if(!t)return;
+ if(t.hasAttribute("data-copy")){doCopy(t,find(t.getAttribute("data-copy")));return;}
+ if(t.hasAttribute("data-edit")){openEdit(find(t.getAttribute("data-edit")));return;}
+ if(t.hasAttribute("data-del")){var it=find(t.getAttribute("data-del"));if(it&&confirm("Delete \""+(it.title||"this entry")+"\"?")){PB.items=PB.items.filter(function(x){return x.id!==it.id;});save();render();toast("Deleted");}return;}
+});
+function copyText(it){return (it.section==="email"&&it.sub)?("Subject: "+it.sub+"\n\n"+it.body):it.body;}
+function doCopy(btn,it){if(!it)return;var txt=copyText(it);
+ function ok(){btn.classList.add("done");btn.textContent="Copied ✓";toast("Copied to clipboard");setTimeout(function(){btn.classList.remove("done");btn.textContent="Copy";},1400);}
+ if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(ok,function(){fallbackCopy(txt);ok();});}
+ else{fallbackCopy(txt);ok();}
+}
+function fallbackCopy(txt){var ta=document.createElement("textarea");ta.value=txt;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();try{document.execCommand("copy");}catch(e){}document.body.removeChild(ta);}
+
+/* ── editor ── */
+var editing=null;
+function fillSectionSelect(){document.getElementById("eSection").innerHTML=SECTIONS.map(function(s){return "<option value=\""+s.k+"\">"+s.label+"</option>";}).join("");}
+function syncEditorLabels(k){var s=sec(k);document.getElementById("eSubWrap").childNodes[0].nodeValue=s.sub;document.getElementById("eSub").placeholder=s.sub;document.getElementById("eBodyWrap").childNodes[0].nodeValue=s.bodyLabel;document.getElementById("eBody").placeholder=s.bodyPh;}
+function openEdit(it){
+ editing=it;
+ document.getElementById("editTitle").textContent=it?"Edit entry":"New "+sec(state.section).label.replace(/s$/,"").toLowerCase();
+ var k=it?it.section:state.section;
+ document.getElementById("eSection").value=k;syncEditorLabels(k);
+ document.getElementById("eName").value=it?it.title:"";
+ document.getElementById("eSub").value=it?(it.sub||""):"";
+ document.getElementById("eBody").value=it?it.body:"";
+ document.getElementById("eTags").value=it?(it.tags||[]).join(", "):"";
+ document.getElementById("eDelete").style.display=it?"":"none";
+ document.getElementById("editBg").classList.add("show");
+ setTimeout(function(){document.getElementById("eName").focus();},30);
+}
+document.getElementById("eSection").onchange=function(){syncEditorLabels(this.value);};
+document.getElementById("newBtn").onclick=function(){openEdit(null);};
+document.getElementById("eCancel").onclick=function(){document.getElementById("editBg").classList.remove("show");};
+document.getElementById("editBg").onclick=function(e){if(e.target===this)this.classList.remove("show");};
+document.getElementById("eDelete").onclick=function(){if(editing&&confirm("Delete this entry?")){PB.items=PB.items.filter(function(x){return x.id!==editing.id;});save();document.getElementById("editBg").classList.remove("show");render();toast("Deleted");}};
+document.getElementById("eSave").onclick=function(){
+ var title=document.getElementById("eName").value.trim();
+ var body=document.getElementById("eBody").value.trim();
+ if(!title&&!body){toast("Add a title or some text first");return;}
+ var k=document.getElementById("eSection").value;
+ var tags=document.getElementById("eTags").value.split(",").map(function(x){return x.trim();}).filter(Boolean);
+ var sub=document.getElementById("eSub").value.trim();
+ if(editing){editing.section=k;editing.title=title;editing.sub=sub;editing.body=body;editing.tags=tags;editing.updated=Date.now();}
+ else{PB.items.push({id:uid(),section:k,title:title,sub:sub,body:body,tags:tags,updated:Date.now()});state.section=k;}
+ save();document.getElementById("editBg").classList.remove("show");render();toast(editing?"Saved":"Added");
+};
+
+/* ── export / import ── */
+document.getElementById("expBtn").onclick=function(){var blob=new Blob([JSON.stringify(PB,null,2)],{type:"application/json"});var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="rov-playbook.json";a.click();};
+document.getElementById("impBtn").onclick=function(){document.getElementById("impFile").click();};
+document.getElementById("impFile").onchange=function(){var f=this.files[0];if(!f)return;var fr=new FileReader();fr.onload=function(){try{var o=JSON.parse(fr.result);if(!o.items)throw new Error("not a playbook file");PB=o;save();render();toast("Playbook imported");}catch(err){alert("Import failed: "+err.message);}};fr.readAsText(f);this.value="";};
+
+/* ── misc ── */
+var toastT;
+function toast(msg){var el=document.getElementById("toast");el.textContent=msg;el.classList.add("show");clearTimeout(toastT);toastT=setTimeout(function(){el.classList.remove("show");},1600);}
+document.getElementById("search").oninput=function(){state.q=this.value;render();};
+(function(){var t=document.getElementById("themeBtn"),r=document.documentElement,d="dark";function set(m){d=m;r.setAttribute("data-theme",m);t.innerHTML=m==="dark"?"<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z\"/></svg>":"<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"12\" cy=\"12\" r=\"5\"/><path d=\"M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42\"/></svg>";}set("dark");t.onclick=function(){set(d==="dark"?"light":"dark");};})();
+
+document.getElementById("ver").textContent="v1 · "+PB.items.length+" entries";
+fillSectionSelect();render();
+</script></body></html>
