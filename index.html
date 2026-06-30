@@ -23,12 +23,12 @@ h2.title{font-size:clamp(2rem,6vw,3.4rem);font-weight:700;letter-spacing:-.025em
 .lede{font-family:'Inter',sans-serif;font-size:1rem;color:var(--text-muted);max-width:46ch;line-height:1.5}
 .cards{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:clamp(2rem,5vw,3rem)}
 @media(max-width:640px){.cards{grid-template-columns:1fr}}
-.tool{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;display:flex;flex-direction:column;gap:.5rem;min-height:200px;transition:transform .18s ease,border-color .18s ease}
+.tool{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;display:flex;flex-direction:column;gap:.5rem;min-height:150px;transition:transform .18s ease,border-color .18s ease}
 .tool:hover{transform:translateY(-3px);border-color:var(--primary)}
 .tool .k{font-family:"DM Mono",monospace;font-size:.72rem;letter-spacing:.16em;color:var(--text-faint)}
 .tool h3{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
 .tool p{font-family:'Inter',sans-serif;font-size:.9rem;line-height:1.5;color:var(--text-muted);flex:1}
-.tool .go{font-size:.85rem;font-weight:600;color:var(--primary)}
+.tool .go{font-size:.85rem;font-weight:600;color:var(--primary);margin-top:auto}
 .tool:hover .go{color:var(--gold)}
 footer{padding:1.4rem 1.6rem;font-family:'Inter',sans-serif;font-size:.78rem;color:var(--text-faint);text-align:center}
 </style></head><body>
@@ -40,19 +40,16 @@ footer{padding:1.4rem 1.6rem;font-family:'Inter',sans-serif;font-size:.78rem;col
 <main>
  <span class="kick">Internal · sales team</span>
  <h2 class="title">The sales hub.</h2>
- <p class="lede">Two tools, one place. Find prospects and work the pipeline, then pitch them with the same words every time.</p>
  <div class="cards">
   <a class="tool" href="atlleadhub.html">
    <span class="k">01</span>
    <h3>Lead Hub</h3>
-   <p>Atlanta-metro prospects. Filter by website status and type of business, and see exactly what to pitch each one.</p>
-   <span class="go">Open Lead Hub →</span>
+   <span class="go">Open →</span>
   </a>
   <a class="tool" href="salesplaybook.html">
    <span class="k">02</span>
    <h3>Sales Playbook</h3>
-   <p>Email, call, LinkedIn and in-person scripts, plus offers, copy and ideas. One source of truth for how we sell.</p>
-   <span class="go">Open Playbook →</span>
+   <span class="go">Open →</span>
   </a>
  </div>
 </main>

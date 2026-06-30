@@ -229,6 +229,8 @@ function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"
 
 /* ── data access ── */
 function data(){return ALL.concat(DB.custom);}
+var CAT_MAP={Food:"Restaurant",Drink:"Restaurant",Roofing:"Home Services",HVAC:"Home Services",Plumbing:"Home Services",Electrical:"Home Services",Shop:"Retail",Health:"Retail",Fitness:"Retail"};
+function catOf(r){return CAT_MAP[r.category]||r.category;}
 function rec(id){return DB.leads[id]||(DB.leads[id]={s:"New",n:"",touches:[],next:"",nextNote:"",owner:""});}
 function getStage(id){return (DB.leads[id]&&DB.leads[id].s)||"New";}
 function touchesOf(id){return (DB.leads[id]&&DB.leads[id].touches)||[];}
@@ -271,7 +273,7 @@ var modesList=["Downtown","Home Services","Real Estate","Restaurants"];
 function fillSelect(el,opts,cur){el.innerHTML=opts.map(function(o){return "<option value=\""+esc(o.v)+"\""+(o.v===cur?" selected":"")+">"+esc(o.l)+"</option>";}).join("");}
 function uniqSorted(getter){var out=[],seen={};data().forEach(function(r){var v=getter(r);if(v&&!seen[v]){seen[v]=1;out.push(v);}});out.sort();return out;}
 function initFilters(){refreshCat();}
-function refreshCat(){var cats=[],seen={};data().forEach(function(r){if(r.dnc||r.closed)return;if(r.category&&!seen[r.category]){seen[r.category]=1;cats.push(r.category);}});cats.sort();fillSelect(document.getElementById("fCat"),[{v:"all",l:"All types"}].concat(cats.map(function(c){return {v:c,l:c};})),st.cat);}
+function refreshCat(){var cats=[],seen={};data().forEach(function(r){if(r.dnc||r.closed||r.category==="Art"||r.category==="Entertainment"||r.category==="Coworking")return;var c=catOf(r);if(c&&!seen[c]){seen[c]=1;cats.push(c);}});cats.sort();fillSelect(document.getElementById("fCat"),[{v:"all",l:"All types"}].concat(cats.map(function(c){return {v:c,l:c};})),st.cat);}
 
 function viewPass(r){
  var id=r.id,rc=DB.leads[id],t=today(),stg=getStage(id);
@@ -285,9 +287,10 @@ function viewPass(r){
 }
 function passes(r){
  if(r.dnc||r.closed)return false;
+ if(r.category==="Art"||r.category==="Entertainment"||r.category==="Coworking")return false;
  if(st.web==="no"&&r.site)return false;
  if(st.web==="has"&&!r.site)return false;
- if(st.cat!=="all"&&r.category!==st.cat)return false;
+ if(st.cat!=="all"&&catOf(r)!==st.cat)return false;
  return true;
 }
 function sortList(list){
@@ -325,7 +328,7 @@ function card(r){
  var ph=r.phone?(" · "+esc(r.phone)):"";
  return "<div class=\"card "+(STAGE_CLS[stg]||"")+"\" data-card=\""+esc(id)+"\">"+
   "<div class=\"ctop\"><div class=\"cname\">"+esc(r.name)+"</div><div class=\"scorebox\"><span class=\"pill "+sc+"\" title=\"Prospect quality 0-100. Green = strong lead.\">"+r.score+"</span><span class=\"scaption\">score</span></div></div>"+
-  "<div class=\"meta\"><span class=\"cat\">"+esc(r.category)+"</span> · "+esc(r.city)+rev+ph+"</div>"+
+  "<div class=\"meta\"><span class=\"cat\">"+esc(catOf(r))+"</span> · "+esc(r.city)+rev+ph+"</div>"+
   pitchRow+
   "<div class=\"acts\">"+acts+"</div>"+
  "</div>";
@@ -352,7 +355,7 @@ function row(r){
  var stsel="<select class=\"stage-sel\" data-id=\""+esc(id)+"\">"+STAGES.map(function(x){return "<option"+(x===stg?" selected":"")+">"+x+"</option>";}).join("")+"</select>";
  return "<div class=\"lrow "+(STAGE_CLS[stg]||"")+((r.dnc||r.closed)?" dim":"")+"\" data-card=\""+esc(id)+"\">"+
   "<span class=\"pill "+sc+"\">"+r.score+"</span>"+
-  "<div class=\"lmain\"><div class=\"lname\">"+esc(r.name)+flag+"</div><div class=\"lmeta\"><span class=\"cat\">"+esc(r.category)+"</span> · "+esc(r.city)+rev+(r.phone?" · "+esc(r.phone):"")+"</div></div>"+
+  "<div class=\"lmain\"><div class=\"lname\">"+esc(r.name)+flag+"</div><div class=\"lmeta\"><span class=\"cat\">"+esc(catOf(r))+"</span> · "+esc(r.city)+rev+(r.phone?" · "+esc(r.phone):"")+"</div></div>"+
   axes+
   "<div class=\"lstat\">"+nextTag+lastTag+"</div>"+
   "<div class=\"lacts\">"+stsel+"<div class=\"llog\">"+chbtns+"<button class=\"lg hist\" data-id=\""+esc(id)+"\" title=\"History\">☰</button></div><button class=\"setnext lset\" data-id=\""+esc(id)+"\" title=\"Set follow-up\">⏰</button></div>"+
