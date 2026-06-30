@@ -421,7 +421,6 @@ function openSettings(){
  document.getElementById("gInperson").value=DB.goals.inperson;
  document.getElementById("setBg").classList.add("show");
 }
-document.getElementById("setBtn").onclick=openSettings;
 document.getElementById("setCancel").onclick=function(){document.getElementById("setBg").classList.remove("show");};
 document.getElementById("setBg").onclick=function(e){if(e.target===this)this.classList.remove("show");};
 document.getElementById("setSave").onclick=function(){
@@ -447,8 +446,6 @@ document.getElementById("tgBrand").onclick=function(){st.needBrand=!st.needBrand
 document.getElementById("tgDigital").onclick=function(){st.needDigital=!st.needDigital;this.classList.toggle("on",st.needDigital);st.top=false;render();};
 document.getElementById("tgMedia").onclick=function(){st.needMedia=!st.needMedia;this.classList.toggle("on",st.needMedia);st.top=false;render();};
 document.getElementById("tgAuto").onclick=function(){st.needAuto=!st.needAuto;this.classList.toggle("on",st.needAuto);st.top=false;render();};
-document.getElementById("topBtn").onclick=function(){st.top=true;st.status="all";st.view="all";st.sort="priority";document.getElementById("fSort").value="priority";renderViews();render();window.scrollTo(0,0);};
-document.getElementById("todayBtn").onclick=function(){st.view="due";st.status="all";st.top=false;st.sort="due";document.getElementById("fSort").value="due";renderViews();render();window.scrollTo(0,0);};
 document.getElementById("csvBtn").onclick=function(){
  var list=st.top?(function(){var l=data().filter(function(r){return !r.dnc&&!r.closed&&getStage(r.id)==="New";});sortList(l);return l.slice(0,25);})():data().filter(passes);
  if(!st.top)sortList(list);
@@ -460,7 +457,6 @@ document.getElementById("csvBtn").onclick=function(){
 
 /* ── add lead (incl. in-person capture) ── */
 var mb=document.getElementById("modalBg");
-document.getElementById("addBtn").onclick=function(){mb.classList.add("show");};
 document.getElementById("mCancel").onclick=function(){mb.classList.remove("show");};
 mb.onclick=function(e){if(e.target===mb)mb.classList.remove("show");};
 document.getElementById("mSave").onclick=function(){
