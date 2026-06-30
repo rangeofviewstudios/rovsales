@@ -1,0 +1,7 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/leads", "destination": "/atlleadhub.html" },
+    { "source": "/playbook", "destination": "/salesplaybook.html" }
+  ]
+}
