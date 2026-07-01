@@ -6,11 +6,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Inter:wght@400;500&family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root,[data-theme="light"]{--bg:#F0E6E0;--surface:rgba(255,251,245,.74);--surface-2:#EADFD2;--border:rgba(22,12,40,.14);--text:#160C28;--text-muted:rgba(22,12,40,.60);--text-faint:rgba(22,12,40,.40);--primary:#A56A67;--primary-hover:#8a514e;--primary-hl:rgba(165,106,103,.16);--gold:#9a6b12;--radius:.7rem;--shadow:0 1px 3px rgba(22,12,40,.06),0 6px 18px rgba(22,12,40,.07)}
-[data-theme="dark"]{--bg:#0F0820;--surface:rgba(33,18,52,.62);--surface-2:rgba(78,61,115,.30);--border:rgba(240,230,224,.15);--text:#F0E6E0;--text-muted:rgba(240,230,224,.70);--text-faint:rgba(240,230,224,.42);--primary:#A56A67;--primary-hover:#c4847f;--primary-hl:rgba(165,106,103,.20);--gold:#E3C24A;--shadow:0 1px 3px rgba(0,0,0,.4),0 8px 24px rgba(7,3,16,.5)}
-html{-webkit-font-smoothing:antialiased}
+:root,[data-theme="light"]{--bg:#F0E6E0;--surface:rgba(255,251,245,.74);--surface-2:#EADFD2;--border:rgba(22,12,40,.14);--text:#160C28;--text-muted:rgba(22,12,40,.60);--text-faint:rgba(22,12,40,.40);--primary:#A56A67;--primary-hover:#8a514e;--primary-hl:rgba(165,106,103,.16);--gold:#9a6b12;--good:#2f7d5b;--radius:.7rem;--shadow:0 1px 3px rgba(22,12,40,.06),0 6px 18px rgba(22,12,40,.07)}
+[data-theme="dark"]{--bg:#0F0820;--surface:rgba(33,18,52,.62);--surface-2:rgba(78,61,115,.30);--border:rgba(240,230,224,.15);--text:#F0E6E0;--text-muted:rgba(240,230,224,.70);--text-faint:rgba(240,230,224,.42);--primary:#A56A67;--primary-hover:#c4847f;--primary-hl:rgba(165,106,103,.20);--gold:#E3C24A;--good:#5fcf9b;--shadow:0 1px 3px rgba(0,0,0,.4),0 8px 24px rgba(7,3,16,.5)}
+html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
 body{font-family:"Space Grotesk",sans-serif;background:var(--bg);color:var(--text);min-height:100dvh;position:relative}
-button,select,input,textarea{font:inherit;color:inherit}button{cursor:pointer;background:none;border:none}a{color:inherit;text-decoration:none}
+button,select,input{font:inherit;color:inherit}button{cursor:pointer;background:none;border:none}a{color:inherit;text-decoration:none}
 /* ── twilight backdrop ── */
 .sky{position:fixed;inset:0;z-index:-2;pointer-events:none;overflow:hidden;background-color:#0F0820;background-image:radial-gradient(150% 40% at 50% 84%,rgba(227,194,74,.15) 0%,rgba(165,106,103,.22) 24%,rgba(78,61,115,.17) 50%,transparent 78%),radial-gradient(130% 52% at 50% -10%,rgba(36,18,58,.72) 0%,transparent 60%),linear-gradient(180deg,#0F0820 0%,#0F0820 32%,#1B0E2E 62%,#24123A 74%,#0F0820 100%);box-shadow:inset 0 0 clamp(140px,20vw,340px) rgba(7,3,16,.6)}
 .sky::after{content:"";position:absolute;inset:0;background:radial-gradient(130% 34% at 50% 86%,rgba(227,194,74,.08),rgba(165,106,103,.06) 40%,transparent 72%);animation:breathe 22s ease-in-out infinite alternate}
@@ -18,7 +18,7 @@ button,select,input,textarea{font:inherit;color:inherit}button{cursor:pointer;ba
 [data-theme="light"] .sky{background-color:#F0E6E0;background-image:radial-gradient(45% 35% at 14% 8%,rgba(227,194,74,.20),transparent 64%),radial-gradient(48% 40% at 86% 14%,rgba(78,61,115,.13),transparent 70%),radial-gradient(50% 42% at 16% 60%,rgba(165,106,103,.13),transparent 68%),radial-gradient(46% 38% at 88% 82%,rgba(78,61,115,.10),transparent 70%)}
 [data-theme="light"] .sky::after{display:none}
 .grain{position:fixed;inset:0;z-index:90;pointer-events:none;opacity:.06;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:170px 170px}
-@media(prefers-reduced-motion:reduce){.sky::after{animation:none}}
+@media(prefers-reduced-motion:reduce){.sky::after{animation:none}html{scroll-behavior:auto}}
 /* ── header ── */
 header{position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border);padding:.75rem 1.4rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;backdrop-filter:blur(12px);background:color-mix(in oklch,var(--bg) 88%,transparent)}
 .brand{display:flex;align-items:center;gap:.7rem}
@@ -28,54 +28,96 @@ header{position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border);p
 .brand .tag{font-size:.74rem;font-weight:500;color:var(--text-faint);letter-spacing:.005em;line-height:1.2;margin-top:.12rem}
 .hdr-r{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
 .search{position:relative}
-.search input{padding:.45rem .7rem .45rem 2rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:.82rem;outline:none;min-width:200px}
+.search input{padding:.45rem .7rem .45rem 2rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:.82rem;outline:none;min-width:210px}
 .search input:focus{border-color:var(--primary)}
 .search svg{position:absolute;left:.6rem;top:50%;transform:translateY(-50%);color:var(--text-faint)}
-.btn{display:inline-flex;align-items:center;gap:.35rem;font-size:.8rem;font-weight:600;padding:.45rem .8rem;border-radius:8px;border:1px solid var(--border);color:var(--text-muted)}
-.btn:hover{background:var(--surface-2);color:var(--text)}
-.btn.primary{background:var(--primary);border-color:var(--primary);color:#fff}.btn.primary:hover{background:var(--primary-hover)}
 .icbtn{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--text-muted);border:1px solid var(--border)}.icbtn:hover{background:var(--surface-2);color:var(--text)}
 /* ── layout ── */
-.wrap{max-width:1180px;margin:0 auto;padding:1.4rem;display:grid;grid-template-columns:212px 1fr;gap:1.4rem;align-items:start}
-@media(max-width:760px){.wrap{grid-template-columns:1fr;gap:1rem}}
-.nav{position:sticky;top:5rem;display:flex;flex-direction:column;gap:.3rem}
-@media(max-width:760px){.nav{position:static;flex-direction:row;overflow-x:auto;gap:.4rem;padding-bottom:.2rem}}
-.navitem{display:flex;align-items:center;gap:.6rem;padding:.6rem .8rem;border-radius:var(--radius);border:1px solid transparent;color:var(--text-muted);font-size:.88rem;font-weight:500;white-space:nowrap;transition:.15s}
+.wrap{max-width:1180px;margin:0 auto;padding:1.4rem;display:grid;grid-template-columns:224px 1fr;gap:1.4rem;align-items:start}
+@media(max-width:820px){.wrap{grid-template-columns:1fr;gap:1rem}}
+.nav{position:sticky;top:5rem;display:flex;flex-direction:column;gap:.28rem}
+@media(max-width:820px){.nav{position:static;flex-direction:row;overflow-x:auto;gap:.4rem;padding-bottom:.3rem}}
+.navlabel{font-family:"DM Mono",monospace;font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-faint);padding:.4rem .8rem .15rem}
+@media(max-width:820px){.navlabel{display:none}}
+.navitem{display:flex;align-items:center;gap:.6rem;padding:.6rem .8rem;border-radius:var(--radius);border:1px solid transparent;color:var(--text-muted);font-size:.9rem;font-weight:500;white-space:nowrap;transition:.15s;text-align:left;width:100%}
 .navitem:hover{background:var(--surface-2)}
 .navitem.on{background:var(--surface);border-color:var(--border);color:var(--text);box-shadow:var(--shadow)}
-.navitem .ico{font-size:1rem;opacity:.85}
-.navitem .ct{margin-left:auto;font-family:"DM Mono",monospace;font-size:.72rem;color:var(--text-faint)}
-@media(max-width:760px){.navitem .ct{margin-left:.3rem}}
+.navitem .ico{font-size:1.05rem;opacity:.9;width:1.2em;text-align:center}
+.navitem .ct{margin-left:auto;font-family:"DM Mono",monospace;font-size:.68rem;color:var(--text-faint)}
+.navitem.todo{opacity:.5;cursor:default}.navitem.todo:hover{background:none}
+@media(max-width:820px){.navitem.todo{display:none}.navitem .ct{margin-left:.3rem}}
 /* ── content ── */
-.sechead{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1rem}
-.sechead h2{font-size:clamp(1.5rem,3.4vw,2.2rem);font-weight:700;letter-spacing:-.02em;line-height:1}
-.sechead .dek{font-family:'Instrument Serif',serif;font-style:italic;font-size:1rem;color:var(--text-faint);margin-top:.25rem}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:.9rem}
-.item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.1rem;display:flex;flex-direction:column;gap:.5rem;box-shadow:var(--shadow);transition:.15s}
-.item:hover{transform:translateY(-2px);border-color:var(--primary)}
-.item h3{font-size:1rem;font-weight:700;letter-spacing:-.01em;line-height:1.25;cursor:pointer}
-.item .sub{font-family:"DM Mono",monospace;font-size:.7rem;letter-spacing:.04em;color:var(--gold);text-transform:uppercase}
-.item .body{font-family:'Inter',sans-serif;font-weight:400;font-size:.875rem;line-height:1.55;color:var(--text);white-space:pre-wrap;display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}
-.item .tags{display:flex;gap:.3rem;flex-wrap:wrap}
-.tag{font-size:.66rem;font-weight:600;padding:.12rem .45rem;border-radius:5px;background:var(--surface-2);color:var(--text-faint);text-transform:uppercase;letter-spacing:.03em}
-.item .foot{display:flex;gap:.4rem;margin-top:.1rem;border-top:1px solid var(--border);padding-top:.6rem}
-.minibtn{font-size:.74rem;font-weight:600;padding:.3rem .6rem;border-radius:6px;border:1px solid var(--border);color:var(--text-muted)}
-.minibtn:hover{background:var(--surface-2);color:var(--text)}
-.minibtn.copy{border-color:var(--primary);color:var(--primary)}.minibtn.copy:hover{background:var(--primary);color:#fff}
-.minibtn.copy.done{background:var(--primary);color:#fff;border-color:var(--primary)}
-.minibtn.del{margin-left:auto;color:var(--text-faint)}.minibtn.del:hover{color:#fff;background:#9a1b1b;border-color:#9a1b1b}
-.empty{grid-column:1/-1;text-align:center;padding:3.5rem 1rem;color:var(--text-muted);font-family:'Instrument Serif',serif;font-style:italic;font-size:1.1rem}
-/* ── editor modal ── */
-.modal-bg{position:fixed;inset:0;background:rgba(7,3,16,.66);display:none;align-items:center;justify-content:center;z-index:200;padding:1rem}
-.modal-bg.show{display:flex}
-.modal{background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:1.5rem;width:min(560px,96vw);max-height:92vh;overflow:auto;display:flex;flex-direction:column;gap:.75rem;box-shadow:var(--shadow)}
-.modal h3{font-size:1.1rem;font-weight:700}
-.fld{display:flex;flex-direction:column;gap:.3rem;font-size:.66rem;letter-spacing:.05em;text-transform:uppercase;color:var(--text-faint)}
-.fld input,.fld select,.fld textarea{padding:.6rem .7rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:.9rem;color:var(--text);outline:none;font-family:inherit;text-transform:none;letter-spacing:0}
-.fld textarea{min-height:170px;resize:vertical;line-height:1.5}
-.fld input:focus,.fld select:focus,.fld textarea:focus{border-color:var(--primary)}
-.modal .foot{display:flex;gap:.5rem;align-items:center;margin-top:.3rem}
-.footer{max-width:1180px;margin:0 auto;padding:1rem 1.4rem 3rem;font-family:'Instrument Serif',serif;font-style:italic;font-size:.9rem;color:var(--text-faint);text-align:center}
+main{min-width:0}
+.sechead{margin-bottom:1.3rem}
+.sechead h2{font-size:clamp(1.6rem,3.6vw,2.3rem);font-weight:700;letter-spacing:-.02em;line-height:1.02;display:flex;align-items:center;gap:.6rem}
+.sechead h2 .em{font-size:1.6rem}
+.sechead .dek{font-family:'Instrument Serif',serif;font-style:italic;font-size:1.12rem;color:var(--text-faint);margin-top:.4rem;max-width:60ch}
+.block{margin:0 0 2rem}
+.blocktitle{font-family:"DM Mono",monospace;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem;display:flex;align-items:center;gap:.5rem}
+.blocktitle::after{content:"";flex:1;height:1px;background:var(--border)}
+.prose{font-family:'Inter',sans-serif;font-size:.95rem;line-height:1.62;color:var(--text);max-width:70ch}
+.prose b,.prose strong{font-weight:600;color:var(--text)}
+/* callouts */
+.callrow{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+@media(max-width:560px){.callrow{grid-template-columns:1fr}}
+.call{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--primary);border-radius:var(--radius);padding:.85rem 1rem;box-shadow:var(--shadow)}
+.call.who{border-left-color:var(--good)}.call.skip{border-left-color:var(--primary)}
+.call.gold{border-left-color:var(--gold)}
+.call .lbl{font-family:"DM Mono",monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-faint);margin-bottom:.3rem;display:flex;align-items:center;justify-content:space-between;gap:.5rem}
+.call .txt{font-family:'Inter',sans-serif;font-size:.9rem;line-height:1.55;color:var(--text)}
+.call.oneliner .txt{font-family:'Instrument Serif',serif;font-style:italic;font-size:1.1rem;line-height:1.4}
+/* engines / channel table */
+.tbl{width:100%;border-collapse:separate;border-spacing:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);font-family:'Inter',sans-serif}
+.tbl th{text-align:left;font-family:"DM Mono",monospace;font-weight:500;font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text-faint);padding:.6rem .85rem;background:var(--surface-2);border-bottom:1px solid var(--border)}
+.tbl td{padding:.7rem .85rem;font-size:.86rem;line-height:1.45;border-bottom:1px solid var(--border);vertical-align:top}
+.tbl tr:last-child td{border-bottom:none}
+.tbl td.eng{font-weight:600;font-family:"Space Grotesk",sans-serif;white-space:nowrap;color:var(--text)}
+.tbl td.money{color:var(--text-muted)}
+.tbl td.ch{font-weight:600;font-family:"Space Grotesk",sans-serif;color:var(--primary)}
+@media(max-width:560px){.tbl,.tbl tbody,.tbl tr,.tbl td{display:block;width:100%}.tbl thead{display:none}.tbl td{border-bottom:none;padding:.25rem .85rem}.tbl tr{border-bottom:1px solid var(--border);padding:.5rem 0}.tbl td.eng{padding-top:.6rem}}
+/* angle cards */
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}
+@media(max-width:720px){.cards3{grid-template-columns:1fr}}
+.anglecard{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:.9rem 1rem;box-shadow:var(--shadow)}
+.anglecard .a{font-family:"DM Mono",monospace;font-size:.7rem;letter-spacing:.06em;color:var(--gold);text-transform:uppercase;margin-bottom:.35rem}
+.anglecard .n{font-weight:700;font-size:1rem;margin-bottom:.3rem}
+.anglecard .d{font-family:'Inter',sans-serif;font-size:.84rem;line-height:1.5;color:var(--text-muted)}
+/* offer cards (spine) */
+.offergrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(240px,100%),1fr));gap:.8rem}
+.offercard{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:.95rem 1.05rem;box-shadow:var(--shadow)}
+.offercard .n{font-weight:700;font-size:1rem;margin-bottom:.3rem;display:flex;align-items:center;gap:.45rem}
+.offercard .n .dot{width:.6rem;height:.6rem;border-radius:2px;background:var(--primary);transform:rotate(45deg)}
+.offercard .d{font-family:'Inter',sans-serif;font-size:.86rem;line-height:1.5;color:var(--text-muted)}
+/* script cards */
+.scripts{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(340px,100%),1fr));gap:.9rem}
+.subhead{font-weight:700;font-size:1.02rem;letter-spacing:-.01em;margin:1.3rem 0 .6rem;display:flex;align-items:center;gap:.5rem}
+.subhead .ic{font-size:1.05rem;opacity:.85}
+.scard{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:.85rem .95rem;display:flex;flex-direction:column;gap:.55rem;box-shadow:var(--shadow);transition:.15s}
+.scard:hover{border-color:var(--primary)}
+.scard .top{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.chip{font-family:"DM Mono",monospace;font-size:.64rem;font-weight:500;padding:.16rem .5rem;border-radius:5px;letter-spacing:.04em;text-transform:uppercase}
+.chip.a{background:var(--primary-hl);color:var(--primary)}
+.chip.g{background:color-mix(in oklch,var(--gold) 20%,transparent);color:var(--gold)}
+.scard .subj{font-family:'Inter',sans-serif;font-size:.78rem;color:var(--text-muted)}
+.scard .subj b{color:var(--gold);font-weight:600;font-family:"DM Mono",monospace;font-size:.72rem}
+.scard .msg{font-family:"DM Mono",monospace;font-size:.8rem;line-height:1.6;color:var(--text);white-space:pre-wrap;word-break:break-word}
+.scard .ph{color:var(--primary);font-weight:500}
+.scard .foot{display:flex;gap:.4rem;margin-top:.15rem;border-top:1px solid var(--border);padding-top:.6rem}
+.minibtn{font-size:.74rem;font-weight:600;padding:.32rem .7rem;border-radius:6px;border:1px solid var(--primary);color:var(--primary);display:inline-flex;align-items:center;gap:.3rem}
+.minibtn:hover{background:var(--primary);color:#fff}
+.minibtn.done{background:var(--primary);color:#fff}
+/* rules */
+.rules{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+.rules li{position:relative;padding-left:1.4rem;font-family:'Inter',sans-serif;font-size:.9rem;line-height:1.55;color:var(--text)}
+.rules li::before{content:"→";position:absolute;left:0;top:0;color:var(--primary);font-weight:700}
+.rules li b{font-weight:600}
+.vocab{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.2rem}
+.word{font-family:"DM Mono",monospace;font-size:.72rem;padding:.2rem .55rem;border-radius:6px}
+.word.ok{background:color-mix(in oklch,var(--good) 16%,transparent);color:var(--good)}
+.word.no{background:var(--primary-hl);color:var(--primary);text-decoration:line-through;text-decoration-color:color-mix(in oklch,var(--primary) 60%,transparent)}
+.notecard{background:var(--surface-2);border:1px dashed var(--border);border-radius:var(--radius);padding:.7rem .9rem;font-family:'Instrument Serif',serif;font-style:italic;font-size:.98rem;color:var(--text-muted);margin-top:.9rem}
+.hide{display:none!important}
+.footer{max-width:1180px;margin:0 auto;padding:1.4rem 1.4rem 3rem;font-family:'Instrument Serif',serif;font-style:italic;font-size:.9rem;color:var(--text-faint);text-align:center}
 .toast{position:fixed;bottom:1.2rem;left:50%;transform:translateX(-50%) translateY(1rem);background:var(--primary);color:#fff;padding:.55rem 1.1rem;border-radius:999px;font-size:.82rem;font-weight:600;opacity:0;pointer-events:none;transition:.25s;z-index:300}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 </style></head><body>
@@ -83,180 +125,296 @@ header{position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border);p
 <header>
  <div class="brand"><div class="mark"><img src="logos/WHITEnoBG.png" alt="Range of View"></div><div><h1>Sales Playbook</h1><div class="tag">How we sell, one source of truth</div></div></div>
  <div class="hdr-r">
-  <div class="search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input id="search" placeholder="Search this section..."></div>
-  <button class="btn primary" id="newBtn">+ New</button>
-  <button class="btn" id="expBtn">⬇ Export</button>
-  <button class="btn" id="impBtn">⬆ Import</button>
-  <input type="file" id="impFile" accept="application/json" style="display:none">
+  <div class="search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input id="search" placeholder="Search scripts..."></div>
   <button class="icbtn" id="themeBtn" title="Theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
  </div>
 </header>
 <div class="wrap">
  <nav class="nav" id="nav"></nav>
  <main>
-  <div class="sechead"><div><h2 id="secTitle"></h2><div class="dek" id="secDek"></div></div></div>
-  <div class="grid" id="grid"></div>
+  <div class="sechead"><h2 id="secTitle"></h2><div class="dek" id="secDek"></div></div>
+  <div id="body"></div>
  </main>
 </div>
-<div class="footer">Stored in this browser. Use <b>Export</b> to back up or share the playbook with the team · <span id="ver"></span></div>
-
-<div class="modal-bg" id="editBg"><div class="modal">
- <h3 id="editTitle">New entry</h3>
- <label class="fld">Section<select id="eSection"></select></label>
- <label class="fld">Title<input id="eName" placeholder="Short, clear name"></label>
- <label class="fld" id="eSubWrap">Subject<input id="eSub" placeholder=""></label>
- <label class="fld" id="eBodyWrap">Body<textarea id="eBody" placeholder=""></textarea></label>
- <label class="fld">Tags (comma-separated)<input id="eTags" placeholder="cold, restaurant, follow-up"></label>
- <div class="foot"><button class="minibtn del" id="eDelete" style="margin-left:0">Delete</button><span style="flex:1"></span><button class="btn" id="eCancel">Cancel</button><button class="btn primary" id="eSave">Save</button></div>
-</div></div>
+<div class="footer">One source of truth for how ROV sells. Built from the vertical sheets in <b>/playbook</b> · <span id="ver"></span></div>
 <div class="toast" id="toast"></div>
 
 <script>
 /* ════════════════════════════════════════════════════════════════
-   ROV SALES PLAYBOOK
-   DATA LAYER: localStorage for now. Everything goes through PB + save().
-   Swapping to a shared backend later is a contained change.
+   ROV SALES PLAYBOOK — vertical-first
+   Content is baked from the sheets in /playbook (the source of truth).
+   Nav = the Spine (shared engine) + one page per vertical.
    ════════════════════════════════════════════════════════════════ */
-var SECTIONS=[
- {k:"email",label:"Email templates",ico:"✉",dek:"reusable outreach: copy, tweak the name, send.",sub:"Subject line",bodyLabel:"Email body",bodyPh:"Hi {First name},\n\n..."},
- {k:"call",label:"Call scripts",ico:"☎",dek:"what to say on the phone: opener, voicemail, gatekeeper.",sub:"Use it for (opener / voicemail / gatekeeper)",bodyLabel:"Script",bodyPh:"Hi, is this {First name}?..."},
- {k:"linkedin",label:"LinkedIn",ico:"in",dek:"connection notes and messages that get replies.",sub:"Step (connect / first message / follow-up)",bodyLabel:"Message",bodyPh:"Hi {First name},..."},
- {k:"inperson",label:"In-person",ico:"🤝",dek:"walk-in openers and the leave-behind.",sub:"Step (opener / leave-behind / follow-up)",bodyLabel:"What to say",bodyPh:"Hi, are you the owner?..."},
- {k:"offers",label:"Offers",ico:"◆",dek:"what we sell, and how we frame it.",sub:"Price / terms (optional)",bodyLabel:"What it is",bodyPh:"The offer, who it's for, what they get."},
- {k:"copy",label:"Copywriting",ico:"✎",dek:"lines, hooks and value props the team pulls from.",sub:"Where it's used (optional)",bodyLabel:"The copy",bodyPh:"The line(s)."},
- {k:"ideas",label:"Ideas",ico:"✦",dek:"angles and experiments worth trying.",sub:"Status (optional)",bodyLabel:"The idea",bodyPh:"What's the idea, and why it might work."}
+var PH=/(\{[^}]+\})/g; // highlight {First name} etc.
+
+var SPINE={
+ mission:"Start conversations. Get a reply, a demo opened, or a call booked. Not closing, not quoting. When someone bites, it becomes a call.",
+ golden:"One wedge per lead, then expand. Never open with everything ROV does. Lead with the single obvious gap for that vertical. Branding, automation, and media only come up after they are interested.",
+ offers:[
+  {n:"Branding",d:"Logo, look, consistency, the name they own."},
+  {n:"Website",d:"The site itself, built to convert."},
+  {n:"Automation",d:"Missed-call text-back, follow-ups, review requests, reactivation, dashboard."},
+  {n:"Media",d:"Photo, video, Reels, content that shows the work."}
+ ],
+ package:"$750 build + 30 days free + $1K/mo, 3-month minimum. Always frame it against the dollar leak: “you're losing $X/mo, this is $1K/mo.” Only on the call, never in message 1.",
+ channel:"Small and owner-operated lives on Instagram. Bigger and more official lives on email. Home-services owners answer their phone. Real estate and B2B respond on LinkedIn. Every sheet tightens this for its target, including the exact dead-hour send window.",
+ angles:[
+  {a:"A",n:"Diagnosis",d:"Name the money leaks up front, offer to walk them through what you're seeing. Direct. Best when you want to lead with the problem."},
+  {a:"B",n:"Curiosity",d:"Proof + a light tease, make them ask. Smoothest, cheapest to send at scale. The default for cold volume."},
+  {a:"C",n:"Show them",d:"You already built the thing (mockup, Reel, audit) and want to walk them through it. Strongest, but only for a hand-picked short list, because you build it first. Never promise one you haven't made."}
+ ],
+ cta:"“want me to walk you through it?” It implies you've already looked, and it's an offer, not a demand. On reply, the reveal is the walkthrough itself.",
+ voice:[
+  "<b>Sound human, not like a brochure.</b> Real name + one specific detail so it's obviously not a blast.",
+  "<b>Never “would love to” / “happy to.”</b> You're a peer who makes the thing they need. Use “want me to.”",
+  "<b>No em dashes.</b> Ever. Commas, periods, parentheses.",
+  "<b>No formulaic “if you X then Y” constructions.</b>",
+  "<b>Speak their language, not vendor-speak.</b> Use the words the target uses. Vendor words read as commodity. Each sheet lists allowed and banned vocabulary.",
+  "<b>Name a villain that isn't them.</b> The portal (Zillow), the platform tax (DoorDash's 30%), the template everyone else uses.",
+  "<b>Proof is the intro.</b> Don't explain who ROV is in message 1. Lead with the result. Save the studio pitch for the reply.",
+  "<b>One number everywhere.</b> Lock the proof stat, use the exact figure every time. Never invent a stat."
+ ],
+ close:"We don't argue, we show. Either walk them through where they're losing money right now, or build a quick asset (mockup / Reel / audit) so they see it before they pay. Either way it flips “should I?” into “how do we fix it?”",
+ objections:[
+  {q:"How much?",a:"Depends what you need, that's a quick call. The sample/audit is free either way. Do not quote a price cold."},
+  {q:"We already have someone / a site.",a:"Totally fair. Mind if I send the sample anyway? If it's better than what you've got, great. If not, no harm."},
+  {q:"Not interested.",a:"No problem. If it helps, here's the free sample to keep. Then mark dead."},
+  {q:"Send me info.",a:"Send the asset or a one-line recap, mark contacted, follow up in 3 days."},
+  {q:"Too expensive.",a:"Tie it to the dollar leak. It pays for itself."},
+  {q:"Let me think.",a:"One low-friction next step (pick a launch date), not a beg."}
+ ],
+ tracking:"Every touch gets logged: Contacted on reach-out, Interested on a warm reply, Client on signing, Dead on a no. One-line note each (“called, wants quote Friday”). A lead you worked but didn't log is a lead you wasted."
+};
+
+var VERTICALS=[
+ {
+  k:"restaurants",label:"Restaurants",ico:"🍽️",
+  dek:"Unreal food, losing money before anyone tastes it.",
+  who:"Independent restaurants, coffee shops & cafés, metro Atlanta. 1-5 locations, owner-operated. Buyer is the owner (fast yes/no).",
+  skip:"National chains, franchises, corporate marketing depts, ghost kitchens. No local decision-maker = no deal.",
+  offerName:"Get Seen → Get Chosen → Get Kept",
+  offerIntro:"The food is the best part of the business, and it's quietly losing money before anyone ever tastes it. Money leaks at three stages: people searching for a place to eat never find them, the ones who do land on a site too rough to order from, and the orders they do get, they hand 30% to DoorDash. We plug all three.",
+  engines:[
+   {e:"Get Seen",does:"Scroll-stopping photo/video + SEO so you show up when people search Google.",money:"People searching for dinner never find you = lost customers."},
+   {e:"Get Chosen",does:"Website as good as the food, one clear path to order.",money:"Find you but bounce off an ugly site/PDF menu = lost orders."},
+   {e:"Get Kept",does:"Own your customers: reviews, email/SMS, direct ordering, an audience you actually own.",money:"DoorDash takes 30% and keeps the customer = lost margin + no repeats."}
+  ],
+  proof:"We doubled @thebandoatl's online revenue in about 3 months.",
+  close:"Two tools depending on the lead: walk them through where they're losing money right now (invisible on Google, bouncing off the site, DoorDash eating 30%), or build a quick mockup of what their new site could look like. Either way they see it before they pay.",
+  barTest:"Restaurants have unreal food, and they're losing money before anyone tastes it. People can't find them, the ones who do don't order, and the orders they get, they hand 30% to DoorDash. We plug all three and build them an audience they own. We doubled one spot's online revenue in 3 months, and we'll walk you through exactly where you're losing money right now.",
+  channels:[
+   {t:"1 location (mom & pop)",c:"Instagram DM",why:"owner lives there"},
+   {t:"2-3 locations",c:"IG first, email backup",why:""},
+   {t:"4-5 locations",c:"Email primary",why:"official, forwardable"}
+  ],
+  timing:"Tue–Thu, 2–4 PM (dead hour between lunch and dinner). Never Fri/Sat. Many spots closed Mon/Tue.",
+  angles:[
+   {a:"A",n:"Diagnosis",d:"Name the money leaks, offer to walk them through what you're seeing."},
+   {a:"B",n:"Curiosity",d:"Proof + a light tease, make them ask. Cheapest to send at scale."},
+   {a:"C",n:"Mockup",d:"You already built something, want to walk them through it. Hand-picked short list only."}
+  ],
+  cta:"want me to walk you through it / them / what I'm seeing?",
+  scripts:{
+   ig:[
+    {angle:"A · Diagnosis",body:"hey {First name}, food looks unreal\n\nwe just helped @thebandoatl 2x their online revenue in about 3 months\n\nspots with food this good usually lose money in 3 places: people can't find you, the ones who do don't order, and the orders you get you're handing 30% to doordash\n\nwant me to walk you through what I'm seeing at {Business}?"},
+    {angle:"B · Curiosity",body:"hey {First name}, the food looks incredible\n\nwe just helped @thebandoatl double their online revenue in 3 months\n\nnoticed a couple spots where {Business} is probably leaving money on the table. want me to walk you through them?"},
+    {angle:"C · Mockup",body:"hey {First name}, food looks unreal\n\nwe just helped @thebandoatl 2x their online revenue in about 3 months\n\nthe food clearly holds up, so I put together a quick mockup of what your online side could look like to match it. want me to walk you through it?"}
+   ],
+   email:[
+    {angle:"A · Diagnosis",subj:["where {Business} is leaking","{Business} + money on the table"],body:"Hi {First name},\n\nWe just helped @thebandoatl double their online revenue in about 3 months.\n\nMost restaurants with food this good are quietly losing money in three places: people searching for dinner never find them, the ones who do land on a site too rough to order from, and the orders they get, they hand 30% to DoorDash.\n\nWant me to walk you through what I'm seeing at {Business}?\n\nSuchet\nROV Studios"},
+    {angle:"B · Curiosity",subj:["{Business}","quick idea, {First name}"],body:"Hi {First name},\n\nWe just helped @thebandoatl double their online revenue in about 3 months.\n\nDifferent food, but I noticed a couple of spots where {Business} is probably leaving money on the table, same as most great restaurants do.\n\nWant me to walk you through them?\n\nSuchet\nROV Studios"},
+    {angle:"C · Mockup",subj:["made something for {Business}","{Business}"],body:"Hi {First name},\n\nWe just helped @thebandoatl double their online revenue in about 3 months.\n\nThe food at {Business} clearly holds up, so I put together a quick mockup of what the online side could look like to match it.\n\nWant me to walk you through it?\n\nSuchet\nROV Studios"}
+   ]
+  },
+  rules:[
+   "<b>Play:</b> B for cold volume, A when you want to name the leak up front, C for a hand-picked short list where you build the mockup first. On reply, the reveal is the walkthrough (the diagnosis or the mockup).",
+   "Never say “would love to” / “happy to.” You're a peer who just doubled a restaurant's revenue. Use “want me to.”",
+   "Don't explain who ROV is in message 1. The Bando result is the intro. Save the studio pitch for the reply."
+  ],
+  note:"Proof note (Suchet): confirm and lock the exact Bando figure before wide send. Keep one number everywhere."
+ },
+ {
+  k:"real-estate",label:"Real Estate",ico:"🏡",
+  dek:"14,000 agents, all identical online. Make one the obvious premium choice.",
+  who:"Residential agents who reinvest in themselves, metro Atlanta. Top producers, boutique teams (3-10 agents), agents with a real budget. The agent IS the business, so the buyer is the agent or team lead (fast yes/no).",
+  skip:"Brand-new agents with zero budget, anyone who leans 100% on the brokerage's marketing and won't spend on their own name, corporate brokerage marketing departments.",
+  offerName:"The Go-To Agent System — Win the Listing · Own the Sphere · Get Found",
+  offerIntro:"The agent is the entire brand, and almost every one of them hands that brand to a brokerage template and a phone camera. Money leaks in two places at once: they rent Zillow leads at $1K a month that barely close, and the referral business that actually pays sits dead and unworked in their database. We make the agent the obvious premium choice and turn past clients into referrals on autopilot.",
+  engines:[
+   {e:"Win the Listing",does:"Personal-brand website + listing media (photo, walkthrough video, Reels) + a win-the-listing marketing asset.",money:"Looking like everyone else and losing listings to whoever markets better."},
+   {e:"Own the Sphere",does:"Email/SMS stay-in-touch + referral automation + database reactivation + done-for-you social.",money:"$150K of GCI rotting in the database, plus the social treadmill."},
+   {e:"Get Found",does:"Personal-brand SEO + Google Business Profile + review engine.",money:"Renting Zillow leads at $1K a month that barely convert."}
+  ],
+  proof:"No real estate case study yet. The Reel IS your proof right now, so lead with it. Adjacent proof: ROV doubled @thebandoatl's online revenue in about 3 months (a restaurant, so keep it for the call, not the cold DM). Priority: land one agent and document listings sold faster or referrals recovered. Never invent a stat.",
+  close:"Agents get pitched by every Zillow rep alive, so don't pitch, show. Cut a branded Reel of one of their current listings so they can post it that day and look elite. Backups: a personal-brand homepage mockup, or a database audit that puts a dollar figure on the referral money sitting unworked. The Reel is strongest because it's instant, visual, and theirs.",
+  barTest:"There are 14,000 agents in Atlanta and they all look identical online, so they panic and rent leads from Zillow at a grand a month that barely close, while the referral money that actually pays is sitting dead in their database. We make an agent look like the obvious premium choice and turn their past clients into referrals on autopilot. And we'll show them, we'll cut a Reel of one of their listings for free.",
+  channels:[
+   {t:"Solo agent (lives on IG)",c:"Instagram DM",why:"where they are all day"},
+   {t:"Boutique team (3-10)",c:"IG first, email backup",why:""},
+   {t:"Top producer / established",c:"Email primary",why:"forwardable to a team"}
+  ],
+  timing:"Tue–Thu, 10 AM – 2 PM. Avoid weekends (open houses and showings) and Monday mornings.",
+  angles:[
+   {a:"A",n:"Diagnosis",d:"Name the two money leaks (renting Zillow leads + dead database), offer to walk them through it."},
+   {a:"B",n:"Curiosity",d:"Tease the referral money sitting in their sphere, make them ask."},
+   {a:"C",n:"Reel",d:"You already cut a Reel of their listing and want to send it over. Strongest here. Build it first."}
+  ],
+  cta:"want me to walk you through it? (diagnosis) or want me to send it over? (Reel)",
+  scripts:{
+   ig:[
+    {angle:"A · Diagnosis",body:"hey {First name}\n\nthere are 14,000 agents in atlanta and online everyone kind of blurs together, so most end up renting zillow leads that barely close while their referral money sits unworked in their past clients\n\nthat part's very fixable. want me to walk you through what I'm seeing?"},
+    {angle:"B · Curiosity",body:"hey {First name}, been following your listings\n\nmost agents I talk to have real referral money sitting dead in their past-client list with nothing pulling it back\n\nnoticed a couple spots where that's probably you too. want me to walk you through them?"},
+    {angle:"C · Reel",body:"hey {First name}, saw your {Street} listing\n\nI cut listing reels for atlanta agents, so I made you one of that place to show the style. yours to keep either way, post it today if you like it\n\nwant me to send it over?"}
+   ],
+   email:[
+    {angle:"A · Diagnosis",subj:["the money in your database","{First name}"],body:"Hi {First name},\n\nThere are 14,000 agents in Atlanta and online they mostly blur together, so most end up renting Zillow leads that barely close while the referral money that actually pays sits dead in their database.\n\nBoth are fixable, and you already own the expensive part.\n\nWant me to walk you through what I'm seeing?\n\nSuchet\nROV Studios"},
+    {angle:"B · Curiosity",subj:["quick idea, {First name}","{First name}"],body:"Hi {First name},\n\nMost Atlanta agents I talk to have real referral money sitting unworked in their past-client list, with no system pulling it back in.\n\nI noticed a couple of spots where that's probably happening for you too.\n\nWant me to walk you through them?\n\nSuchet\nROV Studios"},
+    {angle:"C · Reel",subj:["made something for your {Street} listing","your {Street} listing"],body:"Hi {First name},\n\nI cut listing reels for Atlanta agents, so I made you one of your {Street} listing to show the style. Yours to keep either way, post it today if you like it.\n\nWant me to send it over?\n\nSuchet\nROV Studios"}
+   ]
+  },
+  vocab:{ok:["listings","your sphere","past clients","top of mind","referrals","win the listing","GCI","the go-to agent"],no:["leads","funnels","CRM","conversions","nurture campaign"]},
+  rules:[
+   "<b>Play:</b> C (the Reel) is your strongest angle here, lean on it more than in other verticals. No case study yet, so a Reel of their own listing sidesteps the “who have you done this for?” question. Use B for cold volume, A to name the money leak up front.",
+   "<b>The Reel angle requires you to actually cut the Reel first.</b> Never promise one you haven't made. Build it for a hand-picked short list of dream agents.",
+   "Never say “would love to” or “happy to.” You're a peer who makes the thing they need. Use “want me to.”",
+   "Don't pitch “lead generation.” Promise positioning (the obvious premium choice) and recapture (referral money they already own), not lead volume.",
+   "The villain is the portal (Zillow, realtor.com), not other agents or vendors. You build the asset they own so they stop renting leads."
+  ],
+  note:"Proof note (Suchet): land and document one agent win, then swap the Bando line for a real listings-sold-faster or referrals-recovered number. Keep one number everywhere."
+ }
 ];
-function sec(k){for(var i=0;i<SECTIONS.length;i++)if(SECTIONS[i].k===k)return SECTIONS[i];return SECTIONS[0];}
 
-function uid(){return "p"+Date.now().toString(36)+Math.floor(Math.random()*1e4).toString(36);}
+var TODO=[{label:"HVAC",ico:"❄"},{label:"Roofing",ico:"🏠"},{label:"Pressure washing",ico:"💦"},{label:"Lawn care",ico:"🌱"}];
 
-var SEED=[
- {section:"email",title:"Cold intro: local business",sub:"A sharper look for {Business}",body:"Hi {First name},\n\nI came across {Business} and the work looks genuinely good, but the brand around it isn't doing it justice yet. We're Range of View, a studio that helps local businesses look as considered as the work they put out.\n\nWorth a short call this week? No pitch deck, just a few specific ideas for {Business}.\n\n{Your name}, Range of View",tags:["cold","intro"]},
- {section:"email",title:"Follow-up: no reply",sub:"Circling back, {First name}",body:"Hi {First name},\n\nFloating this back up in case it got buried. Still happy to share a couple of quick ideas for {Business}. Takes ten minutes and you keep whatever's useful.\n\nGood to grab time this week?\n\n{Your name}",tags:["follow-up"]},
- {section:"offers",title:"Brand identity & design systems",sub:"",body:"A complete visual identity: logo, type, color, and a system to keep it consistent everywhere. For businesses that have outgrown their first look.",tags:["brand"]},
- {section:"offers",title:"Web / interactive / product",sub:"",body:"Sites and product interfaces designed to convert and feel premium. Built, not templated.",tags:["web"]},
- {section:"offers",title:"Video / motion / content",sub:"",body:"Editorial, warm-toned video and motion content that matches the brand, never cold stock.",tags:["video"]},
- {section:"offers",title:"Creative tech / AI experiences",sub:"",body:"AI-powered tools and interactive experiences for brands that want to feel ahead.",tags:["ai"]},
- {section:"copy",title:"Detail line",sub:"email sign-off / site",body:"Crafted for those who value the details.",tags:["one-liner"]},
- {section:"copy",title:"Process value prop",sub:"pitch",body:"Our process is methodical. Every step considered, every outcome earned. We don't rush quality.",tags:["value-prop"]},
- {section:"ideas",title:"Walk-in Fridays",sub:"to try",body:"Block Friday mornings to visit 5 local businesses in person with a one-page leave-behind. Warm, low-pressure, memorable.",tags:["outreach"]},
- {section:"call",title:"Cold call: opener",sub:"opener",body:"Hi, is this {First name}? Great, I'll be quick. I'm {Your name} with Range of View, a design studio here in the metro. I came across {Business} and the work looks good, but the brand and site around it aren't pulling their weight yet. I'm not going to sell you anything on this call. I just want to send over two or three specific ideas for {Business}. What's the best email for that?",tags:["cold","opener"]},
- {section:"call",title:"Cold call: voicemail",sub:"voicemail",body:"Hi {First name}, it's {Your name} with Range of View. Quick one. I had a couple of specific ideas for {Business}'s brand and website and wanted to run them by you. No pitch. I'll send a short email as well. You can reach me at {phone}. Thanks {First name}.",tags:["voicemail"]},
- {section:"call",title:"Gatekeeper",sub:"gatekeeper",body:"Hi, maybe you can help me out. I'm trying to get a couple of design ideas in front of whoever owns the look of {Business}, the brand and the website. Who's the best person for that, and what's the best way to reach them?",tags:["gatekeeper"]},
- {section:"linkedin",title:"Connection note",sub:"connect",body:"Hi {First name}, I run a design studio (Range of View) and keep an eye on local businesses doing good work. {Business} stood out. Would like to connect.",tags:["connect"]},
- {section:"linkedin",title:"First message",sub:"after they connect",body:"Thanks for connecting, {First name}. Straight to it: I had a couple of specific ideas for {Business}'s brand and site. Happy to send them over, no pitch attached. Want me to?",tags:["first-message"]},
- {section:"linkedin",title:"Follow-up (no reply)",sub:"follow-up",body:"No problem if now isn't the time, {First name}. I'll leave the offer open: a couple of free, specific ideas for {Business} whenever you want them. Just say the word.",tags:["follow-up"]},
- {section:"inperson",title:"Walk-in opener",sub:"opener (10 seconds)",body:"Hi, are you the owner or manager? I'm {Your name} from Range of View, a design studio just nearby. I'll be honest, I came in because I liked {Business} but felt the brand could go further. I'm not here to sell you anything today. Can I leave you one page and a card?",tags:["walk-in"]},
- {section:"inperson",title:"Leave-behind one-pager",sub:"what the page says",body:"Range of View. We make local businesses look as good as the work they do. Brand identity, websites, video, and creative tech. A few recent results: [add 2 or 3]. If the look of {Business} ever bugs you, we should talk. {Your name}, {phone}, {email}.",tags:["leave-behind"]},
- {section:"inperson",title:"After the visit",sub:"follow-up email",body:"Hi {First name}, it's {Your name} from Range of View. Good to meet you at {Business} earlier. As promised, here are a couple of specific ideas: [1], [2]. If either one is interesting, I'm around this week.",tags:["follow-up"]}
-];
-
-var CHANNEL_SECTIONS=["call","linkedin","inperson"];
-var PB=JSON.parse(localStorage.getItem("rovPlaybook")||"null");
-function seedItems(arr){return arr.map(function(s){return Object.assign({id:uid(),updated:Date.now()},s);});}
-if(!PB){
- PB={v:1,seeded:CHANNEL_SECTIONS.slice(),items:seedItems(SEED)};save();
-}else{
- // existing installs: add seeds for any newly-introduced channel section, once, without touching saved entries
- if(!PB.seeded)PB.seeded=[];
- var added=false;
- CHANNEL_SECTIONS.forEach(function(k){if(PB.seeded.indexOf(k)<0){PB.items=PB.items.concat(seedItems(SEED.filter(function(s){return s.section===k;})));PB.seeded.push(k);added=true;}});
- if(added)save();
-}
-function save(){localStorage.setItem("rovPlaybook",JSON.stringify(PB));}
-
-var state={section:"email",q:""};
-
+/* ── helpers ── */
 function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
-function itemsIn(k){return PB.items.filter(function(it){return it.section===k;});}
+function msgHTML(s){return esc(s).replace(PH,"<span class=\"ph\">$1</span>");}
+var state={page:"spine",q:""};
 
+/* ── nav ── */
 function renderNav(){
- document.getElementById("nav").innerHTML=SECTIONS.map(function(s){return "<button class=\"navitem"+(state.section===s.k?" on":"")+"\" data-k=\""+s.k+"\"><span class=\"ico\">"+s.ico+"</span>"+s.label+"<span class=\"ct\">"+itemsIn(s.k).length+"</span></button>";}).join("");
- Array.prototype.forEach.call(document.querySelectorAll(".navitem"),function(b){b.onclick=function(){state.section=b.getAttribute("data-k");state.q="";document.getElementById("search").value="";render();};});
+ var h="<div class=\"navlabel\">Engine</div>";
+ h+=navBtn("spine","🎯","The Spine","");
+ h+="<div class=\"navlabel\">Verticals</div>";
+ VERTICALS.forEach(function(v){h+=navBtn(v.k,v.ico,v.label,scriptCount(v)+" scripts");});
+ TODO.forEach(function(t){h+="<div class=\"navitem todo\"><span class=\"ico\">"+t.ico+"</span>"+t.label+"<span class=\"ct\">soon</span></div>";});
+ document.getElementById("nav").innerHTML=h;
+ Array.prototype.forEach.call(document.querySelectorAll(".navitem[data-k]"),function(b){b.onclick=function(){state.page=b.getAttribute("data-k");state.q="";document.getElementById("search").value="";render();window.scrollTo(0,0);};});
 }
-function render(){
- var s=sec(state.section);
- document.getElementById("secTitle").textContent=s.label;
- document.getElementById("secDek").textContent=s.dek;
- document.getElementById("search").placeholder="Search "+s.label.toLowerCase()+"...";
- var list=itemsIn(state.section);
- if(state.q){var q=state.q.toLowerCase();list=list.filter(function(it){return (it.title+" "+it.body+" "+(it.tags||[]).join(" ")+" "+(it.sub||"")).toLowerCase().indexOf(q)>=0;});}
- list.sort(function(a,b){return (b.updated||0)-(a.updated||0);});
- document.getElementById("grid").innerHTML=list.length?list.map(card).join(""):"<div class=\"empty\">Nothing here yet. Hit <b>+ New</b> to add the first one.</div>";
- renderNav();
-}
-function card(it){
- var tags=(it.tags||[]).filter(Boolean).map(function(t){return "<span class=\"tag\">"+esc(t)+"</span>";}).join("");
- return "<div class=\"item\">"+
-  (it.sub?"<div class=\"sub\">"+esc(it.sub)+"</div>":"")+
-  "<h3 data-edit=\""+it.id+"\">"+esc(it.title||"(untitled)")+"</h3>"+
-  "<div class=\"body\">"+esc(it.body)+"</div>"+
-  (tags?"<div class=\"tags\">"+tags+"</div>":"")+
-  "<div class=\"foot\"><button class=\"minibtn copy\" data-copy=\""+it.id+"\">Copy</button><button class=\"minibtn\" data-edit=\""+it.id+"\">Edit</button><button class=\"minibtn del\" data-del=\""+it.id+"\">Delete</button></div>"+
- "</div>";
-}
-function find(id){for(var i=0;i<PB.items.length;i++)if(PB.items[i].id===id)return PB.items[i];return null;}
+function navBtn(k,ico,label,ct){return "<button class=\"navitem"+(state.page===k?" on":"")+"\" data-k=\""+k+"\"><span class=\"ico\">"+ico+"</span>"+label+(ct?"<span class=\"ct\">"+ct+"</span>":"")+"</button>";}
+function scriptCount(v){var n=0;for(var c in v.scripts)n+=v.scripts[c].length;return n;}
 
-/* ── grid actions ── */
-document.getElementById("grid").addEventListener("click",function(e){
- var t=e.target.closest("[data-copy],[data-edit],[data-del]");if(!t)return;
- if(t.hasAttribute("data-copy")){doCopy(t,find(t.getAttribute("data-copy")));return;}
- if(t.hasAttribute("data-edit")){openEdit(find(t.getAttribute("data-edit")));return;}
- if(t.hasAttribute("data-del")){var it=find(t.getAttribute("data-del"));if(it&&confirm("Delete \""+(it.title||"this entry")+"\"?")){PB.items=PB.items.filter(function(x){return x.id!==it.id;});save();render();toast("Deleted");}return;}
-});
-function copyText(it){return (it.section==="email"&&it.sub)?("Subject: "+it.sub+"\n\n"+it.body):it.body;}
-function doCopy(btn,it){if(!it)return;var txt=copyText(it);
- function ok(){btn.classList.add("done");btn.textContent="Copied ✓";toast("Copied to clipboard");setTimeout(function(){btn.classList.remove("done");btn.textContent="Copy";},1400);}
+/* ── render ── */
+function render(){
+ renderNav();
+ if(state.page==="spine")renderSpine();else renderVertical(vert(state.page));
+ applySearch();
+}
+function vert(k){for(var i=0;i<VERTICALS.length;i++)if(VERTICALS[i].k===k)return VERTICALS[i];return VERTICALS[0];}
+
+function renderSpine(){
+ document.getElementById("secTitle").innerHTML="<span class=\"em\">🎯</span> The Spine";
+ document.getElementById("secDek").textContent="The engine every vertical inherits. Written once so no sheet repeats it.";
+ var h="";
+ h+=block("The job",
+  "<div class=\"callrow\"><div class=\"call gold\"><div class=\"lbl\">One job</div><div class=\"txt\">"+esc(SPINE.mission)+"</div></div>"+
+  "<div class=\"call gold\"><div class=\"lbl\">Golden rule</div><div class=\"txt\">"+esc(SPINE.golden)+"</div></div></div>");
+ var oc=SPINE.offers.map(function(o){return "<div class=\"offercard\"><div class=\"n\"><span class=\"dot\"></span>"+esc(o.n)+"</div><div class=\"d\">"+esc(o.d)+"</div></div>";}).join("");
+ h+=block("The four offers","<div class=\"offergrid\">"+oc+"</div>"+
+  "<div class=\"call gold\" style=\"margin-top:.8rem\"><div class=\"lbl\">The package<button class=\"minibtn\" data-copy=\"spine-package\">Copy</button></div><div class=\"txt\" id=\"spine-package-txt\">"+esc(SPINE.package)+"</div></div>"+
+  "<p class=\"prose\" style=\"margin-top:.7rem\">You sell <b>one</b> engine per lead. The other three are the upside you reveal once they bite.</p>");
+ h+=block("The three angles",angleCards(SPINE.angles)+"<div class=\"call\" style=\"margin-top:.8rem\"><div class=\"lbl\">CTA throughline</div><div class=\"txt\">"+esc(SPINE.cta)+"</div></div>");
+ h+=block("Voice rules — this is what “copywriting” means","<ul class=\"rules\">"+SPINE.voice.map(function(r){return "<li>"+r+"</li>";}).join("")+"</ul>");
+ h+=block("The close (show, don't tell)","<div class=\"call oneliner\"><div class=\"txt\">"+esc(SPINE.close)+"</div></div>");
+ h+=block("Objections",SPINE.objections.map(function(o){return "<div class=\"scard\" data-search=\""+esc((o.q+" "+o.a).toLowerCase())+"\"><div class=\"top\"><span class=\"chip a\">“"+esc(o.q)+"”</span></div><div class=\"msg\" style=\"font-family:Inter,sans-serif;font-size:.88rem\">"+esc(o.a)+"</div></div>";}).join("").replace(/^/,"<div class=\"scripts\">")+"</div>");
+ h+=block("Tracking discipline","<div class=\"call\"><div class=\"txt\">"+esc(SPINE.tracking)+"</div></div>");
+ h+=block("Channel principle","<div class=\"prose\">"+esc(SPINE.channel)+"</div>");
+ document.getElementById("body").innerHTML=h;
+ bindCopy();
+}
+
+function renderVertical(v){
+ document.getElementById("secTitle").innerHTML="<span class=\"em\">"+v.ico+"</span> "+esc(v.label);
+ document.getElementById("secDek").textContent=v.dek;
+ var h="";
+ // ICP
+ h+=block("Who we sell","<div class=\"callrow\"><div class=\"call who\"><div class=\"lbl\">Who</div><div class=\"txt\">"+esc(v.who)+"</div></div><div class=\"call skip\"><div class=\"lbl\">Skip</div><div class=\"txt\">"+esc(v.skip)+"</div></div></div>");
+ // Offer
+ var rows=v.engines.map(function(e){return "<tr><td class=\"eng\">"+esc(e.e)+"</td><td>"+esc(e.does)+"</td><td class=\"money\">"+esc(e.money)+"</td></tr>";}).join("");
+ h+=block("The offer",
+  "<p class=\"prose\" style=\"margin-bottom:.8rem\"><b>"+esc(v.offerName)+"</b><br>"+esc(v.offerIntro)+"</p>"+
+  "<table class=\"tbl\"><thead><tr><th>Engine</th><th>What it does</th><th>The money it wins</th></tr></thead><tbody>"+rows+"</tbody></table>"+
+  "<div class=\"callrow\" style=\"margin-top:.8rem\"><div class=\"call gold\"><div class=\"lbl\">Proof</div><div class=\"txt\">"+esc(v.proof)+"</div></div>"+
+  "<div class=\"call\"><div class=\"lbl\">The close (show, don't tell)</div><div class=\"txt\">"+esc(v.close)+"</div></div></div>"+
+  "<div class=\"call oneliner gold\" style=\"margin-top:.8rem\" data-search=\""+esc(v.barTest.toLowerCase())+"\"><div class=\"lbl\">Bar test (say it out loud)<button class=\"minibtn\" data-copyraw=\""+esc(v.barTest)+"\">Copy</button></div><div class=\"txt\">"+esc(v.barTest)+"</div></div>");
+ // Play
+ var ch=v.channels.map(function(c){return "<tr><td>"+esc(c.t)+"</td><td class=\"ch\">"+esc(c.c)+(c.why?" <span style=\"color:var(--text-faint);font-weight:400\">· "+esc(c.why)+"</span>":"")+"</td></tr>";}).join("");
+ h+=block("Which channel (by size)","<table class=\"tbl\"><thead><tr><th>Size / type</th><th>Channel</th></tr></thead><tbody>"+ch+"</tbody></table>"+
+  "<div class=\"call\" style=\"margin-top:.8rem\"><div class=\"lbl\">Send timing</div><div class=\"txt\">"+esc(v.timing)+"</div></div>");
+ // Angles
+ h+=block("The three angles to A/B/C test",angleCards(v.angles)+"<div class=\"call\" style=\"margin-top:.8rem\"><div class=\"lbl\">CTA throughline</div><div class=\"txt\">“"+esc(v.cta)+"”</div></div>");
+ // Scripts
+ var sh="";
+ if(v.scripts.ig)sh+="<div class=\"subhead\"><span class=\"ic\">📷</span>Instagram DM</div><div class=\"scripts\">"+v.scripts.ig.map(scriptCard).join("")+"</div>";
+ if(v.scripts.email)sh+="<div class=\"subhead\"><span class=\"ic\">✉️</span>Email</div><div class=\"scripts\">"+v.scripts.email.map(scriptCard).join("")+"</div>";
+ if(v.scripts.linkedin)sh+="<div class=\"subhead\"><span class=\"ic\">in</span>LinkedIn</div><div class=\"scripts\">"+v.scripts.linkedin.map(scriptCard).join("")+"</div>";
+ h+=block("Scripts — tap Copy, tweak the {name}, send",sh);
+ // Vocab
+ if(v.vocab){
+  var ok=v.vocab.ok.map(function(w){return "<span class=\"word ok\">"+esc(w)+"</span>";}).join("");
+  var no=v.vocab.no.map(function(w){return "<span class=\"word no\">"+esc(w)+"</span>";}).join("");
+  h+=block("Speak their language","<p class=\"prose\" style=\"margin-bottom:.5rem\">Their words build trust. Vendor words read as commodity.</p><div class=\"vocab\">"+ok+"</div><div class=\"vocab\" style=\"margin-top:.5rem\">"+no+"</div>");
+ }
+ // Rules
+ h+=block("Rules of the road","<ul class=\"rules\">"+v.rules.map(function(r){return "<li>"+r+"</li>";}).join("")+"</ul>"+(v.note?"<div class=\"notecard\">"+esc(v.note)+"</div>":""));
+ document.getElementById("body").innerHTML=h;
+ bindCopy();
+}
+
+function block(title,inner){return "<section class=\"block\"><div class=\"blocktitle\">"+esc(title)+"</div>"+inner+"</section>";}
+function angleCards(arr){return "<div class=\"cards3\">"+arr.map(function(a){return "<div class=\"anglecard\"><div class=\"a\">Angle "+esc(a.a)+"</div><div class=\"n\">"+esc(a.n)+"</div><div class=\"d\">"+esc(a.d)+"</div></div>";}).join("")+"</div>";}
+function scriptCard(s){
+ var subj="";
+ if(s.subj)subj="<div class=\"subj\">Subjects: "+s.subj.map(function(x){return "<b>"+esc(x)+"</b>";}).join(" &nbsp;/&nbsp; ")+"</div>";
+ var searchtext=esc(((s.angle||"")+" "+(s.subj?s.subj.join(" "):"")+" "+s.body).toLowerCase());
+ var copy=s.subj?("Subject: "+s.subj[0]+"\n\n"+s.body):s.body;
+ return "<div class=\"scard\" data-search=\""+searchtext+"\"><div class=\"top\"><span class=\"chip "+(s.angle.indexOf('C ')===0?"g":"a")+"\">"+esc(s.angle)+"</span></div>"+subj+
+  "<div class=\"msg\">"+msgHTML(s.body)+"</div>"+
+  "<div class=\"foot\"><button class=\"minibtn\" data-copyraw=\""+esc(copy)+"\">📋 Copy</button></div></div>";
+}
+
+/* ── copy ── */
+function bindCopy(){
+ Array.prototype.forEach.call(document.querySelectorAll("[data-copyraw]"),function(b){b.onclick=function(){doCopy(b,b.getAttribute("data-copyraw"));};});
+ Array.prototype.forEach.call(document.querySelectorAll("[data-copy=spine-package]"),function(b){b.onclick=function(){doCopy(b,SPINE.package);};});
+}
+function doCopy(btn,txt){
+ var label=btn.textContent;
+ function ok(){btn.classList.add("done");btn.textContent="Copied ✓";toast("Copied to clipboard");setTimeout(function(){btn.classList.remove("done");btn.textContent=label;},1400);}
  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(ok,function(){fallbackCopy(txt);ok();});}
  else{fallbackCopy(txt);ok();}
 }
 function fallbackCopy(txt){var ta=document.createElement("textarea");ta.value=txt;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();try{document.execCommand("copy");}catch(e){}document.body.removeChild(ta);}
 
-/* ── editor ── */
-var editing=null;
-function fillSectionSelect(){document.getElementById("eSection").innerHTML=SECTIONS.map(function(s){return "<option value=\""+s.k+"\">"+s.label+"</option>";}).join("");}
-function syncEditorLabels(k){var s=sec(k);document.getElementById("eSubWrap").childNodes[0].nodeValue=s.sub;document.getElementById("eSub").placeholder=s.sub;document.getElementById("eBodyWrap").childNodes[0].nodeValue=s.bodyLabel;document.getElementById("eBody").placeholder=s.bodyPh;}
-function openEdit(it){
- editing=it;
- document.getElementById("editTitle").textContent=it?"Edit entry":"New "+sec(state.section).label.replace(/s$/,"").toLowerCase();
- var k=it?it.section:state.section;
- document.getElementById("eSection").value=k;syncEditorLabels(k);
- document.getElementById("eName").value=it?it.title:"";
- document.getElementById("eSub").value=it?(it.sub||""):"";
- document.getElementById("eBody").value=it?it.body:"";
- document.getElementById("eTags").value=it?(it.tags||[]).join(", "):"";
- document.getElementById("eDelete").style.display=it?"":"none";
- document.getElementById("editBg").classList.add("show");
- setTimeout(function(){document.getElementById("eName").focus();},30);
+/* ── search (filters cards on the active page) ── */
+function applySearch(){
+ var q=state.q.trim().toLowerCase();
+ var cards=document.querySelectorAll("#body [data-search]");
+ if(!q){Array.prototype.forEach.call(cards,function(c){c.classList.remove("hide");});Array.prototype.forEach.call(document.querySelectorAll("#body .block"),function(b){b.classList.remove("hide");});return;}
+ Array.prototype.forEach.call(cards,function(c){c.classList.toggle("hide",c.getAttribute("data-search").indexOf(q)<0);});
+ // hide script/objection blocks that end up empty
+ Array.prototype.forEach.call(document.querySelectorAll("#body .block"),function(b){
+  var searchable=b.querySelectorAll("[data-search]");
+  if(searchable.length){var anyVisible=false;Array.prototype.forEach.call(searchable,function(c){if(!c.classList.contains("hide"))anyVisible=true;});b.classList.toggle("hide",!anyVisible);}
+ });
 }
-document.getElementById("eSection").onchange=function(){syncEditorLabels(this.value);};
-document.getElementById("newBtn").onclick=function(){openEdit(null);};
-document.getElementById("eCancel").onclick=function(){document.getElementById("editBg").classList.remove("show");};
-document.getElementById("editBg").onclick=function(e){if(e.target===this)this.classList.remove("show");};
-document.getElementById("eDelete").onclick=function(){if(editing&&confirm("Delete this entry?")){PB.items=PB.items.filter(function(x){return x.id!==editing.id;});save();document.getElementById("editBg").classList.remove("show");render();toast("Deleted");}};
-document.getElementById("eSave").onclick=function(){
- var title=document.getElementById("eName").value.trim();
- var body=document.getElementById("eBody").value.trim();
- if(!title&&!body){toast("Add a title or some text first");return;}
- var k=document.getElementById("eSection").value;
- var tags=document.getElementById("eTags").value.split(",").map(function(x){return x.trim();}).filter(Boolean);
- var sub=document.getElementById("eSub").value.trim();
- if(editing){editing.section=k;editing.title=title;editing.sub=sub;editing.body=body;editing.tags=tags;editing.updated=Date.now();}
- else{PB.items.push({id:uid(),section:k,title:title,sub:sub,body:body,tags:tags,updated:Date.now()});state.section=k;}
- save();document.getElementById("editBg").classList.remove("show");render();toast(editing?"Saved":"Added");
-};
+document.getElementById("search").oninput=function(){state.q=this.value;applySearch();};
 
-/* ── export / import ── */
-document.getElementById("expBtn").onclick=function(){var blob=new Blob([JSON.stringify(PB,null,2)],{type:"application/json"});var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="rov-playbook.json";a.click();};
-document.getElementById("impBtn").onclick=function(){document.getElementById("impFile").click();};
-document.getElementById("impFile").onchange=function(){var f=this.files[0];if(!f)return;var fr=new FileReader();fr.onload=function(){try{var o=JSON.parse(fr.result);if(!o.items)throw new Error("not a playbook file");PB=o;save();render();toast("Playbook imported");}catch(err){alert("Import failed: "+err.message);}};fr.readAsText(f);this.value="";};
-
-/* ── misc ── */
-var toastT;
-function toast(msg){var el=document.getElementById("toast");el.textContent=msg;el.classList.add("show");clearTimeout(toastT);toastT=setTimeout(function(){el.classList.remove("show");},1600);}
-document.getElementById("search").oninput=function(){state.q=this.value;render();};
+/* ── theme ── */
 (function(){var t=document.getElementById("themeBtn"),r=document.documentElement,d="dark";function set(m){d=m;r.setAttribute("data-theme",m);t.innerHTML=m==="dark"?"<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z\"/></svg>":"<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"12\" cy=\"12\" r=\"5\"/><path d=\"M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42\"/></svg>";}set("dark");t.onclick=function(){set(d==="dark"?"light":"dark");};})();
 
-document.getElementById("ver").textContent="v1 · "+PB.items.length+" entries";
-fillSectionSelect();render();
+/* ── misc ── */
+var toastT;function toast(msg){var el=document.getElementById("toast");el.textContent=msg;el.classList.add("show");clearTimeout(toastT);toastT=setTimeout(function(){el.classList.remove("show");},1600);}
+document.getElementById("ver").textContent="v2 · "+VERTICALS.length+" verticals live";
+render();
 </script></body></html>
