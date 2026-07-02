@@ -116,6 +116,20 @@ main{min-width:0}
 .word.ok{background:color-mix(in oklch,var(--good) 16%,transparent);color:var(--good)}
 .word.no{background:var(--primary-hl);color:var(--primary);text-decoration:line-through;text-decoration-color:color-mix(in oklch,var(--primary) 60%,transparent)}
 .notecard{background:var(--surface-2);border:1px dashed var(--border);border-radius:var(--radius);padding:.7rem .9rem;font-family:'Instrument Serif',serif;font-style:italic;font-size:.98rem;color:var(--text-muted);margin-top:.9rem}
+/* research accordion (below the copy) */
+.rlead{font-family:"DM Mono",monospace;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--text-faint);margin:2.6rem 0 1rem;display:flex;align-items:center;gap:.7rem}
+.rlead::after{content:"";flex:1;height:1px;background:var(--border)}
+.rblock{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:.6rem;overflow:hidden}
+.rblock>summary{list-style:none;cursor:pointer;padding:.8rem 1rem;display:flex;align-items:center;gap:.7rem;user-select:none;transition:background .15s}
+.rblock>summary::-webkit-details-marker{display:none}
+.rblock>summary:hover{background:var(--surface-2)}
+.rblock>summary .rt{font-weight:700;font-size:.98rem;letter-spacing:-.01em;white-space:nowrap}
+.rblock>summary .rs{font-family:'Inter',sans-serif;font-size:.82rem;color:var(--text-faint);font-weight:400;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media(max-width:560px){.rblock>summary .rs{display:none}}
+.rblock>summary .chev{margin-left:auto;color:var(--text-faint);transition:transform .2s;flex-shrink:0}
+.rblock[open]>summary .chev{transform:rotate(90deg)}
+.rblock[open]>summary{border-bottom:1px solid var(--border)}
+.rbody{padding:1rem}
 .hide{display:none!important}
 .footer{max-width:1180px;margin:0 auto;padding:1.4rem 1.4rem 3rem;font-family:'Instrument Serif',serif;font-style:italic;font-size:.9rem;color:var(--text-faint);text-align:center}
 .toast{position:fixed;bottom:1.2rem;left:50%;transform:translateX(-50%) translateY(1rem);background:var(--primary);color:#fff;padding:.55rem 1.1rem;border-radius:999px;font-size:.82rem;font-weight:600;opacity:0;pointer-events:none;transition:.25s;z-index:300}
@@ -342,39 +356,50 @@ function renderVertical(v){
  document.getElementById("secTitle").innerHTML="<span class=\"em\">"+v.ico+"</span> "+esc(v.label);
  document.getElementById("secDek").textContent=v.dek;
  var h="";
- // ICP
- h+=block("Who we sell","<div class=\"callrow\"><div class=\"call who\"><div class=\"lbl\">Who</div><div class=\"txt\">"+esc(v.who)+"</div></div><div class=\"call skip\"><div class=\"lbl\">Skip</div><div class=\"txt\">"+esc(v.skip)+"</div></div></div>");
- // Offer
- var rows=v.engines.map(function(e){return "<tr><td class=\"eng\">"+esc(e.e)+"</td><td>"+esc(e.does)+"</td><td class=\"money\">"+esc(e.money)+"</td></tr>";}).join("");
- h+=block("The offer",
-  "<p class=\"prose\" style=\"margin-bottom:.8rem\"><b>"+esc(v.offerName)+"</b><br>"+esc(v.offerIntro)+"</p>"+
-  "<table class=\"tbl\"><thead><tr><th>Engine</th><th>What it does</th><th>The money it wins</th></tr></thead><tbody>"+rows+"</tbody></table>"+
-  "<div class=\"callrow\" style=\"margin-top:.8rem\"><div class=\"call gold\"><div class=\"lbl\">Proof</div><div class=\"txt\">"+esc(v.proof)+"</div></div>"+
-  "<div class=\"call\"><div class=\"lbl\">The close (show, don't tell)</div><div class=\"txt\">"+esc(v.close)+"</div></div></div>"+
-  "<div class=\"call oneliner gold\" style=\"margin-top:.8rem\" data-search=\""+esc(v.barTest.toLowerCase())+"\"><div class=\"lbl\">Bar test (say it out loud)<button class=\"minibtn\" data-copyraw=\""+esc(v.barTest)+"\">Copy</button></div><div class=\"txt\">"+esc(v.barTest)+"</div></div>");
- // Play
- var ch=v.channels.map(function(c){return "<tr><td>"+esc(c.t)+"</td><td class=\"ch\">"+esc(c.c)+(c.why?" <span style=\"color:var(--text-faint);font-weight:400\">· "+esc(c.why)+"</span>":"")+"</td></tr>";}).join("");
- h+=block("Which channel (by size)","<table class=\"tbl\"><thead><tr><th>Size / type</th><th>Channel</th></tr></thead><tbody>"+ch+"</tbody></table>"+
-  "<div class=\"call\" style=\"margin-top:.8rem\"><div class=\"lbl\">Send timing</div><div class=\"txt\">"+esc(v.timing)+"</div></div>");
- // Angles
- h+=block("The three angles to A/B/C test",angleCards(v.angles)+"<div class=\"call\" style=\"margin-top:.8rem\"><div class=\"lbl\">CTA throughline</div><div class=\"txt\">“"+esc(v.cta)+"”</div></div>");
- // Scripts
+
+ /* ══ THE COPY (top) — what you actually say and send ══ */
+ // Pitch: the bar-test line + the CTA you close on
+ h+=block("The pitch — say it out loud",
+  "<div class=\"call oneliner gold\" data-search=\""+esc(v.barTest.toLowerCase())+"\"><div class=\"lbl\">Bar test<button class=\"minibtn\" data-copyraw=\""+esc(v.barTest)+"\">Copy</button></div><div class=\"txt\">"+esc(v.barTest)+"</div></div>"+
+  "<div class=\"call\" style=\"margin-top:.8rem\"><div class=\"lbl\">CTA throughline</div><div class=\"txt\">“"+esc(v.cta)+"”</div></div>");
+ // Scripts, grouped by channel
  var sh="";
  if(v.scripts.ig)sh+="<div class=\"subhead\"><span class=\"ic\">📷</span>Instagram DM</div><div class=\"scripts\">"+v.scripts.ig.map(scriptCard).join("")+"</div>";
  if(v.scripts.email)sh+="<div class=\"subhead\"><span class=\"ic\">✉️</span>Email</div><div class=\"scripts\">"+v.scripts.email.map(scriptCard).join("")+"</div>";
  if(v.scripts.linkedin)sh+="<div class=\"subhead\"><span class=\"ic\">in</span>LinkedIn</div><div class=\"scripts\">"+v.scripts.linkedin.map(scriptCard).join("")+"</div>";
  h+=block("Scripts — tap Copy, tweak the {name}, send",sh);
+
+ /* ══ THE RESEARCH (below, collapsed) — the strategy behind the copy ══ */
+ var r="<div class=\"rlead\">The strategy behind it</div>";
+ // Who
+ r+=rblock("Who we sell","who's a fit, who to skip","<div class=\"callrow\"><div class=\"call who\"><div class=\"lbl\">Who</div><div class=\"txt\">"+esc(v.who)+"</div></div><div class=\"call skip\"><div class=\"lbl\">Skip</div><div class=\"txt\">"+esc(v.skip)+"</div></div></div>");
+ // Offer
+ var rows=v.engines.map(function(e){return "<tr><td class=\"eng\">"+esc(e.e)+"</td><td>"+esc(e.does)+"</td><td class=\"money\">"+esc(e.money)+"</td></tr>";}).join("");
+ r+=rblock("The offer",esc(v.offerName),
+  "<p class=\"prose\" style=\"margin-bottom:.8rem\"><b>"+esc(v.offerName)+"</b><br>"+esc(v.offerIntro)+"</p>"+
+  "<table class=\"tbl\"><thead><tr><th>Engine</th><th>What it does</th><th>The money it wins</th></tr></thead><tbody>"+rows+"</tbody></table>"+
+  "<div class=\"callrow\" style=\"margin-top:.8rem\"><div class=\"call gold\"><div class=\"lbl\">Proof</div><div class=\"txt\">"+esc(v.proof)+"</div></div>"+
+  "<div class=\"call\"><div class=\"lbl\">The close (show, don't tell)</div><div class=\"txt\">"+esc(v.close)+"</div></div></div>");
+ // Channel + timing
+ var ch=v.channels.map(function(c){return "<tr><td>"+esc(c.t)+"</td><td class=\"ch\">"+esc(c.c)+(c.why?" <span style=\"color:var(--text-faint);font-weight:400\">· "+esc(c.why)+"</span>":"")+"</td></tr>";}).join("");
+ r+=rblock("Which channel & when","by size, plus the send window","<table class=\"tbl\"><thead><tr><th>Size / type</th><th>Channel</th></tr></thead><tbody>"+ch+"</tbody></table>"+
+  "<div class=\"call\" style=\"margin-top:.8rem\"><div class=\"lbl\">Send timing</div><div class=\"txt\">"+esc(v.timing)+"</div></div>");
+ // Angles
+ r+=rblock("The three angles","A / B / C to test","<div style=\"margin-bottom:.4rem\"></div>"+angleCards(v.angles));
  // Vocab
  if(v.vocab){
   var ok=v.vocab.ok.map(function(w){return "<span class=\"word ok\">"+esc(w)+"</span>";}).join("");
   var no=v.vocab.no.map(function(w){return "<span class=\"word no\">"+esc(w)+"</span>";}).join("");
-  h+=block("Speak their language","<p class=\"prose\" style=\"margin-bottom:.5rem\">Their words build trust. Vendor words read as commodity.</p><div class=\"vocab\">"+ok+"</div><div class=\"vocab\" style=\"margin-top:.5rem\">"+no+"</div>");
+  r+=rblock("Speak their language","their words vs. vendor words","<p class=\"prose\" style=\"margin-bottom:.5rem\">Their words build trust. Vendor words read as commodity.</p><div class=\"vocab\">"+ok+"</div><div class=\"vocab\" style=\"margin-top:.5rem\">"+no+"</div>");
  }
  // Rules
- h+=block("Rules of the road","<ul class=\"rules\">"+v.rules.map(function(r){return "<li>"+r+"</li>";}).join("")+"</ul>"+(v.note?"<div class=\"notecard\">"+esc(v.note)+"</div>":""));
+ r+=rblock("Rules of the road",v.note?"the plays, plus a proof note":"the plays","<ul class=\"rules\">"+v.rules.map(function(r){return "<li>"+r+"</li>";}).join("")+"</ul>"+(v.note?"<div class=\"notecard\">"+esc(v.note)+"</div>":""));
+
+ h+="<div id=\"researchWrap\">"+r+"</div>";
  document.getElementById("body").innerHTML=h;
  bindCopy();
 }
+function rblock(title,sub,inner){return "<details class=\"rblock\"><summary><span class=\"rt\">"+esc(title)+"</span>"+(sub?"<span class=\"rs\">"+sub+"</span>":"")+"<svg class=\"chev\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"m9 18 6-6-6-6\"/></svg></summary><div class=\"rbody\">"+inner+"</div></details>";}
 
 function block(title,inner){return "<section class=\"block\"><div class=\"blocktitle\">"+esc(title)+"</div>"+inner+"</section>";}
 function angleCards(arr){return "<div class=\"cards3\">"+arr.map(function(a){return "<div class=\"anglecard\"><div class=\"a\">Angle "+esc(a.a)+"</div><div class=\"n\">"+esc(a.n)+"</div><div class=\"d\">"+esc(a.d)+"</div></div>";}).join("")+"</div>";}
@@ -405,6 +430,8 @@ function fallbackCopy(txt){var ta=document.createElement("textarea");ta.value=tx
 function applySearch(){
  var q=state.q.trim().toLowerCase();
  var cards=document.querySelectorAll("#body [data-search]");
+ var rw=document.getElementById("researchWrap");
+ if(rw)rw.classList.toggle("hide",!!q); // hide the strategy accordions while filtering copy
  if(!q){Array.prototype.forEach.call(cards,function(c){c.classList.remove("hide");});Array.prototype.forEach.call(document.querySelectorAll("#body .block"),function(b){b.classList.remove("hide");});return;}
  Array.prototype.forEach.call(cards,function(c){c.classList.toggle("hide",c.getAttribute("data-search").indexOf(q)<0);});
  // hide script/objection blocks that end up empty
