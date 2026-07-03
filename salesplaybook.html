@@ -305,6 +305,31 @@ var VERTICALS=[
 
 var TODO=[{label:"HVAC",ico:"❄"},{label:"Roofing",ico:"🏠"},{label:"Pressure washing",ico:"💦"},{label:"Lawn care",ico:"🌱"}];
 
+/* ── RADIUS ── every client throws off a radius of warm-adjacent leads (geo + category).
+   The point: proximity kills "who have you done this for?" Name-drop a client two doors
+   down and the cold lead is suddenly warm. One win = a whole territory to work. */
+var RADIUS=[
+ {
+  client:"The Bando",handle:"@thebandoatl",
+  what:"Wings, West Atlanta. The biggest social media presence of any wings brand in Atlanta.",
+  stat:"Doubled online revenue in about 3 months.",
+  geo:["West Atlanta","Atlanta metro"],
+  industry:["Restaurants","Wings & soul food","Instagram-first food brands"],
+  drop:"we just helped @thebandoatl, the biggest wings presence in Atlanta, double their online revenue in about 3 months",
+  unlocks:"Any West Atlanta food spot, wings and soul-food kitchens, and restaurants whose whole marketing is their Instagram. Same playbook, warm reference two neighborhoods over."
+ },
+ {
+  client:"Aysegul Ikna",handle:"aysegulikna.com",
+  what:"Sustainable fashion brand out of Ponce City Market. Great in-person rep, zero online before us. We built the whole online side and funneled every channel (Instagram shop, Facebook shop, custom site) into one Square backend, so all payments live on one platform.",
+  stat:"$0 to a live online revenue stream, +20% total sales, 6M+ Atlanta reach. A brand-new channel on top of in-person, none of it cannibalized.",
+  geo:["Ponce City Market","Beltline","Midtown","Jamestown LP portfolio"],
+  industry:["Sustainable fashion","Boutique retail","Maker & product brands"],
+  drop:"we work with Aysegul Ikna in Ponce City Market, took her from zero online to a live store adding +20% total sales on top of her in-person",
+  unlocks:"Other Ponce City Market and Citizen Supply brands, Beltline and Midtown boutiques, and any local retailer with a strong in-person rep but no online channel. Same $0-to-live story.",
+  wedge:"Jamestown LP owns Ponce City Market and a whole portfolio beyond it. One tenant reference is a key to the entire landlord's roster. The play: ask Aysegul for a warm intro to the property team, then work the building."
+ }
+];
+
 /* ── helpers ── */
 function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
 function msgHTML(s){return esc(s).replace(PH,"<span class=\"ph\">$1</span>");}
@@ -314,6 +339,7 @@ var state={page:"spine",q:""};
 function renderNav(){
  var h="<div class=\"navlabel\">Engine</div>";
  h+=navBtn("spine","🎯","The Spine","");
+ h+=navBtn("radius","📍","Radius",RADIUS.length+" proofs");
  h+="<div class=\"navlabel\">Verticals</div>";
  VERTICALS.forEach(function(v){h+=navBtn(v.k,v.ico,v.label,scriptCount(v)+" scripts");});
  TODO.forEach(function(t){h+="<div class=\"navitem todo\"><span class=\"ico\">"+t.ico+"</span>"+t.label+"<span class=\"ct\">soon</span></div>";});
@@ -326,7 +352,7 @@ function scriptCount(v){var n=0;for(var c in v.scripts)n+=v.scripts[c].length;re
 /* ── render ── */
 function render(){
  renderNav();
- if(state.page==="spine")renderSpine();else renderVertical(vert(state.page));
+ if(state.page==="spine")renderSpine();else if(state.page==="radius")renderRadius();else renderVertical(vert(state.page));
  applySearch();
 }
 function vert(k){for(var i=0;i<VERTICALS.length;i++)if(VERTICALS[i].k===k)return VERTICALS[i];return VERTICALS[0];}
@@ -352,6 +378,31 @@ function renderSpine(){
  bindCopy();
 }
 
+function renderRadius(){
+ document.getElementById("secTitle").innerHTML="<span class=\"em\">📍</span> Radius";
+ document.getElementById("secDek").textContent="Every client throws off a radius of warm leads. Who each win lets you target next, by neighborhood and by category. Name-drop the client two doors down and the cold lead is already warm.";
+ var h="";
+ h+=block("How to use this",
+  "<div class=\"call gold\"><div class=\"lbl\">The move</div><div class=\"txt\">Before you send cold, check the Radius. If the lead sits in a client's geographic or category radius, open with that client, not with ROV. Proximity is the proof: “we work with X two doors down” beats any pitch. One win is a whole territory to work outward from.</div></div>");
+ RADIUS.forEach(function(p){
+  var geo=p.geo.map(function(w){return "<span class=\"word ok\">"+esc(w)+"</span>";}).join("");
+  var ind=p.industry.map(function(w){return "<span class=\"word ok\">"+esc(w)+"</span>";}).join("");
+  var searchtext=esc(((p.client+" "+(p.handle||"")+" "+p.what+" "+p.geo.join(" ")+" "+p.industry.join(" ")+" "+p.unlocks+" "+(p.wedge||"")).toLowerCase()));
+  var inner="<div data-search=\""+searchtext+"\">";
+  inner+="<p class=\"prose\" style=\"margin-bottom:.8rem\">"+(p.handle?"<b style=\"color:var(--text)\">"+esc(p.handle)+"</b> · ":"")+esc(p.what)+"</p>";
+  inner+="<div class=\"call gold\"><div class=\"lbl\">Proof stat"+(p.lock?" <span style=\"color:var(--gold)\">· lock this</span>":"")+"</div><div class=\"txt\">"+esc(p.stat)+"</div></div>";
+  inner+="<div class=\"callrow\" style=\"margin-top:.8rem\">"+
+   "<div class=\"call\"><div class=\"lbl\">Geographic radius</div><div class=\"vocab\" style=\"margin-top:.4rem\">"+geo+"</div></div>"+
+   "<div class=\"call\"><div class=\"lbl\">Industry radius</div><div class=\"vocab\" style=\"margin-top:.4rem\">"+ind+"</div></div></div>";
+  inner+="<div class=\"call oneliner gold\" style=\"margin-top:.8rem\"><div class=\"lbl\">Name-drop line<button class=\"minibtn\" data-copyraw=\""+esc(p.drop)+"\">Copy</button></div><div class=\"txt\">"+esc(p.drop)+"</div></div>";
+  inner+="<div class=\"call\" style=\"margin-top:.8rem\"><div class=\"lbl\">Who this opens</div><div class=\"txt\">"+esc(p.unlocks)+"</div></div>";
+  if(p.wedge)inner+="<div class=\"notecard\" style=\"margin-top:.8rem\"><b>The wedge:</b> "+esc(p.wedge)+"</div>";
+  inner+="</div>";
+  h+=block(p.client,inner);
+ });
+ document.getElementById("body").innerHTML=h;
+ bindCopy();
+}
 function renderVertical(v){
  document.getElementById("secTitle").innerHTML="<span class=\"em\">"+v.ico+"</span> "+esc(v.label);
  document.getElementById("secDek").textContent=v.dek;
