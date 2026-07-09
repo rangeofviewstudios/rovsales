@@ -167,6 +167,13 @@ body{background:#fff;color:#111}
 .liner,.paincard,.obj,.idea,.door,.banner,.beat,.proofcard,.warn,.dtbl{box-shadow:none;border-color:#ccc}
 .minibtn{display:none}*{color:#111!important}
 }
+.script{display:flex;flex-direction:column;gap:.6rem;max-width:80ch}
+.turn{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:.65rem .9rem;box-shadow:var(--shadow)}
+.turn.them{background:var(--surface-2);border-style:dashed}
+.turn .who{font-family:"DM Mono",monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-faint);margin-bottom:.25rem;display:flex;justify-content:space-between;gap:1rem}
+.turn .who .bt{color:var(--gold)}
+.turn .txt{font-family:'Inter',sans-serif;font-size:.9rem;line-height:1.5;color:var(--text)}
+.turn.you .txt .ph{color:var(--primary);font-weight:600}
 </style></head><body>
 <div class="sky"></div><div class="grain"></div>
 
@@ -189,6 +196,7 @@ body{background:#fff;color:#111}
     <a class="navitem" href="#pain"><span class="ico">🩹</span>Their pain</a>
     <div class="navlabel">The Call</div>
     <a class="navitem" href="#rail"><span class="ico">🧭</span>Call rail</a>
+    <a class="navitem" href="#script"><span class="ico">🎬</span>Sample call</a>
     <a class="navitem" href="#hooks"><span class="ico">🎣</span>Openers</a>
     <div class="navlabel">The Lines</div>
     <a class="navitem" href="#value"><span class="ico">📈</span>Value lines</a>
@@ -257,6 +265,27 @@ body{background:#fff;color:#111}
       <div class="notecard">Diagnose before you dial: open their site, one listing, and their Google profile. The signal you spot picks the door, and the door picks the one idea you lead with. One angle, expand later.</div>
     </section>
 
+    <!-- SAMPLE CALL -->
+    <section class="sec" id="script">
+      <div class="sechead"><h3><span class="em">🎬</span>Sample call — the structure, live</h3>
+        <p class="sub">One full call from cold open to booked walkthrough, so you can see the six beats in motion. A sample, not a recital, steal the shape, not the words. Notice you pitch ONE leak and never explain the full fix, that's what the meeting is for.</p></div>
+      <div class="script">
+        <div class="turn you"><div class="who"><span>You</span><span class="bt">1 · Open</span></div><div class="txt">Hey, is this <span class="ph">[Name]</span>? I know you weren't expecting my call, so I'll be quick, did I catch you at a bad time?</div></div>
+        <div class="turn them"><div class="who"><span>Them</span></div><div class="txt">Kind of. What's this about?</div></div>
+        <div class="turn you"><div class="who"><span>You</span><span class="bt">2 · Anchor</span></div><div class="txt">Fair enough. I was looking at your listing on <span class="ph">[street]</span> this morning, the presentation's clean. I run the marketing side for a couple Atlanta agents.</div></div>
+        <div class="turn you"><div class="who"><span>You</span><span class="bt">3 · One question</span></div><div class="txt">Real quick, where are most of your deals coming from right now, portals, referrals, your sphere?</div></div>
+        <div class="turn them"><div class="who"><span>Them</span></div><div class="txt">Mostly Zillow, some referrals.</div></div>
+        <div class="turn you"><div class="who"><span>You</span><span class="bt">4 · Mirror pain</span></div><div class="txt">Gotcha, so a good chunk of the month is rented from Zillow. If they throttle you or hike the price, it goes quiet. That the part that nags you, or is it fine?</div></div>
+        <div class="turn them"><div class="who"><span>Them</span></div><div class="txt">I mean, yeah. It's expensive and half of them don't even pick up.</div></div>
+        <div class="turn you"><div class="who"><span>You</span><span class="bt">5 · One idea</span></div><div class="txt">Right, paying to fight four other agents for the same tire-kicker. Here's the one thing I'd fix first: the leads you already get, you're losing the after-hours ones to voicemail. A missed call can fire a text in seconds so that buyer stays yours instead of dialing the next name. Usually the cheapest deal you add all year.</div></div>
+        <div class="turn them"><div class="who"><span>Them</span></div><div class="txt">Okay, that actually happens to me a lot.</div></div>
+        <div class="turn you"><div class="who"><span>You</span><span class="bt">6 · Book it</span></div><div class="txt">Let me not explain it half-baked over the phone. Let's set up a proper look, I'll pull up your site and that listing and show you exactly where it's leaking on your own setup, plus what the fix looks like. First 30 days we run it on us, so you're just watching it work. Mornings or late afternoons better for you?</div></div>
+        <div class="turn them"><div class="who"><span>Them</span></div><div class="txt">Mornings. Thursday, maybe.</div></div>
+        <div class="turn you"><div class="who"><span>You</span></div><div class="txt">Thursday morning it is. I'll send an invite and text to confirm so it doesn't slip. Talk then.</div></div>
+      </div>
+      <div class="notecard">You never fanned out the menu and never tried to close on the phone. You diagnosed one leak, proved you get it, and booked the room. That's the whole job, Suchet runs the walkthrough from there.</div>
+    </section>
+
     <!-- OPENERS -->
     <section class="sec" id="hooks">
       <div class="sechead"><h3><span class="em">🎣</span>Openers — get past the reflex</h3>
@@ -296,7 +325,7 @@ body{background:#fff;color:#111}
     <!-- REPLY & BOOK -->
     <section class="sec" id="booking">
       <div class="sechead"><h3><span class="em">📅</span>Reply &amp; book — when they bite</h3>
-        <p class="sub">Every line above ends at "want me to walk you through it?" This is what you say when they say yes. Your job isn't to close the deal on this touch, it's to book the 15-minute look. Don't let a warm yes die in the inbox.</p></div>
+        <p class="sub">Every line above ends at "want me to walk you through it?" This is what you say when they say yes. Your job isn't to close the deal on this touch, it's to book the walkthrough. Don't let a warm yes die in the inbox.</p></div>
       <div class="liners" id="bookLiners"></div>
       <div class="notecard">The booked look is the win, not the sale. Suchet runs the walkthrough and closes from there. Your KPI is conversations booked, so get the time on the calendar while they're warm and confirm it twice to kill no-shows.</div>
     </section>
@@ -348,7 +377,7 @@ body{background:#fff;color:#111}
         <li><b>Warm intro is the cheat code.</b> A shared connection lifts response ~70%. If you know anyone in common, that's your first sentence.</li>
         <li><b>Log what works.</b> Which idea you led with, which line, whether they bit. Winners and losers feed back into this bank, it compounds.</li>
       </ul>
-      <div class="notecard">Your job is to book the 15-minute look where we show them the leak on their own number or site. You're not closing the deal on the first touch. Suchet closes from there.</div>
+      <div class="notecard">Your job is to book the walkthrough where we show them the leak on their own number or site. You're not closing the deal on the first touch. Suchet closes from there.</div>
     </section>
 
   </main>
@@ -395,7 +424,7 @@ var SPINE=[
   {t:"One question",d:"Ask, then say nothing. Let them fill the silence.",s:"\"Where are your deals coming from?\""},
   {t:"Mirror pain",d:"Say their problem back in their words before you offer anything.",s:"\"So if that shuts off, it goes quiet.\""},
   {t:"One idea",d:"Diagnose, then pitch the single fix for their leak. Not all three.",s:"\"Here's the one thing I'd fix.\""},
-  {t:"Book it",d:"Don't close on the call. Book 15 min to show them on their own setup.",s:"\"Thursday morning work?\""}
+  {t:"Book it",d:"Don't close on the call. Book a real walkthrough on their own setup.",s:"\"Thursday morning work?\""}
 ];
 var DIAGNOSE=[
   {see:"Only site is the brokerage template, no personal brand",door:"Door 1",lead:"Converting site + home-value tool"},
@@ -449,18 +478,18 @@ var OBJECTIONS=[
   {them:"Send it to my broker / team.",you:"Can do. Quick thing, is this your call to make or theirs? If it's yours to run, I'd rather show you first and you bring it to them warm.",tag:"Find the real decision-maker without a fight",route:"Reply & book → \"Loop in Suchet\" hand-off framing"}
 ];
 var BOOKING=[
-  {chip:["They said yes"],cls:"gd",say:"Perfect. It's a quick 15 minutes, I'll pull up your site and walk you through exactly what I'm seeing. You free Thursday morning, or is Friday better?"},
-  {chip:["Assumptive book"],cls:"gd",say:"I'll text you a link for a 15-minute slot. Worst case, you walk away with a free audit of where your leads are leaking. Cool?"},
+  {chip:["They said yes"],cls:"gd",say:"Perfect. It's a proper walkthrough, I'll pull up your site and show you exactly what I'm seeing. You free Thursday morning, or is Friday better?"},
+  {chip:["Assumptive book"],cls:"gd",say:"I'll text you a link to grab a time. Worst case, you walk away with a free audit of where your leads are leaking. Cool?"},
   {chip:["Pin it down"],cls:"gd",say:"Let's not let this die in the inbox. What's better for you, mornings or late afternoon? I'll work around a showing."},
-  {chip:["Confirm + kill no-show"],cls:"gd",say:"Sending the invite now. It's just me and you, 15 minutes, no slide deck. I'll have your listing and your site pulled up so we go straight to it."},
-  {chip:["Send info first"],cls:"gd",say:"I'll send one link so you see it's real, then we grab 15 minutes to go through your specific setup. That way the info actually means something. Deal?"},
-  {chip:["Loop in Suchet"],cls:"gd",say:"I'll bring in [Suchet], he runs the walkthrough. He'll have already looked at your site before you two hop on, so it's 15 minutes, not a sales pitch."}
+  {chip:["Confirm + kill no-show"],cls:"gd",say:"Sending the invite now. It's just me and you, no slide deck. I'll have your listing and your site pulled up so we go straight to it."},
+  {chip:["Send info first"],cls:"gd",say:"I'll send one link so you see it's real, then we sit down and go through your specific setup. That way the info actually means something. Deal?"},
+  {chip:["Loop in Suchet"],cls:"gd",say:"I'll bring in [Suchet], he runs the walkthrough. He'll have already looked at your site before you two hop on, so it's a real working session, not a sales pitch."}
 ];
 var PROOF=[
   {n:"Agent site sample",tag:"Door 1",claim:"A real personal site we built for an agent, name, home-value tool, IDX search, the whole platform. Not a template.",asset:"Link: [Leo Mendez sample URL]"},
   {n:"The Bando result",tag:"Door 2",claim:"We doubled a local Atlanta spot's online revenue in about 3 months with content and a rebuilt online side.",asset:"Link: [Bando before/after] · number NOT locked, see guardrail"},
   {n:"NeuroGuard+ systems",tag:"Door 3",claim:"We run the outreach and retention system for an ecommerce brand end to end, and manage all their customer data.",asset:"Link: [NG+ example / screenshot]"},
-  {n:"Live demo on their number",tag:"Door 3",claim:"The strongest proof is showing the missed-call text-back firing on their own line. Nothing beats them seeing it work.",asset:"Do it live on the 15-min call"}
+  {n:"Live demo on their number",tag:"Door 3",claim:"The strongest proof is showing the missed-call text-back firing on their own line. Nothing beats them seeing it work.",asset:"Do it live on the walkthrough"}
 ];
 var WRITING=[
   {t:"Lead with their world, not who you are.",ex:"The proof or the listing is the intro. Save the ROV bio for the reply."},
@@ -472,7 +501,7 @@ var WRITING=[
   {t:"Under pressure, ask a question instead of defending. A question keeps them on their problem, not your pitch.",ex:"Not 'we're the best,' but 'is there anything that says why you?'"},
   {t:"Lead the close with the free month, never the price. The risk-remover is the yes.",ex:"'Watch it work for free before you pay a dime.'"},
   {t:"Be specific. Name the street, the neighborhood, the number of reviews. Specificity is proof you did the work.",ex:"'[street]' is worth more than any claim."},
-  {t:"Book the next step, don't close on the first touch. The win is a 15-minute look, not a signed deal.",ex:"'Thursday morning or Friday better?'"}
+  {t:"Book the next step, don't close on the first touch. The win is a booked walkthrough, not a signed deal.",ex:"'Thursday morning or Friday better?'"}
 ];
 var VOCAB=[
   ["GCI / production / what you closed","revenue, top-line, your numbers"],

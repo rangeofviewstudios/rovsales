@@ -211,6 +211,13 @@
   .fade { opacity: 0; transform: translateY(10px); animation: fade 0.6s ease forwards; }
   @keyframes fade { to { opacity: 1; transform: none; } }
   @media (prefers-reduced-motion: reduce) { .fade { animation: none; opacity: 1; transform: none; } }
+
+  .thread { display: grid; gap: 0.55rem; max-width: 42rem; }
+  .turn2 { border: 1px solid var(--line); border-radius: 10px; padding: 0.6rem 0.85rem; background: var(--card); }
+  .turn2.them { background: var(--paper); border-style: dashed; }
+  .turn2 .who { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 0.25rem; display: flex; justify-content: space-between; gap: 1rem; }
+  .turn2 .who .bt { color: var(--accent); }
+  .turn2 .t { font-family: var(--font-mono); font-size: 0.9rem; line-height: 1.5; }
 </style>
 
 </head>
@@ -252,6 +259,21 @@
     </div>
 
     <p class="annot">Words that kill the preview: <b>Hi / We / help / grow / website / 🚀</b>. Any one shows and you're the vendor bucket. Open like a person and you get read.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">The play</div>
+    <h2>The structure that actually works</h2>
+    <p class="muted">The banks are raw material. This is the order you run them in. Five beats, each doing a job on the owner's brain, not just filling space. The whole thing drives to one place: a booked call.</p>
+    <ol class="rules" style="margin-top:1.1rem;">
+      <li><h3>Disarm</h3><p class="muted" style="margin:0;">Open with a real, curious question, never a pitch. Their guard is up because everyone in their DMs is selling. A genuine question they can answer in three words breaks the pattern and earns the reply.</p></li>
+      <li><h3>Make them name the pain</h3><p class="muted" style="margin:0;">Your question points at the nerve (the apps, the buried menu, no time) so <em>they</em> say it out loud, not you. People believe what they say, not what you tell them.</p></li>
+      <li><h3>Mirror it</h3><p class="muted" style="margin:0;">Say their problem back in their own words. "Yeah, that 30% is brutal." Now you're the one person in their inbox who actually gets the business.</p></li>
+      <li><h3>Drop the proof</h3><p class="muted" style="margin:0;">Bando, same situation, here's what happened. A real local spot and a specific number. This is where they feel the money they're leaving on the table.</p></li>
+      <li><h3>Book the call</h3><p class="muted" style="margin:0;">Not a pitch, an invite. "Let me not explain it half-baked in a DM, let's set up a time and I'll show you on your own setup." The DM's only job is the meeting. You close nothing in an inbox.</p></li>
+    </ol>
   </div>
 </section>
 
@@ -358,21 +380,41 @@
 
     <div class="opener">
       <div class="opener-head"><span class="tag">off the apps' leash</span></div>
-      <div class="msg">The whole idea is getting you off the apps' leash. Your site, your customers, your margin. Same thing we ran with The Bando down the street. Worth a quick ten minutes to walk you through exactly what we changed?</div>
-      <div class="cardfoot"><button class="copy" data-copy="The whole idea is getting you off the apps' leash. Your site, your customers, your margin. Same thing we ran with The Bando down the street. Worth a quick ten minutes to walk you through exactly what we changed?">Copy message</button></div>
+      <div class="msg">The whole idea is getting you off the apps' leash. Your site, your customers, your margin. Same thing we ran with The Bando down the street. Worth hopping on a quick call so I can walk you through exactly what we changed?</div>
+      <div class="cardfoot"><button class="copy" data-copy="The whole idea is getting you off the apps' leash. Your site, your customers, your margin. Same thing we ran with The Bando down the street. Worth hopping on a quick call so I can walk you through exactly what we changed?">Copy message</button></div>
     </div>
 
     <div class="opener">
       <div class="opener-head"><span class="tag">local peer</span></div>
-      <div class="msg">We're local. We did this for The Bando right here in Atlanta, so it's not some out-of-state agency thing. Worth a quick ten minutes to see if it'd work for you? Happy to hop on a call and walk you through it.</div>
-      <div class="cardfoot"><button class="copy" data-copy="We're local. We did this for The Bando right here in Atlanta, so it's not some out-of-state agency thing. Worth a quick ten minutes to see if it'd work for you? Happy to hop on a call and walk you through it.">Copy message</button></div>
+      <div class="msg">We're local. We did this for The Bando right here in Atlanta, so it's not some out-of-state agency thing. Worth a quick call to see if it'd work for you? Happy to walk you through it.</div>
+      <div class="cardfoot"><button class="copy" data-copy="We're local. We did this for The Bando right here in Atlanta, so it's not some out-of-state agency thing. Worth a quick call to see if it'd work for you? Happy to walk you through it.">Copy message</button></div>
     </div>
 
     <div class="opener">
       <div class="opener-head"><span class="tag">soft close</span></div>
-      <div class="msg">No pressure either way, but if you're open to it, let's grab ten minutes on a call. I'll walk you through exactly what we did for Bando and what it'd look like for you. When's good this week?</div>
-      <div class="cardfoot"><button class="copy" data-copy="No pressure either way, but if you're open to it, let's grab ten minutes on a call. I'll walk you through exactly what we did for Bando and what it'd look like for you. When's good this week?">Copy message</button></div>
+      <div class="msg">No pressure either way, but if you're open to it, let's set up a quick call. I'll walk you through exactly what we did for Bando and what it'd look like for you. What's your week look like?</div>
+      <div class="cardfoot"><button class="copy" data-copy="No pressure either way, but if you're open to it, let's set up a quick call. I'll walk you through exactly what we did for Bando and what it'd look like for you. What's your week look like?">Copy message</button></div>
     </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Sample thread</div>
+    <h2>The structure, assembled</h2>
+    <p class="muted">One full DM from opener to booked call, so you can see the five beats in motion. It's a sample, not a script to paste. Steal the shape. Notice you sell the outcome and never once pitch a website.</p>
+    <div class="thread" style="margin-top:1.1rem;">
+      <div class="turn2 you"><div class="who"><span>You</span><span class="bt">1 · Disarm</span></div><div class="t">Owner to owner, I've always wondered this. When an order comes through DoorDash, do you actually keep much of it, or is it mostly just for discovery?</div></div>
+      <div class="turn2 them"><div class="who"><span>Them</span></div><div class="t">lol barely. after their cut it's basically nothing</div></div>
+      <div class="turn2 you"><div class="who"><span>You</span><span class="bt">2 + 3 · They name it, you mirror</span></div><div class="t">Yeah, that 30% is brutal, especially once delivery becomes half your volume. You're basically cooking for them to own the customer.</div></div>
+      <div class="turn2 them"><div class="who"><span>Them</span></div><div class="t">exactly. and they won't even give me the customer info</div></div>
+      <div class="turn2 you"><div class="who"><span>You</span><span class="bt">4 · Proof</span></div><div class="t">That's the exact thing we fixed for The Bando here in Atlanta. Got ordering onto their own site so they keep the margin and the customer. Their online revenue doubled in four months, and the site went from 94% of people bouncing off to about half.</div></div>
+      <div class="turn2 them"><div class="who"><span>Them</span></div><div class="t">damn. how does that work</div></div>
+      <div class="turn2 you"><div class="who"><span>You</span><span class="bt">5 · Book the call</span></div><div class="t">Let me not explain it half-baked in a DM. Let's set up a time and I'll walk you through exactly what we did and what it'd look like for your spot, on your own setup. What's your week look like?</div></div>
+      <div class="turn2 them"><div class="who"><span>Them</span></div><div class="t">thursday afternoon could work</div></div>
+      <div class="turn2 you"><div class="who"><span>You</span></div><div class="t">Thursday it is. I'll send a time to lock it in.</div></div>
+    </div>
+    <p class="note" style="margin-top:1rem;">You sold the outcome, proved it with a real number, and booked the room. You never pitched a website. That comes up on the call, where you can actually explain it.</p>
   </div>
 </section>
 
