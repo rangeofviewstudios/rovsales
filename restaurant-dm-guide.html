@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Restaurant DM Playbook — ROV Studios</title>
+<style>
+  :root {
+    --paper: #FAF8F4;
+    --ink: #1C1917;
+    --ink-soft: #57514B;
+    --line: #E7E2D9;
+    --card: #FFFFFF;
+    --accent: #1F6F5C;
+    --accent-ink: #16513F;
+    --accent-soft: #E4F0EA;
+    --money: #B26E12;
+    --money-soft: #FAEDD5;
+    --bad: #B23A3A;
+    --bad-soft: #F6E3E1;
+
+    --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Segoe UI Mono", Menlo, Consolas, monospace;
+
+    --maxw: 46rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #16130F;
+      --ink: #F2EDE4;
+      --ink-soft: #A79E92;
+      --line: #2C2721;
+      --card: #201C16;
+      --accent: #4FB79B;
+      --accent-ink: #7FD3BC;
+      --accent-soft: #16302A;
+      --money: #E8A13A;
+      --money-soft: #2E2413;
+      --bad: #E06B6B;
+      --bad-soft: #33201F;
+    }
+  }
+  :root[data-theme="light"] {
+    --paper: #FAF8F4; --ink: #1C1917; --ink-soft: #57514B; --line: #E7E2D9;
+    --card: #FFFFFF; --accent: #1F6F5C; --accent-ink: #16513F; --accent-soft: #E4F0EA;
+    --money: #B26E12; --money-soft: #FAEDD5; --bad: #B23A3A; --bad-soft: #F6E3E1;
+  }
+  :root[data-theme="dark"] {
+    --paper: #16130F; --ink: #F2EDE4; --ink-soft: #A79E92; --line: #2C2721;
+    --card: #201C16; --accent: #4FB79B; --accent-ink: #7FD3BC; --accent-soft: #16302A;
+    --money: #E8A13A; --money-soft: #2E2413; --bad: #E06B6B; --bad-soft: #33201F;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 1.25rem; }
+  section { padding: 2.75rem 0; border-top: 1px solid var(--line); }
+  section:first-of-type { border-top: none; }
+
+  .eyebrow {
+    font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.16em;
+    font-size: 0.7rem; font-weight: 600; color: var(--accent); margin: 0 0 0.85rem;
+  }
+  h1 {
+    font-weight: 800; letter-spacing: -0.028em; font-size: clamp(2rem, 6vw, 3.1rem);
+    line-height: 1.05; margin: 0 0 1rem; text-wrap: balance;
+  }
+  h2 {
+    font-weight: 800; letter-spacing: -0.022em; font-size: clamp(1.4rem, 3.6vw, 1.9rem);
+    line-height: 1.12; margin: 0 0 0.4rem; text-wrap: balance;
+  }
+  h3 { font-weight: 700; font-size: 1.05rem; letter-spacing: -0.01em; margin: 0 0 0.35rem; }
+  p { margin: 0 0 1rem; }
+  .lede { font-size: 1.14rem; color: var(--ink-soft); max-width: 38rem; }
+  .muted { color: var(--ink-soft); }
+  strong { font-weight: 700; }
+  a { color: var(--accent-ink); }
+  .note { font-size: 0.92rem; color: var(--ink-soft); }
+
+  header.hero { padding: 3.5rem 0 2.5rem; }
+  .kicker-row {
+    display: flex; align-items: center; gap: 0.6rem; font-family: var(--font-mono);
+    font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink-soft); margin-bottom: 1.6rem;
+  }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+
+  .thesis {
+    margin-top: 1.75rem; padding: 1.1rem 1.25rem; background: var(--accent-soft);
+    border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; font-size: 1.02rem;
+  }
+  .thesis b { color: var(--accent-ink); }
+
+  /* IG message request mock */
+  .phone {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    overflow: hidden; box-shadow: 0 1px 0 var(--line), 0 18px 40px -28px rgba(0,0,0,0.4);
+  }
+  .phone-top {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0.7rem 1rem; border-bottom: 1px solid var(--line);
+    font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-soft);
+  }
+  .req { display: flex; gap: 0.8rem; align-items: flex-start; padding: 0.95rem 1rem; }
+  .req + .req { border-top: 1px solid var(--line); }
+  .avatar {
+    flex: 0 0 auto; width: 42px; height: 42px; border-radius: 50%; display: grid;
+    place-items: center; font-family: var(--font-mono); font-weight: 700; font-size: 0.8rem;
+    background: linear-gradient(135deg, var(--accent), var(--accent-ink)); color: #fff;
+  }
+  .req-body { min-width: 0; flex: 1; }
+  .req-name { font-weight: 700; font-size: 0.9rem; }
+  .req-prev {
+    font-size: 0.9rem; color: var(--ink-soft); white-space: nowrap; overflow: hidden;
+    text-overflow: ellipsis; margin-top: 1px;
+  }
+  .verdict {
+    flex: 0 0 auto; align-self: center; font-family: var(--font-mono); font-size: 0.62rem;
+    font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.22rem 0.5rem; border-radius: 100px; white-space: nowrap;
+  }
+  .v-dead { background: var(--bad-soft); color: var(--bad); }
+  .v-tap { background: var(--accent-soft); color: var(--accent-ink); }
+  .req.dead .req-name, .req.dead .req-prev { opacity: 0.65; }
+  .annot { font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-soft); margin-top: 0.7rem; }
+  .annot b { color: var(--money); }
+
+  /* one-liner bank */
+  .angle {
+    font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--money);
+    margin: 1.5rem 0 0.6rem;
+  }
+  .angle:first-of-type { margin-top: 0.4rem; }
+  .angle.acc { color: var(--accent); }
+  .chips { display: grid; gap: 0.5rem; }
+  .chip {
+    display: flex; align-items: center; justify-content: space-between; gap: 0.75rem;
+    background: var(--card); border: 1px solid var(--line); border-radius: 8px;
+    padding: 0.65rem 0.7rem 0.65rem 0.9rem; font-family: var(--font-mono); font-size: 0.9rem;
+  }
+  .copy {
+    flex: 0 0 auto; cursor: pointer; border: 1px solid var(--line); background: transparent;
+    color: var(--ink-soft); font-family: var(--font-mono); font-size: 0.64rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase; padding: 0.3rem 0.55rem;
+    border-radius: 6px; transition: all 0.15s ease;
+  }
+  .copy:hover { color: var(--accent-ink); border-color: var(--accent); }
+  .copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .copy.done { color: var(--accent-ink); border-color: var(--accent); }
+
+  /* opener + proof cards */
+  .opener {
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    padding: 1.2rem; margin-bottom: 0.9rem;
+  }
+  .opener.pick { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+  .opener-head { display: flex; align-items: center; gap: 0.55rem; flex-wrap: wrap; margin-bottom: 0.55rem; }
+  .tag {
+    font-family: var(--font-mono); font-size: 0.63rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 0.24rem 0.55rem; border-radius: 100px;
+    background: var(--money-soft); color: var(--money);
+  }
+  .tag.pick { background: var(--accent); color: #fff; }
+  .tag.acc { background: var(--accent-soft); color: var(--accent-ink); }
+  .opener-letter { font-family: var(--font-mono); font-weight: 700; color: var(--ink-soft); }
+  .msg {
+    font-family: var(--font-mono); font-size: 0.93rem; line-height: 1.5; background: var(--paper);
+    border: 1px dashed var(--line); border-radius: 8px; padding: 0.85rem 0.95rem; margin: 0.35rem 0 0.85rem;
+  }
+  .meta-row { display: grid; gap: 0.45rem; font-size: 0.9rem; }
+  .meta-row .k {
+    font-family: var(--font-mono); font-size: 0.64rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink-soft); display: block; margin-bottom: 0.1rem;
+  }
+  .meta-row .loads { color: var(--money); }
+  .cardfoot { margin-top: 0.85rem; }
+
+  .flag {
+    display: inline-block; font-family: var(--font-mono); font-size: 0.62rem; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--bad);
+    background: var(--bad-soft); border-radius: 5px; padding: 0.12rem 0.4rem; margin-left: 0.4rem;
+  }
+
+  /* say / dont table */
+  .vocab { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+  .vocab th, .vocab td { text-align: left; padding: 0.55rem 0.7rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .vocab th {
+    font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink-soft); font-weight: 700;
+  }
+  .vocab td.say { color: var(--accent-ink); font-weight: 600; }
+  .vocab td.dont { color: var(--ink-soft); text-decoration: line-through; text-decoration-color: var(--bad); }
+  .tbl-scroll { overflow-x: auto; }
+
+  footer { padding: 2.5rem 0 3.5rem; border-top: 1px solid var(--line); }
+  footer .src { font-size: 0.78rem; color: var(--ink-soft); }
+  footer .src a { color: var(--ink-soft); text-decoration: underline; text-underline-offset: 2px; }
+  footer h3 { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); }
+
+  .fade { opacity: 0; transform: translateY(10px); animation: fade 0.6s ease forwards; }
+  @keyframes fade { to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .fade { animation: none; opacity: 1; transform: none; } }
+</style>
+
+</head>
+<body>
+<header class="hero">
+  <div class="wrap fade">
+    <div class="kicker-row"><span class="dot"></span> ROV Studios · Restaurant Outreach · Idea Bank</div>
+    <div class="eyebrow">Instagram DM Playbook</div>
+    <h1>A bank of lines that don't read as a pitch.</h1>
+    <p class="lede">Pick, mix, steal. Openers that earn the tap, proof lines that convert once they're talking, and the words that keep you sounding like a real person instead of another agency in the requests folder.</p>
+    <div class="thesis">This bank has one job: <b>book the meeting</b>, then hand off to close. The spine: open with a soft, no-pitch question (survive the folder), sell the <b>outcome</b> once they reply (more margin, more orders, more revenue), let Bando prove it, book a quick call. Never open with the outcome. That reads as a pitch and dies in the folder.</div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">The decision surface</div>
+    <h2>How the preview actually lands</h2>
+    <p class="muted">Instagram cuts the preview to about the first line. Same studio account, same folder, opposite outcome. The first words are the entire game.</p>
+
+    <div class="phone" style="margin-top:1.2rem;">
+      <div class="phone-top"><span>Message requests</span><span>2:31 PM</span></div>
+      <div class="req dead">
+        <div class="avatar" style="background:linear-gradient(135deg,#9a9a9a,#6f6f6f);">RV</div>
+        <div class="req-body">
+          <div class="req-name">rangeofviewstudios</div>
+          <div class="req-prev">Hi! We help restaurants grow with a new website and…</div>
+        </div>
+        <span class="verdict v-dead">Deleted</span>
+      </div>
+      <div class="req">
+        <div class="avatar">RV</div>
+        <div class="req-body">
+          <div class="req-name">rangeofviewstudios</div>
+          <div class="req-prev">random owner-to-owner q, when someone orders you…</div>
+        </div>
+        <span class="verdict v-tap">Tapped</span>
+      </div>
+    </div>
+
+    <p class="annot">Words that kill the preview: <b>Hi / We / help / grow / website / 🚀</b>. Any one shows and you're the vendor bucket. Open like a person and you get read.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Opener bank · the first 5 words</div>
+    <h2>One-liners that earn the tap</h2>
+    <p class="muted">These are the previews. Grouped by the nerve they pull. Grab one, finish the thought in your voice.</p>
+
+    <div class="angle">Angle · the app cut (money)</div>
+    <div class="chips">
+      <div class="chip"><span>random owner-to-owner q, when someone orders you…</span><button class="copy" data-copy="random owner-to-owner q, when someone orders you on doordash">Copy</button></div>
+      <div class="chip"><span>genuinely, does doordash even make you money…</span><button class="copy" data-copy="genuinely, does doordash even make you money or is it just for discovery?">Copy</button></div>
+      <div class="chip"><span>how much does the 30% actually hurt…</span><button class="copy" data-copy="how much does the 30% cut actually hurt a spot your size?">Copy</button></div>
+    </div>
+
+    <div class="angle">Angle · food vs website</div>
+    <div class="chips">
+      <div class="chip"><span>your food looks unreal, quick q…</span><button class="copy" data-copy="your food looks unreal, quick q">Copy</button></div>
+      <div class="chip"><span>tried to order and kinda got lost…</span><button class="copy" data-copy="tried to order and kinda got lost, is that just me?">Copy</button></div>
+      <div class="chip"><span>where's the actual menu hiding…</span><button class="copy" data-copy="ok where is the actual menu hiding lol">Copy</button></div>
+    </div>
+
+    <div class="angle">Angle · no time / who runs it</div>
+    <div class="chips">
+      <div class="chip"><span>whoever runs this page deserves…</span><button class="copy" data-copy="whoever runs this page deserves a raise">Copy</button></div>
+      <div class="chip"><span>ok this is gonna sound random but…</span><button class="copy" data-copy="ok this is gonna sound random but">Copy</button></div>
+      <div class="chip"><span>not a customer but had to ask…</span><button class="copy" data-copy="not a customer but had to ask">Copy</button></div>
+    </div>
+
+    <div class="angle">Angle · slow nights / regulars</div>
+    <div class="chips">
+      <div class="chip"><span>how do you fill a dead tuesday…</span><button class="copy" data-copy="random q, how do you fill a dead tuesday?">Copy</button></div>
+      <div class="chip"><span>do most of your regulars find you on…</span><button class="copy" data-copy="do most of your regulars find you on ig or google?">Copy</button></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Opener bank · full messages</div>
+    <h2>The whole opener, and the outcome it sells</h2>
+    <p class="muted">No pitch on the surface, ends in an easy reply. Tag shows the nerve it pulls; "outcome sold" is the money result you're actually selling (the website or social is just how you deliver it).</p>
+
+    <div class="opener pick" style="margin-top:1.2rem;">
+      <div class="opener-head"><span class="opener-letter">A</span><span class="tag pick">Run first</span><span class="tag">the app cut</span></div>
+      <div class="msg">random owner-to-owner q, when someone orders you on doordash do you actually keep much of that or is it basically just to get discovered? always wondered how much that cut hurts spots your size</div>
+      <div class="meta-row">
+        <div><span class="k">Why it lands</span>The nerve they feel most, and nobody asks it out loud. Owners rant about the apps. Reads like a peer, not a seller.</div>
+        <div><span class="k">Outcome sold</span><span class="loads">Keep the 30% you hand DoorDash. Direct ordering on your own site is how.</span></div>
+      </div>
+      <div class="cardfoot"><button class="copy" data-copy="random owner-to-owner q, when someone orders you on doordash do you actually keep much of that or is it basically just to get discovered? always wondered how much that cut hurts spots your size">Copy message</button></div>
+    </div>
+
+    <div class="opener">
+      <div class="opener-head"><span class="opener-letter">B</span><span class="tag">food vs website</span></div>
+      <div class="msg">your food looks genuinely unreal 😅 tried to actually order and kinda got bounced to doordash, couldn't find a straight menu. is that just me or do people tell you that?</div>
+      <div class="meta-row">
+        <div><span class="k">Why it lands</span>It's true and it's a real experience, not flattery. "is that just me?" is almost impossible to answer with a heart.</div>
+        <div><span class="k">Outcome sold</span><span class="loads">More orders that actually land. Stop losing the 94% who bounce (new site is the vehicle).</span></div>
+      </div>
+      <div class="cardfoot"><button class="copy" data-copy="your food looks genuinely unreal 😅 tried to actually order and kinda got bounced to doordash, couldn't find a straight menu. is that just me or do people tell you that?">Copy message</button></div>
+    </div>
+
+    <div class="opener">
+      <div class="opener-head"><span class="opener-letter">C</span><span class="tag">no time</span></div>
+      <div class="msg">whoever runs this page deserves a raise, it's actually good 😂 is that you or do you have someone doing it? asking bc most spots this size don't have the time and it shows. yours doesn't</div>
+      <div class="meta-row">
+        <div><span class="k">Why it lands</span>Names the "Instagram is exhausting" truth, flatters the real human, confirms who you're talking to.</div>
+        <div><span class="k">Outcome sold</span><span class="loads">More covers from the audience you already have (we run the content).</span></div>
+      </div>
+      <div class="cardfoot"><button class="copy" data-copy="whoever runs this page deserves a raise, it's actually good 😂 is that you or do you have someone doing it? asking bc most spots this size don't have the time and it shows. yours doesn't">Copy message</button></div>
+    </div>
+
+    <div class="opener">
+      <div class="opener-head"><span class="opener-letter">D</span><span class="tag">slow nights</span></div>
+      <div class="msg">random q, when you have a slow tuesday do you have a way to just ping your regulars, or is it mostly hope people walk in? curious how spots your size handle it</div>
+      <div class="meta-row">
+        <div><span class="k">Why it lands</span>Talks covers and regulars in their language. A dead Tuesday is a real, felt problem.</div>
+        <div><span class="k">Outcome sold</span><span class="loads">Fill the dead nights with regulars you already have (owned email/SMS is the tool).</span></div>
+      </div>
+      <div class="cardfoot"><button class="copy" data-copy="random q, when you have a slow tuesday do you have a way to just ping your regulars, or is it mostly hope people walk in? curious how spots your size handle it">Copy message</button></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Proof bank · the Bando drop</div>
+    <h2>Lines that convert once they're talking</h2>
+    <p class="note">Do not open with these. They land the moment the owner engages, right after they admit the pain. Every one aims at the same finish: <strong>book a quick call</strong>, then hand to the closer. Pick the angle that matches what they just said.</p>
+
+    <div class="opener" style="margin-top:1.2rem;">
+      <div class="opener-head"><span class="tag acc">audience → orders</span></div>
+      <div class="msg">this is literally what we did for The Bando here in atlanta. they had the audience, it just wasn't turning into orders they actually owned. we rebuilt the path from their instagram straight to ordering on their own site and doubled their online revenue in 4 months</div>
+      <div class="cardfoot"><button class="copy" data-copy="this is literally what we did for The Bando here in atlanta. they had the audience, it just wasn't turning into orders they actually owned. we rebuilt the path from their instagram straight to ordering on their own site and doubled their online revenue in 4 months">Copy message</button></div>
+    </div>
+
+    <div class="opener">
+      <div class="opener-head"><span class="tag">hard number</span></div>
+      <div class="msg">real number: before, 94% of people who landed on Bando's site left without doing anything, no order, no menu, nothing. we got that down to about 50%. same 4 months their online revenue doubled</div>
+      <div class="cardfoot"><button class="copy" data-copy="real number: before, 94% of people who landed on Bando's site left without doing anything, no order, no menu, nothing. we got that down to about 50%. same 4 months their online revenue doubled">Copy message</button></div>
+    </div>
+
+    <div class="opener">
+      <div class="opener-head"><span class="tag">off the apps' leash</span></div>
+      <div class="msg">the whole play is getting you off the apps' leash. your site, your customers, your margin. same thing we ran with The Bando down the street. worth a quick 10 min call to walk you through exactly what we changed?</div>
+      <div class="cardfoot"><button class="copy" data-copy="the whole play is getting you off the apps' leash. your site, your customers, your margin. same thing we ran with The Bando down the street. worth a quick 10 min call to walk you through exactly what we changed?">Copy message</button></div>
+    </div>
+
+    <div class="opener">
+      <div class="opener-head"><span class="tag">local peer</span></div>
+      <div class="msg">we're local, did this for The Bando right here in atlanta so it's not some out-of-state agency thing. worth a quick 10 min to see if it'd work for you? happy to hop on a call and walk you through it</div>
+      <div class="cardfoot"><button class="copy" data-copy="we're local, did this for The Bando right here in atlanta so it's not some out-of-state agency thing. worth a quick 10 min to see if it'd work for you? happy to hop on a call and walk you through it">Copy message</button></div>
+    </div>
+
+    <div class="opener">
+      <div class="opener-head"><span class="tag">soft close</span></div>
+      <div class="msg">no pressure either way, but if you're open to it let's grab 10 min on a call. i'll walk you through exactly what we did for Bando and what it'd look like for yall. when's good this week?</div>
+      <div class="cardfoot"><button class="copy" data-copy="no pressure either way, but if you're open to it let's grab 10 min on a call. i'll walk you through exactly what we did for Bando and what it'd look like for yall. when's good this week?">Copy message</button></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Stay in their words</div>
+    <h2>Say this, not that</h2>
+    <p class="muted">The second you say "conversion" or "funnel," you're back in the deleted bucket. Talk like an owner.</p>
+    <div class="tbl-scroll" style="margin-top:1rem;">
+      <table class="vocab">
+        <thead><tr><th>Say this</th><th>Never this</th></tr></thead>
+        <tbody>
+          <tr><td class="say">covers / seats filled</td><td class="dont">table conversions</td></tr>
+          <tr><td class="say">regulars</td><td class="dont">retained customer cohort</td></tr>
+          <tr><td class="say">the apps / the cut they take / 30%</td><td class="dont">channel take rate</td></tr>
+          <tr><td class="say">order on our site / direct ordering</td><td class="dont">first-party funnel</td></tr>
+          <tr><td class="say">own our customers / our list</td><td class="dont">customer data asset</td></tr>
+          <tr><td class="say">show up on Google / get found</td><td class="dont">local SEO / SERP visibility</td></tr>
+          <tr><td class="say">a website as good as the food</td><td class="dont">brand-aligned digital experience</td></tr>
+          <tr><td class="say">wearing all the hats / no time</td><td class="dont">operational bandwidth</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <h3>Notes</h3>
+    <p class="src" style="margin-bottom:0.8rem;"><strong style="color:var(--accent-ink);">What this asset is for:</strong> a top-of-funnel meeting-getter for the sales team. The win is a booked call. Closing and delivery are the rep's next step, not in this playbook.</p>
+    <p class="src" style="margin-bottom:0.8rem;"><strong style="color:var(--accent-ink);">Locked Bando proof:</strong> online revenue doubled in 4 months, and site bounce rate went from 94% to 50% (9 in 10 visitors used to leave without ordering, now about half). Use these two everywhere and keep the wording plain so an owner gets it without the jargon.</p>
+    <p class="src">
+      ROV Studios restaurant research brief (internal) ·
+      <a href="https://www.restaurantdive.com/news/77-of-diners-visit-restaurant-websites-before-going-survey-finds/562008/">Restaurant Dive / MGH survey</a> ·
+      <a href="https://activemenus.com/the-hidden-costs-of-third-party-delivery-what-restaurant-owners-really-pay-and-how-to-calculate-your-true-roi/">ActiveMenus — hidden cost of delivery</a> ·
+      <a href="https://get.chownow.com/blog/instagram-guide-for-restaurants/">ChowNow — Instagram for restaurants</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll(".copy").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var text = btn.getAttribute("data-copy");
+      navigator.clipboard.writeText(text).then(function () {
+        var orig = btn.textContent;
+        btn.textContent = "Copied";
+        btn.classList.add("done");
+        setTimeout(function () { btn.textContent = orig; btn.classList.remove("done"); }, 1400);
+      });
+    });
+  });
+</script>
+</body>
+</html>
