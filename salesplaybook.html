@@ -66,6 +66,10 @@ main{min-width:0}
 .call .lbl{font-family:"DM Mono",monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-faint);margin-bottom:.3rem;display:flex;align-items:center;justify-content:space-between;gap:.5rem}
 .call .txt{font-family:'Inter',sans-serif;font-size:.9rem;line-height:1.55;color:var(--text)}
 .call.oneliner .txt{font-family:'Instrument Serif',serif;font-style:normal;font-size:1.1rem;line-height:1.4}
+a.deepdive{display:flex;align-items:center;gap:1rem;text-decoration:none;transition:border-color .15s,transform .15s}
+a.deepdive:hover{border-color:var(--primary);transform:translateY(-2px)}
+a.deepdive .body{flex:1}
+a.deepdive .go{font-family:"DM Mono",monospace;font-size:.8rem;font-weight:500;color:var(--gold);white-space:nowrap}
 /* engines / channel table */
 .tbl{width:100%;border-collapse:separate;border-spacing:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);font-family:'Inter',sans-serif}
 .tbl th{text-align:left;font-family:"DM Mono",monospace;font-weight:500;font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text-faint);padding:.6rem .85rem;background:var(--surface-2);border-bottom:1px solid var(--border)}
@@ -204,6 +208,7 @@ var VERTICALS=[
  {
   k:"restaurants",label:"Restaurants",ico:"🍽️",
   dek:"Unreal food, losing money before anyone tastes it.",
+  deepDive:{href:"restaurant-dm-guide.html",label:"Restaurant DM Playbook",desc:"Idea bank for IG DMs: soft openers that sell the outcome, Bando proof lines, meeting CTAs."},
   who:"Independent restaurants, coffee shops & cafés, metro Atlanta. 1-5 locations, owner-operated. Buyer is the owner (fast yes/no).",
   skip:"National chains, franchises, corporate marketing depts, ghost kitchens. No local decision-maker = no deal.",
   offerName:"Get Seen → Get Chosen → Get Kept",
@@ -250,6 +255,7 @@ var VERTICALS=[
  {
   k:"real-estate",label:"Real Estate",ico:"🏡",
   dek:"14,000 agents, all identical online. Make one the obvious premium choice.",
+  deepDive:{href:"real-estate-cold-call-guide.html",label:"Real Estate Playbook",desc:"Idea bank for agents: what we sell, value & trust lines, objections, writing tips."},
   who:"Residential agents who reinvest in themselves, metro Atlanta. Top producers, boutique teams (3-10 agents), agents with a real budget. The agent IS the business, so the buyer is the agent or team lead (fast yes/no).",
   skip:"Brand-new agents with zero budget, anyone who leans 100% on the brokerage's marketing and won't spend on their own name, corporate brokerage marketing departments.",
   offerName:"The Go-To Agent System — Win the Listing · Own the Sphere · Get Found",
@@ -419,6 +425,9 @@ function renderVertical(v){
  if(v.scripts.email)sh+="<div class=\"subhead\"><span class=\"ic\">✉️</span>Email</div><div class=\"scripts\">"+v.scripts.email.map(scriptCard).join("")+"</div>";
  if(v.scripts.linkedin)sh+="<div class=\"subhead\"><span class=\"ic\">in</span>LinkedIn</div><div class=\"scripts\">"+v.scripts.linkedin.map(scriptCard).join("")+"</div>";
  h+=block("Scripts — tap Copy, tweak the {name}, send",sh);
+ // Deep-dive playbook link (lives here, not on the hub)
+ if(v.deepDive)h+=block("Deep-dive playbook",
+  "<a class=\"call gold deepdive\" href=\""+esc(v.deepDive.href)+"\"><div class=\"body\"><div class=\"lbl\">"+esc(v.deepDive.label)+"</div><div class=\"txt\">"+esc(v.deepDive.desc)+"</div></div><span class=\"go\">Open →</span></a>");
 
  /* ══ THE RESEARCH (below, collapsed) — the strategy behind the copy ══ */
  var r="<div class=\"rlead\">The strategy behind it</div>";
