@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ROV — Instagram DM Funnel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Inter:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root,[data-theme="light"]{--bg:#F0E6E0;--surface:rgba(255,251,245,.82);--surface-2:#EADFD2;--border:rgba(22,12,40,.16);--text:#160C28;--text-muted:rgba(22,12,40,.74);--text-faint:rgba(22,12,40,.55);--primary:#8a514e;--primary-hover:#8a514e;--primary-hl:rgba(165,106,103,.16);--gold:#8a5e0f;--good:#2f7d5b;--warn:#9a4b12;--radius:.7rem;--shadow:0 1px 3px rgba(22,12,40,.06),0 6px 18px rgba(22,12,40,.07)}
+[data-theme="dark"]{--bg:#0F0820;--surface:rgba(33,18,52,.62);--surface-2:rgba(78,61,115,.30);--border:rgba(240,230,224,.17);--text:#F7F1EC;--text-muted:rgba(245,238,232,.84);--text-faint:rgba(245,238,232,.62);--primary:#c4847f;--primary-hover:#c4847f;--primary-hl:rgba(165,106,103,.22);--gold:#E3C24A;--good:#5fcf9b;--warn:#e0954a;--shadow:0 1px 3px rgba(0,0,0,.4),0 8px 24px rgba(7,3,16,.5)}
+html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+body{font-family:"Space Grotesk",sans-serif;background:var(--bg);color:var(--text);min-height:100dvh;position:relative}
+button,select,input{font:inherit;color:inherit}button{cursor:pointer;background:none;border:none}a{color:inherit;text-decoration:none}
+.sky{position:fixed;inset:0;z-index:-2;pointer-events:none;overflow:hidden;background-color:#0F0820;background-image:radial-gradient(150% 40% at 50% 84%,rgba(227,194,74,.15) 0%,rgba(165,106,103,.22) 24%,rgba(78,61,115,.17) 50%,transparent 78%),radial-gradient(130% 52% at 50% -10%,rgba(36,18,58,.72) 0%,transparent 60%),linear-gradient(180deg,#0F0820 0%,#0F0820 32%,#1B0E2E 62%,#24123A 74%,#0F0820 100%);box-shadow:inset 0 0 clamp(140px,20vw,340px) rgba(7,3,16,.6)}
+[data-theme="light"] .sky{background-color:#F0E6E0;background-image:radial-gradient(45% 35% at 14% 8%,rgba(227,194,74,.20),transparent 64%),radial-gradient(48% 40% at 86% 14%,rgba(78,61,115,.13),transparent 70%),radial-gradient(50% 42% at 16% 60%,rgba(165,106,103,.13),transparent 68%),radial-gradient(46% 38% at 88% 82%,rgba(78,61,115,.10),transparent 70%)}
+.grain{position:fixed;inset:0;z-index:90;pointer-events:none;opacity:.06;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:170px 170px}
+/* header */
+header{position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border);padding:.75rem 1.4rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;backdrop-filter:blur(12px);background:color-mix(in oklch,var(--bg) 90%,transparent)}
+.brand{display:flex;align-items:center;gap:.7rem}
+.brand .mark{width:40px;height:40px;border-radius:10px;background:#1B0E2E;border:1px solid rgba(240,230,224,.12);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.05rem;color:#E3C24A;flex-shrink:0}
+.brand h1{font-size:1.06rem;font-weight:700;letter-spacing:-.01em;line-height:1.1}
+.brand .tag{font-size:.72rem;font-weight:500;color:var(--text-faint);letter-spacing:.005em;line-height:1.2;margin-top:.12rem}
+.hdr-r{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.icbtn{height:34px;padding:0 .7rem;border-radius:8px;display:flex;align-items:center;gap:.4rem;font-size:.8rem;font-weight:600;color:var(--text-muted);border:1px solid var(--border)}.icbtn:hover{background:var(--surface-2);color:var(--text)}
+/* quick nav */
+.quicknav{position:sticky;top:57px;z-index:99;display:flex;gap:.5rem;flex-wrap:wrap;padding:.7rem 1.4rem;border-bottom:1px solid var(--border);backdrop-filter:blur(12px);background:color-mix(in oklch,var(--bg) 90%,transparent)}
+.qn{display:flex;align-items:center;gap:.5rem;padding:.4rem .85rem;border-radius:999px;border:1px solid var(--border);color:var(--text-muted);font-size:.85rem;font-weight:600;transition:.15s;white-space:nowrap}
+.qn:hover{background:var(--surface-2);color:var(--text)}
+.qn.on{background:var(--primary);border-color:var(--primary);color:#fff}
+.qn .em{font-size:.95rem}
+/* layout */
+.wrap{max-width:960px;margin:0 auto;padding:1.4rem 1.4rem 2rem}
+main{min-width:0}
+.intro{font-family:'Inter',sans-serif;font-size:1rem;font-weight:500;line-height:1.55;color:var(--text-muted);max-width:74ch;margin:.2rem 0 1.4rem}
+.intro b{color:var(--text);font-weight:600}
+/* flow strip */
+.flowstrip{display:flex;align-items:stretch;gap:0;flex-wrap:wrap;margin:0 0 1.8rem}
+.fs{flex:1;min-width:120px;display:flex;flex-direction:column;gap:.15rem;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);padding:.55rem .75rem}
+.fs .fsn{font-family:"DM Mono",monospace;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.fs .fst{font-weight:700;font-size:.98rem;letter-spacing:-.01em;color:var(--text)}
+.fsarrow{display:flex;align-items:center;justify-content:center;color:var(--primary);font-size:1.2rem;font-weight:700;padding:0 .35rem;flex-shrink:0}
+@media(max-width:560px){.flowstrip{flex-direction:column}.fs{min-width:0}.fsarrow{transform:rotate(90deg);padding:.15rem 0}}
+/* stepped timeline */
+.flow{position:relative;margin:.4rem 0 .2rem}
+.step{position:relative;padding-left:2.7rem;margin:0 0 1.9rem}
+.step:last-child{margin-bottom:.2rem}
+.step::after{content:"";position:absolute;left:.82rem;top:2rem;bottom:-1.9rem;width:2px;background:var(--border)}
+.step:last-child::after{display:none}
+.stepnode{position:absolute;left:0;top:-.05rem;width:1.72rem;height:1.72rem;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-family:"DM Mono",monospace;font-weight:600;font-size:.85rem;box-shadow:var(--shadow);z-index:1}
+.steplabel{display:flex;align-items:baseline;gap:.5rem;flex-wrap:wrap;margin-bottom:.2rem;min-height:1.72rem}
+.steplabel .st{font-weight:700;font-size:1.2rem;letter-spacing:-.01em;color:var(--text)}
+.steplabel .em{font-size:1.15rem}
+.stepnote{font-family:'Inter',sans-serif;font-size:.92rem;font-weight:500;color:var(--text-muted);margin:0 0 .8rem;line-height:1.5;max-width:74ch}
+.stepnote b{color:var(--text);font-weight:600}
+.blocktitle{font-family:"DM Mono",monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:1.1rem 0 .6rem;display:flex;align-items:center;gap:.5rem}
+.blocktitle::after{content:"";flex:1;height:1px;background:var(--border)}
+/* message bubble (DM) */
+.msg{background:var(--bg);border:1px solid var(--border);border-radius:1.1rem;border-top-left-radius:.3rem;padding:.85rem 1rem;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:.6rem;max-width:60ch}
+[data-theme="light"] .msg{background:rgba(255,251,245,.7)}
+.msg.you{border-left:3px solid var(--primary)}
+.msg .top{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.chip{font-family:"DM Mono",monospace;font-size:.62rem;font-weight:500;padding:.18rem .5rem;border-radius:5px;letter-spacing:.04em;text-transform:uppercase}
+.chip.a{background:var(--primary-hl);color:var(--primary)}
+.chip.g{background:color-mix(in oklch,var(--gold) 22%,transparent);color:var(--gold)}
+.chip.gd{background:color-mix(in oklch,var(--good) 20%,transparent);color:var(--good)}
+.msg .say{font-family:'Inter',sans-serif;font-size:.98rem;line-height:1.55;color:var(--text)}
+.msg .say .ph{color:var(--primary);font-weight:700}
+.msg .foot{display:flex;margin-top:.05rem;border-top:1px solid var(--border);padding-top:.5rem}
+.minibtn{font-size:.72rem;font-weight:600;padding:.3rem .65rem;border-radius:6px;border:1px solid var(--primary);color:var(--primary);display:inline-flex;align-items:center;gap:.3rem}
+.minibtn:hover{background:var(--primary);color:#fff}
+.minibtn.done{background:var(--primary);color:#fff}
+.goal{font-family:'Inter',sans-serif;font-size:.88rem;font-weight:500;color:var(--text-muted);margin-top:.7rem;padding-left:.9rem;border-left:2px solid var(--gold)}
+.goal b{color:var(--gold);font-weight:600}
+/* routing cards */
+.routes{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;margin-top:.2rem}
+@media(max-width:720px){.routes{grid-template-columns:1fr}}
+.routecard{background:var(--bg);border:1px solid var(--border);border-left:3px solid var(--primary);border-radius:var(--radius);padding:.8rem .9rem;box-shadow:var(--shadow)}
+[data-theme="light"] .routecard{background:rgba(255,251,245,.6)}
+.routecard .rif{font-weight:700;color:var(--text);font-size:.95rem}
+.routecard .rmid{font-family:'Inter',sans-serif;font-size:.86rem;color:var(--text-muted);margin:.3rem 0 .5rem;line-height:1.45}
+.routecard .rto{font-family:"DM Mono",monospace;font-size:.64rem;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);font-weight:600;display:inline-flex;align-items:center;gap:.3rem}
+/* branch cards */
+.branches{display:flex;flex-direction:column;gap:.8rem}
+/* reads (response → your line) */
+.reads{display:flex;flex-direction:column;gap:.7rem;margin-top:.2rem}
+.read{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:.85rem 1rem;box-shadow:var(--shadow);display:grid;grid-template-columns:minmax(140px,190px) 1fr;gap:.35rem 1.1rem;align-items:start}
+[data-theme="light"] .read{background:rgba(255,251,245,.6)}
+@media(max-width:640px){.read{grid-template-columns:1fr;gap:.5rem}}
+.read .them{font-weight:700;font-size:.95rem;color:var(--primary);display:flex;gap:.4rem;align-items:flex-start}
+.read .them::before{content:"“";font-family:Georgia,serif;font-size:1.4rem;line-height:.9;color:var(--text-faint)}
+.read .rcol{display:flex;flex-direction:column;gap:.5rem}
+.read .you{font-family:'Inter',sans-serif;font-size:.94rem;font-weight:500;line-height:1.55;color:var(--text)}
+.read .you .ph{color:var(--primary);font-weight:700}
+.read .rtag{font-family:"DM Mono",monospace;font-size:.62rem;letter-spacing:.05em;text-transform:uppercase;color:var(--text-faint)}
+.read .rline{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.read .miniboxbtn{font-size:.68rem;font-weight:600;padding:.24rem .55rem;border-radius:6px;border:1px solid var(--primary);color:var(--primary)}
+.read .miniboxbtn:hover{background:var(--primary);color:#fff}
+.read .miniboxbtn.done{background:var(--primary);color:#fff}
+.note{background:var(--surface-2);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:var(--radius);padding:.75rem .95rem;font-family:'Inter',sans-serif;font-size:.9rem;font-weight:500;color:var(--text);line-height:1.5;margin-top:1.4rem}
+.note b{font-weight:600;color:var(--primary)}
+#toast{position:fixed;bottom:1.4rem;left:50%;transform:translateX(-50%) translateY(20px);background:var(--text);color:var(--bg);font-size:.82rem;font-weight:600;padding:.55rem 1rem;border-radius:8px;opacity:0;pointer-events:none;transition:.2s;z-index:200}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+footer{max-width:960px;margin:0 auto;padding:1.4rem;color:var(--text-faint);font-size:.8rem;font-weight:500;font-family:'Inter',sans-serif;border-top:1px solid var(--border)}
+@media print{
+.sky,.grain,header .hdr-r,.quicknav,#toast,footer{display:none!important}
+body{background:#fff;color:#111}
+.wrap{max-width:none}
+.step{page-break-inside:avoid}
+.msg,.read,.routecard,.note{box-shadow:none;border-color:#ccc}
+.minibtn,.miniboxbtn{display:none}*{color:#111!important}
+}
+</style></head><body>
+<div class="sky"></div><div class="grain"></div>
+
+<header>
+  <div class="brand">
+    <div class="mark">R</div>
+    <div><h1>Instagram DM Funnel</h1><div class="tag">ROV Studios · full flow · genuine-customer-who-also-helps voice</div></div>
+  </div>
+  <div class="hdr-r">
+    <a class="icbtn" href="index.html">← Hub</a>
+    <button class="icbtn" id="printBtn">🖨 Print</button>
+    <button class="icbtn" id="themeBtn">☾ Theme</button>
+  </div>
+</header>
+
+<nav class="quicknav" id="quicknav">
+  <a class="qn" href="#opener"><span class="em">👋</span>1 · Opener</a>
+  <a class="qn" href="#bridge"><span class="em">🌉</span>2 · Bridge</a>
+  <a class="qn" href="#reveal"><span class="em">💡</span>3 · Reveal</a>
+  <a class="qn" href="#cta"><span class="em">📇</span>4 · Soft CTA</a>
+</nav>
+
+<div class="wrap">
+  <main>
+    <p class="intro">Four steps, each asking for slightly more than the last. <b>Warm all the way through, no whiplash.</b> Every message stays in the "genuine customer who also happens to help" voice. Tap any bubble to copy it, then cater the specifics — <span style="color:var(--primary);font-weight:700">[brackets]</span>, their dish, their handle — to the page in front of you. Never send the same line to everyone.</p>
+
+    <div class="flowstrip">
+      <div class="fs"><span class="fsn">Step 1</span><span class="fst">Opener</span></div>
+      <div class="fsarrow">→</div>
+      <div class="fs"><span class="fsn">Step 2</span><span class="fst">Bridge</span></div>
+      <div class="fsarrow">→</div>
+      <div class="fs"><span class="fsn">Step 3</span><span class="fst">Reveal</span></div>
+      <div class="fsarrow">→</div>
+      <div class="fs"><span class="fsn">Step 4</span><span class="fst">Soft CTA</span></div>
+    </div>
+
+    <div class="flow">
+
+      <!-- STEP 1 -->
+      <section class="step" id="opener">
+        <span class="stepnode">1</span>
+        <div class="steplabel"><span class="em">👋</span><span class="st">Opener</span></div>
+        <p class="stepnote">Warm, personal, acting as a genuine customer. Cater the detail to their page — <b>their dish, the patio, a specific reel</b>. Don't send the same line to everyone.</p>
+        <div class="msg you">
+          <div class="top"><span class="chip a">You · DM</span></div>
+          <div class="say">Hey! Just followed you. Had to stop scrolling because your page made me hungry 😂 Do people usually order online, or is most of your business dine-in?</div>
+          <div class="foot"><button class="minibtn" data-copy="Hey! Just followed you. Had to stop scrolling because your page made me hungry 😂 Do people usually order online, or is most of your business dine-in?">⧉ Copy</button></div>
+        </div>
+        <div class="goal"><b>Goal:</b> get a reply. Low-stakes, genuine, no pitch.</div>
+      </section>
+
+      <!-- STEP 2 -->
+      <section class="step" id="bridge">
+        <span class="stepnode">2</span>
+        <div class="steplabel"><span class="em">🌉</span><span class="st">Bridge</span></div>
+        <p class="stepnote">Stay a curious customer and surface the pain. Their answer hands you the exact thread for the reveal.</p>
+        <div class="msg you">
+          <div class="top"><span class="chip a">You · DM</span></div>
+          <div class="say">Good mix is the dream honestly 🙌 quick q since I was about to order, do you run online orders through your own site or something like DoorDash? Tried earlier and wasn't totally sure</div>
+          <div class="foot"><button class="minibtn" data-copy="Good mix is the dream honestly 🙌 quick q since I was about to order, do you run online orders through your own site or something like DoorDash? Tried earlier and wasn't totally sure">⧉ Copy</button></div>
+        </div>
+        <div class="blocktitle">Their answer routes the reveal</div>
+        <div class="routes">
+          <div class="routecard"><div class="rif">"DoorDash / third party"</div><div class="rmid">They rent customers and bleed fees on every order.</div><div class="rto">→ Reveal · Branch A</div></div>
+          <div class="routecard"><div class="rif">"Our own site"</div><div class="rmid">You tried it and it's clunky — orders leak there.</div><div class="rto">→ Reveal · Branch B</div></div>
+          <div class="routecard"><div class="rif">"No online ordering"</div><div class="rmid">Biggest gap of all — nowhere for a hungry visitor to click.</div><div class="rto">→ Reveal · Branch C</div></div>
+        </div>
+      </section>
+
+      <!-- STEP 3 -->
+      <section class="step" id="reveal">
+        <span class="stepnode">3</span>
+        <div class="steplabel"><span class="em">💡</span><span class="st">Reveal</span></div>
+        <p class="stepnote">You happen to also do this, and can help. No confession, no "gotcha" — you're the fan who also works in this world. Pick the branch that matches their answer, one line, keep it punchy.</p>
+        <div class="branches">
+          <div class="msg you">
+            <div class="top"><span class="chip a">Branch A · they said DoorDash / third party</span></div>
+            <div class="say">Btw small world, this is literally what I do 😅 I help ATL restaurants own their online orders instead of renting them from DoorDash. Did it for @thebando_atl, doubled their online revenue in 4 months. Noticed 2 things I'd change for [restaurant], want em?</div>
+            <div class="foot"><button class="minibtn" data-copy="Btw small world, this is literally what I do 😅 I help ATL restaurants own their online orders instead of renting them from DoorDash. Did it for @thebando_atl, doubled their online revenue in 4 months. Noticed 2 things I'd change for [restaurant], want em?">⧉ Copy</button></div>
+          </div>
+          <div class="msg you">
+            <div class="top"><span class="chip g">Branch B · they said their own site</span></div>
+            <div class="say">Btw small world, this is literally what I do 😅 I help ATL restaurants turn more online traffic into orders. Actually tried ordering earlier and a couple spots made me stop, that's usually where orders leak. Did this for @thebando_atl, doubled them in 4 months. Want the 2 quick fixes for [restaurant]?</div>
+            <div class="foot"><button class="minibtn" data-copy="Btw small world, this is literally what I do 😅 I help ATL restaurants turn more online traffic into orders. Actually tried ordering earlier and a couple spots made me stop, that's usually where orders leak. Did this for @thebando_atl, doubled them in 4 months. Want the 2 quick fixes for [restaurant]?">⧉ Copy</button></div>
+          </div>
+          <div class="msg you">
+            <div class="top"><span class="chip gd">Branch C · they have no online ordering</span></div>
+            <div class="say">Btw small world, this is literally what I do 😅 I help ATL restaurants turn their page + site into actual online orders. Right now every hungry person who finds you has nowhere to click, that's money walking. Did this for @thebando_atl and doubled their online revenue in 4 months. Want me to show you what I'd set up for [restaurant]?</div>
+            <div class="foot"><button class="minibtn" data-copy="Btw small world, this is literally what I do 😅 I help ATL restaurants turn their page + site into actual online orders. Right now every hungry person who finds you has nowhere to click, that's money walking. Did this for @thebando_atl and doubled their online revenue in 4 months. Want me to show you what I'd set up for [restaurant]?">⧉ Copy</button></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 4 -->
+      <section class="step" id="cta">
+        <span class="stepnode">4</span>
+        <div class="steplabel"><span class="em">📇</span><span class="st">Soft CTA</span></div>
+        <p class="stepnote">Find the decision maker and get a channel. No time-ask yet — just learn who buys and how to reach them properly.</p>
+        <div class="msg you">
+          <div class="top"><span class="chip a">You · DM</span></div>
+          <div class="say">Honestly no pressure at all 🙌 are you the one who handles this kind of thing, or would that be the owner? Happy to put together a quick breakdown for whoever makes those calls</div>
+          <div class="foot"><button class="minibtn" data-copy="Honestly no pressure at all 🙌 are you the one who handles this kind of thing, or would that be the owner? Happy to put together a quick breakdown for whoever makes those calls">⧉ Copy</button></div>
+        </div>
+        <div class="blocktitle">Reads by response</div>
+        <div class="reads">
+          <div class="read">
+            <div class="them">That's me</div>
+            <div class="rcol">
+              <span class="rtag">You're talking to the buyer — offer the look</span>
+              <div class="rline"><div class="you">Perfect, easiest is I screen-share it on a quick 10 min call this week, or send a short video, whatever's easier 🙌</div></div>
+              <div><button class="miniboxbtn minibtn" data-copy="Perfect, easiest is I screen-share it on a quick 10 min call this week, or send a short video, whatever's easier 🙌">⧉ Copy</button></div>
+            </div>
+          </div>
+          <div class="read">
+            <div class="them">That's the owner</div>
+            <div class="rcol">
+              <span class="rtag">Get the channel, promise something specific</span>
+              <div class="rline"><div class="you">Got it, what's the best way to reach them, here or email? I'll send something quick and specific to [business].</div></div>
+              <div><button class="miniboxbtn minibtn" data-copy="Got it, what's the best way to reach them, here or email? I'll send something quick and specific to [business].">⧉ Copy</button></div>
+            </div>
+          </div>
+          <div class="read">
+            <div class="them">Goes quiet</div>
+            <div class="rcol">
+              <span class="rtag">One nudge only — then stop</span>
+              <div class="rline"><div class="you">no rush, want me to just send the short video?</div></div>
+              <div><button class="miniboxbtn minibtn" data-copy="no rush, want me to just send the short video?">⧉ Copy</button></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <div class="note"><b>The one rule:</b> every step asks for slightly more than the last, and never breaks the warm customer voice. If a reply cools off, drop back a step — don't push forward. A genuine "no worries, love the spot 🙌" today is a reply you can reopen next month.</div>
+
+  </main>
+</div>
+
+<footer>ROV Studios · internal sales asset · Instagram DM funnel. Swap <b>[brackets]</b>, the dish, and the handle for the page in front of you before you send.</footer>
+
+<div id="toast"></div>
+
+<script>
+/* ---------- COPY ---------- */
+document.addEventListener('click',function(e){
+  var b=e.target.closest('[data-copy]');if(!b)return;
+  var txt=b.getAttribute('data-copy');
+  function ok(){b.classList.add('done');var o=b.textContent;b.textContent='Copied ✓';toast('Copied to clipboard');setTimeout(function(){b.classList.remove('done');b.textContent=o;},1300);}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(ok,function(){fb(txt);ok();});}
+  else{fb(txt);ok();}
+});
+function fb(t){var ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(e){}document.body.removeChild(ta);}
+var toastT;function toast(m){var el=document.getElementById('toast');el.textContent=m;el.classList.add('show');clearTimeout(toastT);toastT=setTimeout(function(){el.classList.remove('show');},1500);}
+
+/* ---------- quick-nav highlight ---------- */
+var navmap={};document.querySelectorAll('.qn').forEach(function(a){navmap[a.getAttribute('href').slice(1)]=a;});
+var obs=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){for(var k in navmap)navmap[k].classList.remove('on');var a=navmap[en.target.id];if(a)a.classList.add('on');}});},{rootMargin:'-25% 0px -65% 0px'});
+document.querySelectorAll('main .step').forEach(function(s){obs.observe(s);});
+
+/* ---------- theme + print ---------- */
+(function(){var t=document.getElementById('themeBtn'),r=document.documentElement,d='dark';
+t.onclick=function(){d=d==='dark'?'light':'dark';r.setAttribute('data-theme',d);t.textContent=d==='dark'?'☾ Theme':'☀ Theme';};})();
+document.getElementById('printBtn').onclick=function(){window.print();};
+</script>
+</body></html>
