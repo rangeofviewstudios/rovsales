@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ROV — Cold Call Approaches</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Inter:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root,[data-theme="light"]{--bg:#F0E6E0;--surface:rgba(255,251,245,.82);--surface-2:#EADFD2;--border:rgba(22,12,40,.16);--text:#160C28;--text-muted:rgba(22,12,40,.74);--text-faint:rgba(22,12,40,.55);--primary:#8a514e;--primary-hover:#8a514e;--primary-hl:rgba(165,106,103,.16);--gold:#8a5e0f;--good:#2f7d5b;--warn:#9a4b12;--radius:.7rem;--shadow:0 1px 3px rgba(22,12,40,.06),0 6px 18px rgba(22,12,40,.07)}
+[data-theme="dark"]{--bg:#0F0820;--surface:rgba(33,18,52,.62);--surface-2:rgba(78,61,115,.30);--border:rgba(240,230,224,.17);--text:#F7F1EC;--text-muted:rgba(245,238,232,.84);--text-faint:rgba(245,238,232,.62);--primary:#c4847f;--primary-hover:#c4847f;--primary-hl:rgba(165,106,103,.22);--gold:#E3C24A;--good:#5fcf9b;--warn:#e0954a;--shadow:0 1px 3px rgba(0,0,0,.4),0 8px 24px rgba(7,3,16,.5)}
+html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+body{font-family:"Space Grotesk",sans-serif;background:var(--bg);color:var(--text);min-height:100dvh;position:relative}
+button,select,input{font:inherit;color:inherit}button{cursor:pointer;background:none;border:none}a{color:inherit;text-decoration:none}
+.sky{position:fixed;inset:0;z-index:-2;pointer-events:none;overflow:hidden;background-color:#0F0820;background-image:radial-gradient(150% 40% at 50% 84%,rgba(227,194,74,.15) 0%,rgba(165,106,103,.22) 24%,rgba(78,61,115,.17) 50%,transparent 78%),radial-gradient(130% 52% at 50% -10%,rgba(36,18,58,.72) 0%,transparent 60%),linear-gradient(180deg,#0F0820 0%,#0F0820 32%,#1B0E2E 62%,#24123A 74%,#0F0820 100%);box-shadow:inset 0 0 clamp(140px,20vw,340px) rgba(7,3,16,.6)}
+[data-theme="light"] .sky{background-color:#F0E6E0;background-image:radial-gradient(45% 35% at 14% 8%,rgba(227,194,74,.20),transparent 64%),radial-gradient(48% 40% at 86% 14%,rgba(78,61,115,.13),transparent 70%),radial-gradient(50% 42% at 16% 60%,rgba(165,106,103,.13),transparent 68%),radial-gradient(46% 38% at 88% 82%,rgba(78,61,115,.10),transparent 70%)}
+.grain{position:fixed;inset:0;z-index:90;pointer-events:none;opacity:.06;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:170px 170px}
+/* header */
+header{position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border);padding:.75rem 1.4rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;backdrop-filter:blur(12px);background:color-mix(in oklch,var(--bg) 90%,transparent)}
+.brand{display:flex;align-items:center;gap:.7rem}
+.brand .mark{width:40px;height:40px;border-radius:10px;background:#1B0E2E;border:1px solid rgba(240,230,224,.12);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.05rem;color:#E3C24A;flex-shrink:0}
+.brand h1{font-size:1.06rem;font-weight:700;letter-spacing:-.01em;line-height:1.1}
+.brand .tag{font-size:.72rem;font-weight:500;color:var(--text-faint);letter-spacing:.005em;line-height:1.2;margin-top:.12rem}
+.hdr-r{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.icbtn{height:34px;padding:0 .7rem;border-radius:8px;display:flex;align-items:center;gap:.4rem;font-size:.8rem;font-weight:600;color:var(--text-muted);border:1px solid var(--border)}.icbtn:hover{background:var(--surface-2);color:var(--text)}
+/* quick nav */
+.quicknav{position:sticky;top:57px;z-index:99;display:flex;gap:.5rem;flex-wrap:wrap;padding:.7rem 1.4rem;border-bottom:1px solid var(--border);backdrop-filter:blur(12px);background:color-mix(in oklch,var(--bg) 90%,transparent)}
+.qn{display:flex;align-items:center;gap:.5rem;padding:.4rem .85rem;border-radius:999px;border:1px solid var(--border);color:var(--text-muted);font-size:.85rem;font-weight:600;transition:.15s;white-space:nowrap}
+.qn:hover{background:var(--surface-2);color:var(--text)}
+.qn.on{background:var(--primary);border-color:var(--primary);color:#fff}
+.qn .em{font-size:.95rem}
+/* layout */
+.wrap{max-width:960px;margin:0 auto;padding:1.6rem 1.4rem 2rem}
+main{min-width:0}
+.sec{scroll-margin-top:8rem;margin:0 0 2.4rem}
+.sechead{margin-bottom:1rem}
+.sechead h3{font-size:clamp(1.4rem,3.4vw,1.9rem);font-weight:700;letter-spacing:-.015em;line-height:1.05;display:flex;align-items:center;gap:.55rem;flex-wrap:wrap}
+.sechead h3 .em{font-size:1.4rem}
+.sechead .sub{font-family:'Inter',sans-serif;font-size:1rem;font-weight:500;color:var(--text-muted);margin-top:.3rem;max-width:72ch;line-height:1.5}
+.leverchip{font-family:"DM Mono",monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:.22rem .6rem;border-radius:6px;background:var(--primary-hl);color:var(--primary);border:1px solid var(--border);align-self:center}
+.blocktitle{font-family:"DM Mono",monospace;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin:1.5rem 0 .8rem;display:flex;align-items:center;gap:.5rem}
+.blocktitle::after{content:"";flex:1;height:1px;background:var(--border)}
+/* approach card */
+.approach{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem 1.2rem;box-shadow:var(--shadow);border-top:3px solid var(--primary)}
+.approach .prep{font-family:'Inter',sans-serif;font-size:.92rem;font-weight:500;line-height:1.55;color:var(--text);background:var(--surface-2);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:var(--radius);padding:.75rem .95rem;margin-bottom:1rem}
+.approach .prep b{color:var(--primary);font-weight:600}
+/* flow strip — at-a-glance shape of the call */
+.flowstrip{display:flex;align-items:stretch;gap:0;flex-wrap:wrap;margin:0 0 1.4rem}
+.fs{flex:1;min-width:130px;display:flex;flex-direction:column;gap:.15rem;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);padding:.55rem .75rem}
+.fs .fsn{font-family:"DM Mono",monospace;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.fs .fst{font-weight:700;font-size:.98rem;letter-spacing:-.01em;color:var(--text)}
+.fsarrow{display:flex;align-items:center;justify-content:center;color:var(--primary);font-size:1.2rem;font-weight:700;padding:0 .4rem;flex-shrink:0}
+@media(max-width:560px){.flowstrip{flex-direction:column}.fs{min-width:0}.fsarrow{transform:rotate(90deg);padding:.15rem 0}}
+/* stepped flow — numbered vertical timeline */
+.flow{position:relative;margin:.4rem 0 .2rem}
+.bgroup{position:relative;padding-left:2.7rem;margin:0 0 1.3rem}
+.bgroup:last-child{margin-bottom:.2rem}
+.bgroup::after{content:"";position:absolute;left:.82rem;top:2rem;bottom:-1.3rem;width:2px;background:var(--border)}
+.bgroup:last-child::after{display:none}
+.bgnode{position:absolute;left:0;top:-.05rem;width:1.72rem;height:1.72rem;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-family:"DM Mono",monospace;font-weight:600;font-size:.85rem;box-shadow:var(--shadow);z-index:1}
+.bglabel{display:flex;align-items:baseline;gap:.5rem;flex-wrap:wrap;margin-bottom:.25rem;min-height:1.72rem}
+.bglabel .stage{font-weight:700;font-size:1.08rem;letter-spacing:-.01em;color:var(--text)}
+.bglabel .nm{font-weight:500;font-size:.95rem;color:var(--text-muted)}
+.bgnote{font-family:'Inter',sans-serif;font-size:.86rem;font-weight:500;color:var(--text-muted);margin:0 0 .6rem;line-height:1.4}
+/* liner (script line) cards */
+.liners{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(340px,100%),1fr));gap:.7rem}
+.liner{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:.85rem .95rem;display:flex;flex-direction:column;gap:.55rem;box-shadow:var(--shadow);transition:.15s}
+[data-theme="light"] .liner{background:rgba(255,251,245,.6)}
+.liner:hover{border-color:var(--primary)}
+.liner .top{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.chip{font-family:"DM Mono",monospace;font-size:.62rem;font-weight:500;padding:.18rem .5rem;border-radius:5px;letter-spacing:.04em;text-transform:uppercase}
+.chip.a{background:var(--primary-hl);color:var(--primary)}
+.chip.g{background:color-mix(in oklch,var(--gold) 22%,transparent);color:var(--gold)}
+.chip.gd{background:color-mix(in oklch,var(--good) 20%,transparent);color:var(--good)}
+.liner .say{font-family:'Inter',sans-serif;font-size:.95rem;line-height:1.55;color:var(--text)}
+.liner .say .ph{color:var(--primary);font-weight:700}
+.liner .foot{display:flex;margin-top:.1rem;border-top:1px solid var(--border);padding-top:.5rem}
+.minibtn{font-size:.72rem;font-weight:600;padding:.3rem .65rem;border-radius:6px;border:1px solid var(--primary);color:var(--primary);display:inline-flex;align-items:center;gap:.3rem}
+.minibtn:hover{background:var(--primary);color:#fff}
+.minibtn.done{background:var(--primary);color:#fff}
+/* objections */
+.objgrid{display:flex;flex-direction:column;gap:.7rem;margin-top:.6rem}
+.obj{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:.85rem 1rem;box-shadow:var(--shadow);display:grid;grid-template-columns:minmax(150px,210px) 1fr;gap:.3rem 1.1rem;align-items:start}
+[data-theme="light"] .obj{background:rgba(255,251,245,.6)}
+@media(max-width:640px){.obj{grid-template-columns:1fr;gap:.5rem}}
+.obj .them{font-weight:700;font-size:.95rem;color:var(--primary);display:flex;gap:.4rem;align-items:flex-start}
+.obj .them::before{content:"“";font-family:Georgia,serif;font-size:1.4rem;line-height:.9;color:var(--text-faint)}
+.obj .you{font-family:'Inter',sans-serif;font-size:.92rem;font-weight:500;line-height:1.55;color:var(--text)}
+.obj .you .ph{color:var(--primary);font-weight:700}
+/* watch metric */
+.warn{background:color-mix(in oklch,var(--warn) 14%,var(--surface));border:1px solid var(--border);border-left:3px solid var(--warn);border-radius:var(--radius);padding:.85rem 1rem;box-shadow:var(--shadow);margin-top:1rem}
+.warn .l{font-family:"DM Mono",monospace;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--warn);margin-bottom:.35rem;font-weight:600}
+.warn .txt{font-family:'Inter',sans-serif;font-size:.9rem;font-weight:500;line-height:1.55;color:var(--text)}
+.warn .txt b{font-weight:700}
+#toast{position:fixed;bottom:1.4rem;left:50%;transform:translateX(-50%) translateY(20px);background:var(--text);color:var(--bg);font-size:.82rem;font-weight:600;padding:.55rem 1rem;border-radius:8px;opacity:0;pointer-events:none;transition:.2s;z-index:200}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+footer{max-width:960px;margin:0 auto;padding:1.4rem;color:var(--text-faint);font-size:.8rem;font-weight:500;font-family:'Inter',sans-serif;border-top:1px solid var(--border)}
+@media print{
+.sky,.grain,header .hdr-r,.quicknav,#toast,footer{display:none!important}
+body{background:#fff;color:#111}
+.wrap{max-width:none}
+.sec{page-break-inside:avoid;margin-bottom:1.4rem}
+.liner,.obj,.beat,.warn,.approach{box-shadow:none;border-color:#ccc}
+.minibtn{display:none}*{color:#111!important}
+}
+</style></head><body>
+<div class="sky"></div><div class="grain"></div>
+
+<header>
+  <div class="brand">
+    <div class="mark">R</div>
+    <div><h1>Cold Call Approaches</h1><div class="tag">ROV Studios · three openers we're testing · same booked-call destination</div></div>
+  </div>
+  <div class="hdr-r">
+    <a class="icbtn" href="index.html">← Hub</a>
+    <button class="icbtn" id="printBtn">🖨 Print</button>
+    <button class="icbtn" id="themeBtn">☾ Theme</button>
+  </div>
+</header>
+
+<nav class="quicknav" id="quicknav">
+  <a class="qn" href="#demo"><span class="em">😬</span>1 · Live Demo</a>
+  <a class="qn" href="#gift"><span class="em">🎁</span>2 · Gift-First</a>
+  <a class="qn" href="#warm"><span class="em">🤝</span>3 · Warm-Borrow</a>
+</nav>
+
+<div class="wrap">
+  <main>
+    <div id="approachRoot"></div>
+  </main>
+</div>
+
+<footer>ROV Studios · internal sales asset · three cold-call openers under test. Swap the <b>[brackets]</b> for real details before you dial, and log which approach booked.</footer>
+
+<div id="toast"></div>
+
+<script>
+var PH=/(\[[^\]]+\])/g;
+function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function ph(s){return esc(s).replace(PH,'<span class="ph">$1</span>');}
+
+var APPROACHES=[
+  {
+    id:"demo",num:"Approach 1",name:"The Live Demo",icon:"😬",lever:"Lever: Discomfort",
+    tagline:"Be the customer they just lost.",
+    prep:"<b>Before you dial:</b> actually try to order/book on their site, or call after hours. Whatever wall you hit is your hook. Now you're reporting, not acting.",
+    beats:[
+      {num:"①",nm:"Hook — be the lost customer",note:"Let them respond once, they start to help you. Then reveal.",lines:[
+        {chip:"Say it",cls:"a",say:"Hi, I was just on your website trying to [book an appointment / place an order] and it wouldn't let me finish, kept [dead-ending / asking me to call]. Is there another way to do this?"},
+        {chip:"Reveal · within ~15s",cls:"g",say:"Okay, I'll be straight with you [name], I'm actually not a customer, I'm [rep] from Range of View, we build websites for [industry] here in [city]. But notice what just happened: I genuinely tried to book on your site 20 minutes ago and couldn't. I'm probably not the first person this week. That's real money walking out the door. Can I take 40 seconds to show you what I mean?"}
+      ]},
+      {num:"②",nm:"Swing — proof",note:"Use whichever you have.",lines:[
+        {chip:"Testimonial",cls:"a",say:"Here's why I bothered calling instead of moving on. We fixed this exact thing for [similar business], they went from [X] bookings a month to [Y]. Same traffic, same town."},
+        {chip:"Demo line",cls:"a",say:"I was so sure this was costing you customers that we already mocked up your site with it fixed. Same brand, same look, this version actually lets people book. I'd rather show you than talk at you."}
+      ]},
+      {num:"③",nm:"Book — to show live",note:"",lines:[
+        {chip:"Book it",cls:"gd",say:"Give me 15 minutes and I'll put your actual site up on screen, show you exactly where the leak is and what the fixed version looks like. No obligation. I've got [day] at [time] or [day] at [time], which is better?"},
+        {chip:"Lock it",cls:"gd",say:"Perfect, best email for the calendar invite? I'll have both versions pulled up. Talk [day]."}
+      ]}
+    ],
+    objections:[
+      {them:"Weird way to call people.",you:"Fair, and I did it on purpose. That flash of friction you just felt is exactly what a real customer feels right before they leave. Give me 15 minutes to show you the fix?"},
+      {them:"Already have a website.",you:"You do, and it looks good. But I just tried to book on it and couldn't. The question isn't whether it exists, it's whether it's booking people. 15 minutes."},
+      {them:"How much?",you:"Rebuilds run $2k–$10k one time, but that only matters if the extra bookings cover it. Let me show you the leak and the fix first."},
+      {them:"Just send it.",you:"Lands way better if I walk you through it live, and it's only 15 minutes. [day] or [day]?"},
+      {them:"Too busy.",you:"That's why it's 15 minutes and I do the prep. Quietest slot this week, [day] morning or afternoon?"}
+    ],
+    watch:"the \"annoyed\" count on the reveal. Lives or dies on whether the hook reads as a favor or a stunt."
+  },
+  {
+    id:"gift",num:"Approach 2",name:"The Gift-First",icon:"🎁",lever:"Lever: Delight",
+    tagline:"I already made you something free.",
+    prep:"<b>Before you dial:</b> the mockup must be real. Curated list of 10–20 dream-fit businesses, batch-build a homepage mockup for each, host on a private link, then call. Every mockup is also a portfolio piece.",
+    beats:[
+      {num:"①",nm:"Gift open",note:"If guarded, add the no-catch line.",lines:[
+        {chip:"Open",cls:"a",say:"Hi, is this [name]? I'm [rep] from Range of View, a design studio here in [city]. I want to be upfront, I'm not selling you anything on this call. My team rebuilt your homepage this week, just something we wanted to try, and it's sitting on a live link. I mostly called to send it to you. Got 20 seconds?"},
+        {chip:"If guarded",cls:"a",say:"No catch. We do these as portfolio pieces. I just figured the person it's actually of should get to see it."}
+      ]},
+      {num:"②",nm:"Curiosity swing",note:"Optional proof line if you have a comparable result.",lines:[
+        {chip:"Swing",cls:"a",say:"Here's what we changed. Your current site makes people [call / hunt around] to book. Ours puts one clear 'book now' right up top, loads in about a second on a phone, and leads with your reviews. Same brand, same photos, it just actually turns visitors into bookings. Looks like you, just working harder."},
+        {chip:"Optional",cls:"g",say:"We did the same move for [similar business], they picked up [Y] bookings a month off it."}
+      ]},
+      {num:"③",nm:"Book — to reveal",note:"Don't just send the link.",lines:[
+        {chip:"Book it",cls:"gd",say:"I could email you the link, but it's way better if I put it on screen next to your current site and walk you through what changed and why. 15 minutes, no pitch, and the mockup's yours to keep either way. [day] at [time] or [day] at [time]?"},
+        {chip:"Lock it",cls:"gd",say:"Perfect, best email for the invite? I'll have both versions side by side. Talk [day]."}
+      ]}
+    ],
+    objections:[
+      {them:"Why build it for free?",you:"It's a portfolio piece for us either way, and it's the most honest way to show what we do. If you love it, we'd talk about making it your real site. If not, keep the ideas."},
+      {them:"Just email me the link.",you:"Happy to, but do me one favor, 15 minutes so I can show it next to your current site. That side-by-side is where it clicks. Otherwise it's just another link in your inbox."},
+      {them:"How much for the real thing?",you:"$2k–$10k one time. But the mockup's free regardless, and on the call I'll show you what the extra bookings are worth."},
+      {them:"Already have a site.",you:"So yours isn't bad, this is just a sharper take on the same brand, built to book more. Worst case, free second opinion. 15 minutes?"},
+      {them:"Is this a scam?",you:"Reasonable to ask. You're a public [industry] in [city], no payment, no catch, I'm literally trying to give you something. Look us up before the call."}
+    ],
+    watch:"people taking the free link and never booking. Log the \"just email it\" deflections."
+  },
+  {
+    id:"warm",num:"Approach 3",name:"The Warm-Borrow",icon:"🤝",lever:"Lever: Belonging",
+    tagline:"A real client's name.",
+    prep:"<b>Before you dial:</b> the engine is the name. Ask happy clients for permission to use their name + intros to peers. Three honest tiers, never overstate: <b>T1</b> direct referral / <b>T2</b> name permission / <b>T3</b> peer proof.",
+    beats:[
+      {num:"①",nm:"Warm open",note:"Pick the highest tier you can honestly claim — never overstate.",lines:[
+        {chip:"T1 · direct referral",cls:"gd",say:"Hi, is this [name]? I'm [rep] from Range of View. [Referrer] over at [business] suggested I reach out, we redid their website and they've been really happy with how it's booking for them. They mentioned you as someone who'd actually appreciate good work. Got a minute?"},
+        {chip:"T2 · name permission",cls:"g",say:"We just did the website for [client] at [business] here in [city], and I'm reaching out to a couple other [industry] owners in town whose sites could book a lot more. You were on that short list."},
+        {chip:"T3 · peer proof",cls:"a",say:"We build websites for [industry] here in [city], recently did one for [similar business] and it's booking really well. I think yours could do the same."}
+      ]},
+      {num:"②",nm:"Bridge — why them",note:"Optional result line if you have the numbers.",lines:[
+        {chip:"Bridge",cls:"a",say:"The reason [Referrer] thought of you, honestly, is your business is clearly good but your site isn't pulling its weight. I looked before I called and [specific leak: no way to book without calling / slow on mobile / booking button's buried]. Same thing we fixed for them."},
+        {chip:"Optional",cls:"g",say:"For [client] that one change took them from about [X] bookings a month to [Y]."}
+      ]},
+      {num:"③",nm:"Book",note:"",lines:[
+        {chip:"Book it",cls:"gd",say:"Here's what I'd do, same as we did for [Referrer]: a quick 15-minute call where I put your site on screen and show you the top few things costing you bookings, plus what the fix looks like. No obligation, you keep the teardown either way. [day] at [time] or [day] at [time]?"},
+        {chip:"Lock it",cls:"gd",say:"Perfect, best email for the invite? I'll tell [Referrer] I got hold of you. Talk [day]."}
+      ]}
+    ],
+    objections:[
+      {them:"How do you know [Referrer]?",you:"We built their website [timeframe] ago, [true detail]. Text them if you want, they'll vouch. I'd rather you hear it from them than me."},
+      {them:"[Referrer] didn't tell me you'd call.",you:"Fair, they may not have. I asked who else in town does good work and your name came up. Since I've got you, can I show you the same thing we did for them?"},
+      {them:"Already have a website.",you:"So did [Referrer]. The question was whether it was booking people. It wasn't, now it is. Let me show you where yours is leaking."},
+      {them:"How much?",you:"Their project was our usual range, $2k–$10k one time. Paid back fast in extra bookings, and that's the math I'll show you. Free to look."},
+      {them:"Not looking right now.",you:"Totally fair. Can I at least send the same teardown we started [Referrer] with, and grab 15 minutes whenever's quiet?"}
+    ],
+    watch:"log the tier per call, so you learn how warm the borrow needs to be to work."
+  }
+];
+
+function linerCard(o){
+  return '<div class="liner"><div class="top"><span class="chip '+(o.cls||'a')+'">'+esc(o.chip)+'</span></div>'+
+    '<div class="say">'+ph(o.say)+'</div>'+
+    '<div class="foot"><button class="minibtn" data-copy="'+esc(o.say)+'">⧉ Copy</button></div></div>';
+}
+
+function stageName(nm){return nm.split('—')[0].trim();}
+function stageRest(nm){var p=nm.split('—');return p.length>1?p.slice(1).join('—').trim():'';}
+
+document.getElementById('approachRoot').innerHTML=APPROACHES.map(function(a){
+  var flow='<div class="flowstrip">'+a.beats.map(function(b,i){
+    var arrow=i<a.beats.length-1?'<div class="fsarrow">→</div>':'';
+    return '<div class="fs"><span class="fsn">Step '+(i+1)+'</span><span class="fst">'+esc(stageName(b.nm))+'</span></div>'+arrow;
+  }).join('')+'</div>';
+  var beats='<div class="flow">'+a.beats.map(function(b,i){
+    var rest=stageRest(b.nm);
+    return '<div class="bgroup"><span class="bgnode">'+(i+1)+'</span>'+
+      '<div class="bglabel"><span class="stage">'+esc(stageName(b.nm))+'</span>'+(rest?'<span class="nm">— '+esc(rest)+'</span>':'')+'</div>'+
+      (b.note?'<div class="bgnote">'+esc(b.note)+'</div>':'')+
+      '<div class="liners">'+b.lines.map(linerCard).join('')+'</div></div>';
+  }).join('')+'</div>';
+  var objs=a.objections.map(function(o){
+    return '<div class="obj"><div class="them">'+esc(o.them)+'</div><div class="you">'+ph(o.you)+'</div></div>';
+  }).join('');
+  return '<section class="sec" id="'+a.id+'">'+
+    '<div class="sechead"><h3><span class="em">'+a.icon+'</span>'+esc(a.num)+' · '+esc(a.name)+' <span class="leverchip">'+esc(a.lever)+'</span></h3>'+
+    '<p class="sub">'+esc(a.tagline)+'</p></div>'+
+    '<div class="approach">'+
+      '<div class="prep">'+a.prep+'</div>'+
+      flow+
+      beats+
+      '<div class="blocktitle">Objections</div>'+
+      '<div class="objgrid">'+objs+'</div>'+
+      '<div class="warn"><div class="l">⚠ Watch</div><div class="txt"><b>Watch:</b> '+esc(a.watch)+'</div></div>'+
+    '</div>'+
+  '</section>';
+}).join('');
+
+/* ---------- COPY ---------- */
+document.addEventListener('click',function(e){
+  var b=e.target.closest('[data-copy]');if(!b)return;
+  var txt=b.getAttribute('data-copy');
+  function ok(){b.classList.add('done');var o=b.textContent;b.textContent='Copied ✓';toast('Copied to clipboard');setTimeout(function(){b.classList.remove('done');b.textContent=o;},1300);}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(ok,function(){fb(txt);ok();});}
+  else{fb(txt);ok();}
+});
+function fb(t){var ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(e){}document.body.removeChild(ta);}
+var toastT;function toast(m){var el=document.getElementById('toast');el.textContent=m;el.classList.add('show');clearTimeout(toastT);toastT=setTimeout(function(){el.classList.remove('show');},1500);}
+
+/* ---------- quick-nav highlight ---------- */
+var navmap={};document.querySelectorAll('.qn').forEach(function(a){navmap[a.getAttribute('href').slice(1)]=a;});
+var obs=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){for(var k in navmap)navmap[k].classList.remove('on');var a=navmap[en.target.id];if(a)a.classList.add('on');}});},{rootMargin:'-30% 0px -60% 0px'});
+document.querySelectorAll('main .sec').forEach(function(s){obs.observe(s);});
+
+/* ---------- theme + print ---------- */
+(function(){var t=document.getElementById('themeBtn'),r=document.documentElement,d='dark';
+t.onclick=function(){d=d==='dark'?'light':'dark';r.setAttribute('data-theme',d);t.textContent=d==='dark'?'☾ Theme':'☀ Theme';};})();
+document.getElementById('printBtn').onclick=function(){window.print();};
+</script>
+</body></html>
